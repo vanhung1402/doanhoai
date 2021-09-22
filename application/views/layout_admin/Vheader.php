@@ -4,18 +4,18 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>{$title}</title>
-    <link href="dist/templates/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="dist/templates/assets/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet">
-    <link href="dist/templates/assets/css/app.css?ver=1.0.01" rel="stylesheet">
-    <link href="dist/templates/assets/images/favicon.svg" rel="shortcut icon" type="image/x-icon">
-    <link href="dist/custom/css/app.css" rel="stylesheet">
+    <link href="dist/templates/admin/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="dist/templates/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet">
+    <link href="dist/templates/admin/assets/css/app.css?ver=1.0.01" rel="stylesheet">
+    <link href="dist/templates/admin/assets/images/favicon.svg" rel="shortcut icon" type="image/x-icon">
+    <link href="dist/custom/admin/css/app.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <div class="active" id="sidebar">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img alt="" src="dist/templates/assets/images/logo.svg" srcset="">
+                    <img alt="" src="dist/templates/admin/assets/images/logo.svg" srcset="">
                     </img>
                 </div>
                 <div class="sidebar-menu">
@@ -65,7 +65,7 @@
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle nav-link-lg nav-link-user" data-bs-toggle="dropdown" href="#">
                                 <div class="avatar me-1">
-                                    <img alt="" src="dist/templates/assets/images/avatar/avatar-s-1.png" srcset="">
+                                    <img alt="" src="dist/templates/admin/assets/images/avatar/avatar-s-1.png" srcset="">
                                     </img>
                                 </div>
                                 <div class="d-none d-md-block d-lg-inline-block">
