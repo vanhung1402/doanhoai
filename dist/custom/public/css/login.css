@@ -373,3 +373,16 @@ Primary style
 #cd-reset-password.is-selected {
     display: block;
 }
+
+#cd-signup input {
+    padding-left: 5px;
+}
+
+.form-gioitinh div {
+    display: flex;
+    align-items: flex-start;
+}
+.form-gioitinh label:not(:first-child) {
+    margin: 0 0 10px;
+    line-height: 100%;
+}

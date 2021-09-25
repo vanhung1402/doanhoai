@@ -1,123 +1,11 @@
     </main>
     <footer id="footer" class="section-bg">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="footer-info">
-                                    <h3>Rapid</h3>
-                                    <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa
-                                        magna derita
-                                        valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque
-                                        felis imperdiet proin
-                                        fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
-                                </div>
-
-                                <div class="footer-newsletter">
-                                    <h4>Our Newsletter</h4>
-                                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim
-                                        veniam illum
-                                        dolore legam minim quorum culpa amet magna export quem.</p>
-                                    <form action="" method="post">
-                                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                                    </form>
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="footer-links">
-                                    <h4>Useful Links</h4>
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">About us</a></li>
-                                        <li><a href="#">Services</a></li>
-                                        <li><a href="#">Terms of service</a></li>
-                                        <li><a href="#">Privacy policy</a></li>
-                                    </ul>
-                                </div>
-
-                                <div class="footer-links">
-                                    <h4>Contact Us</h4>
-                                    <p>
-                                        A108 Adam Street <br>
-                                        New York, NY 535022<br>
-                                        United States <br>
-                                        <strong>Phone:</strong> +1 5589 55488 55<br>
-                                        <strong>Email:</strong> info@example.com<br>
-                                    </p>
-                                </div>
-
-                                <div class="social-links">
-                                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                                    <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6">
-
-                        <div class="form">
-
-                            <h4>Send us a message</h4>
-                            <p>Eos ipsa est voluptates. Nostrum nam libero ipsa vero. Debitis quasi sit eaque numquam
-                                similique
-                                commodi harum aut temporibus.</p>
-                            <form action="" method="post" role="form" class="contactForm">
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Your Name" data-rule="minlen:4"
-                                        data-msg="Please enter at least 4 chars" />
-                                    <div class="validation"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Your Email" data-rule="email"
-                                        data-msg="Please enter a valid email" />
-                                    <div class="validation"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="subject" id="subject"
-                                        placeholder="Subject" data-rule="minlen:4"
-                                        data-msg="Please enter at least 8 chars of subject" />
-                                    <div class="validation"></div>
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" name="message" rows="5" data-rule="required"
-                                        data-msg="Please write something for us" placeholder="Message"></textarea>
-                                    <div class="validation"></div>
-                                </div>
-
-                                <div id="sendmessage">Your message has been sent. Thank you!</div>
-                                <div id="errormessage"></div>
-
-                                <div class="text-center"><button type="submit" title="Send Message">Send
-                                        Message</button></div>
-                            </form>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-            </div>
-        </div>
-
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong>Rapid</strong>. All Rights Reserved
+                &copy; Copyright <strong>Chilin</strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Designed by <a href="https://bootstrapmade.com/">Nguyen Thi Hoai</a>
             </div>
         </div>
     </footer><!-- #footer -->
@@ -127,17 +15,18 @@
     <!-- <div id="preloader"></div> -->
 
     <!-- JavaScript Libraries -->
-    <script src="dist/templates/public/lib/jquery/jquery.min.js"></script>
-    <script src="dist/templates/public/lib/jquery/jquery-migrate.min.js"></script>
-    <script src="dist/templates/public/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="dist/templates/public/lib/easing/easing.min.js"></script>
-    <script src="dist/templates/public/lib/mobile-nav/mobile-nav.js"></script>
-    <script src="dist/templates/public/lib/wow/wow.min.js"></script>
-    <script src="dist/templates/public/lib/waypoints/waypoints.min.js"></script>
-    <script src="dist/templates/public/lib/counterup/counterup.min.js"></script>
-    <script src="dist/templates/public/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="dist/templates/public/lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="dist/templates/public/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="dist/templates/public/libs/jquery/jquery.min.js"></script>
+    <script src="dist/templates/public/libs/jquery/jquery-migrate.min.js"></script>
+    <script src="dist/templates/public/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="dist/templates/public/libs/easing/easing.min.js"></script>
+    <script src="dist/templates/public/libs/mobile-nav/mobile-nav.js"></script>
+    <script src="dist/templates/public/libs/wow/wow.min.js"></script>
+    <script src="dist/templates/public/libs/waypoints/waypoints.min.js"></script>
+    <script src="dist/templates/public/libs/counterup/counterup.min.js"></script>
+    <script src="dist/templates/public/libs/owlcarousel/owl.carousel.min.js"></script>
+    <script src="dist/templates/public/libs/isotope/isotope.pkgd.min.js"></script>
+    <script src="dist/templates/public/libs/lightbox/js/lightbox.min.js"></script>
+    <script src="dist/templates/public/libs//toast-master/js/jquery.toast.js"></script>
     <!-- Contact Form JavaScript File -->
     <script src="dist/templates/public/contactform/contactform.js"></script>
 
@@ -146,6 +35,15 @@
 
     <!-- Custom Main Javascript File -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="dist/custom/public/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="dist/custom/public/js/main.js"></script>
     <script src="dist/custom/public/js/login.js"></script>
+    {if !empty($message)}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            showMessage('{$message.type}', '{$message.msg}');
+        });
+    </script>
+    {/if}
 </body>
 </html>

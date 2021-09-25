@@ -4,3 +4,11 @@
 .flex.align-middle {
 	align-items: center;
 }
+
+.hidden {
+	display: none;
+}
+
+#main {
+	margin-top: 110px;
+}

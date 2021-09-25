@@ -10,7 +10,8 @@ jQuery(document).ready(function ($) {
         $back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a'),
         $main_nav = $('.main-nav');
     //open modal
-    $main_nav.on('click', function (event) {
+    $('.open-modal-account').on('click', function (event) {
+        if ($(this).hasClass('no-action')) return false;
         if ($(event.target).is($main_nav)) {
             // on mobile open the submenu
             $(this).children('ul').toggleClass('is-visible');
@@ -99,8 +100,7 @@ jQuery(document).ready(function ($) {
         $form_login.find('form').first().submit();
     });
     $form_signup.find('input[type="submit"]').on('click', function (event) {
-        event.preventDefault();
-        $form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+
     });
     //IE9 placeholder fallback
     //credits http://www.hagenburger.net/BLOG/HTML5-Input-Placeholder-Fix-With-jQuery.html
