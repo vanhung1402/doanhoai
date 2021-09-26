@@ -1,3 +1,21 @@
 .main-content {
 	min-height: calc(100vh - 140px);
 }
+.hidden {
+	display: none;
+}
+.cursor-pointer {
+	cursor: pointer;
+}
+
+table.table.table-bordered {
+  border-collapse: collapse;
+}
+
+table.table.table-borderedtr {
+	border: 1px solid inherit;
+}
+
+.sidebar-wrapper .menu .submenu li a {
+	padding-left: 1.9rem;	
+}

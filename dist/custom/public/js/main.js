@@ -1,3 +1,4 @@
+const url = document.getElementsByTagName('base')[0].getAttribute('href');
 function showMessage(type, msg){
     (type === 'success') ? type = 'info' : '';
     const title_msg = {

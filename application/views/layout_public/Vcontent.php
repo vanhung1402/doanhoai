@@ -1,10 +1,17 @@
 <?php 
 	$user 						= $this->session->userdata('user');
+	// pr($user);
+	$trangThaiTaiKhoan 		= [
+		1 => 'Đang mở',
+		2 => 'Đang khóa',
+		3 => 'Chưa xác thực',
+	];
 	
 	$data_header 				= array(
 		'title' 	=> isset($data['title']) ? $data['title'] : 'Đấu giá Chilin',
 		'url' 		=> base_url(),
 		'user' 		=> $user,
+		'tttk' 		=> $trangThaiTaiKhoan,
 	);
 
 	$data_footer 				= array(

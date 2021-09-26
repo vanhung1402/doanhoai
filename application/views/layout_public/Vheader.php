@@ -6,8 +6,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicons -->
-    <link href="dist/templates/public/img/favicon.png" rel="icon">
-    <link href="dist/templates/public/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{$url}dist/templates/public/img/favicon.png" rel="icon">
+    <link href="{$url}dist/templates/public/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -15,22 +15,24 @@
         rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
-    <link href="dist/templates/public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Libraries CSS Files -->
-    <link href="dist/templates/public/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="dist/templates/public/libs/animate/animate.min.css" rel="stylesheet">
-    <link href="dist/templates/public/libs/ionicons/css/ionicons.min.css" rel="stylesheet">
-    <link href="dist/templates/public/libs/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="dist/templates/public/libs/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="dist/templates/public/libs/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/libs/animate/animate.min.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/libs/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/libs/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/libs/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/libs/toast-master/css/jquery.toast.css" rel="stylesheet">
 
     <!-- Main Stylesheet File -->
-    <link href="dist/templates/public/css/style.css" rel="stylesheet">
+    <link href="{$url}dist/templates/public/css/style.css" rel="stylesheet">
     <!-- Custom Stylesheet File -->
-    <link href="dist/custom/public/css/main.css" rel="stylesheet">
-    <link href="dist/custom/public/css/login.css" rel="stylesheet">
-    <link href="dist/custom/public/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="{$url}dist/custom/public/css/main.css" rel="stylesheet">
+    <link href="{$url}dist/custom/public/css/login.css" rel="stylesheet">
+    <link href="{$url}dist/custom/public/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <base href="{$url}">
+    <script src="{$url}dist/custom/admin/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -71,8 +73,8 @@
                 <div class="cd-user-modal-container">
                     <!-- this is the container wrapper -->
                     <ul class="cd-switcher">
-                        <li><a href="#0">Sign in</a></li>
-                        <li><a href="#0">New account</a></li>
+                        <li><a href="#0">Đăng nhập</a></li>
+                        <li><a href="#0">Đăng ký</a></li>
                     </ul>
 
                     <div id="cd-login">
@@ -92,13 +94,8 @@
                                 <span class="cd-error-message">Không được bỏ trống!</span>
                             </p>
 
-                            <p class="fieldset flex align-middle">
-                                <input type="checkbox" id="remember-me" checked>
-                                <label class="m-0" for="remember-me">&emsp; Remember me</label>
-                            </p>
-
                             <p class="fieldset">
-                                <input name="login" class="full-width" type="submit" value="Login">
+                                <input name="login" class="full-width" type="submit" value="ĐĂNG NHẬP">
                                 <input name="islogin" type="hidden" value="login">
                             </p>
                         </form>
@@ -151,7 +148,7 @@
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label for="cmnd">Số CCCD <span class="text-danger">*</span></label>
-                                        <input type="text" name="cmnd" id="cmnd" class="form-control" required>
+                                        <input type="number" name="cmnd" id="cmnd" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
@@ -160,45 +157,19 @@
                                         <input type="password" name="signup_password" id="signup_password" class="form-control" required>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 flex align-middle border-top pt-2">
-                                    <div class="form-group">
-                                        <input type="checkbox" name="nguoiban" id="nguoiban">
-                                        <label for="nguoiban">&emsp;Đăng ký bán hàng</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="row nguoiban hidden">
-                                        <div class="col-md-7">
-                                            <div class="form-group">
-                                                <label for="tenshop">Tên shop <span class="text-danger">*</span></label>
-                                                <input type="text" name="tenshop" id="tenshop" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="logoshop">Ảnh logo <span class="text-danger">*</span></label>
-                                                <input type="file" name="logoshop" id="logoshop" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="giayphep">Giấy phép kinh doanh <span class="text-danger">*</span></label>
-                                                <input type="file" name="giayphep" id="giayphep" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label for="mota">Giới thiệu shop</label>
-                                                <textarea name="mota" id="mota" cols="30" rows="8" class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-sm-12 flex align-middle justify-content-between border-top pt-3 mb-2 form-phanloai">
+                                    <label for="nguoiban">Đăng ký với tư cách:&emsp;</label>
+                                    <div><input type="radio" name="phanloai" id="nguoimua" value="1" required checked>&emsp;<label for="nguoimua">Người mua</label></div>
+                                    <div><input type="radio" name="phanloai" id="nguoiban" value="2" required>&emsp;<label for="nguoiban">Người bán</label></div>
                                 </div>
                                 <div class="col-sm-12">
                                     <p class="fieldset">
-                                        <input name="signup" class="full-width" type="submit" value="Signup">
+                                        <input name="btn-signup" class="full-width" type="submit" value="ĐĂNG KÝ">
+                                        <input type="text" name="signup" value="signup" class="hidden">
                                     </p>
                                 </div>
                             </div>
                         </form>
-
-                        <!-- <a href="#0" class="cd-close-form">Close</a> -->
                     </div> <!-- cd-signup -->
 
                     <div id="cd-reset-password">

@@ -3,51 +3,43 @@
 Primary style
 
 -------------------------------- */
+
 .cd-user-modal * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-.cd-user-modal *,
-.cd-user-modal *:after,
-.cd-user-modal *:before {
+.cd-user-modal *, .cd-user-modal *:after, .cd-user-modal *:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
-.cd-user-modal  {
+.cd-user-modal {
     font-size: 100%;
     font-family: "PT Sans", sans-serif;
     color: #505260;
     background-color: #fff;
 }
-
 .cd-user-modal a {
     color: #2f889a;
     text-decoration: none;
 }
-
 .cd-user-modal img {
     max-width: 100%;
 }
-
-.cd-user-modal input,
-.cd-user-modal textarea {
+.cd-user-modal input, .cd-user-modal textarea {
     font-family: "PT Sans", sans-serif;
     font-size: 16px;
     font-size: 1rem;
 }
-.cd-user-modal input::-ms-clear,
-.cd-user-modal textarea::-ms-clear {
+.cd-user-modal input::-ms-clear, .cd-user-modal textarea::-ms-clear {
     display: none;
 }
-
 /* -------------------------------- 
   
   xsigin/signup popup 
   
   -------------------------------- */
+
 .cd-user-modal {
     position: fixed;
     top: 0;
@@ -78,7 +70,6 @@ Primary style
     -o-transform: translateY(0);
     transform: translateY(0);
 }
-
 .cd-user-modal-container {
     position: relative;
     width: 90%;
@@ -140,7 +131,6 @@ Primary style
         line-height: 70px;
     }
 }
-
 .cd-form {
     padding: 1.4em;
 }
@@ -233,8 +223,7 @@ Primary style
     -o-appearance: none;
     appearance: none;
 }
-.no-touch .cd-form input[type="submit"]:hover,
-.no-touch .cd-form input[type="submit"]:focus {
+.no-touch .cd-form input[type="submit"]:hover, .no-touch .cd-form input[type="submit"]:focus {
     background: #3599ae;
     outline: none;
 }
@@ -315,7 +304,6 @@ Primary style
         padding: 16px 0;
     }
 }
-
 .cd-form-message {
     padding: 1.4em 1.4em 0;
     font-size: 14px;
@@ -328,7 +316,6 @@ Primary style
         padding: 2em 2em 0;
     }
 }
-
 .cd-form-bottom-message {
     position: absolute;
     width: 100%;
@@ -342,7 +329,6 @@ Primary style
     color: #fff;
     text-decoration: underline;
 }
-
 .cd-close-form {
     /* form X button on top right */
     display: block;
@@ -361,23 +347,26 @@ Primary style
         display: none;
     }
 }
-
-#cd-login,
-#cd-signup,
-#cd-reset-password {
+#cd-login, #cd-signup, #cd-reset-password {
     display: none;
 }
-
-#cd-login.is-selected,
-#cd-signup.is-selected,
-#cd-reset-password.is-selected {
+#cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected {
     display: block;
 }
-
 #cd-signup input {
     padding-left: 5px;
 }
+/* Chrome, Safari, Edge, Opera */
 
+#cd-signup input[type=number]::-webkit-outer-spin-button, #cd-signup input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Firefox */
+
+#cd-signup input[type=number] {
+    -moz-appearance: textfield;
+}
 .form-gioitinh div {
     display: flex;
     align-items: flex-start;
@@ -385,4 +374,20 @@ Primary style
 .form-gioitinh label:not(:first-child) {
     margin: 0 0 10px;
     line-height: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .form-gioitinh {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .form-phanloai {
+        flex-wrap: wrap;
+    }
+    .form-phanloai label {
+        flex: 100%;
+        margin-bottom: 5px;
+    }
 }

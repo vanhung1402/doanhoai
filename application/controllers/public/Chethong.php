@@ -2,10 +2,54 @@
 
 	class Chethong extends CI_Controller
 	{
+		private $__user;
 	    public function __construct()
 	    {
 	 		parent::__construct();
-	 		$this->load->model('public/Mhethong');    
+	 		$this->load->model('public/Mhethong');
+	 		$this->__user = $this->session->userdata('user');
+	    }
+
+	    public function index()
+	    {
+	    	$action = $this->input->post('action');
+	    	switch ($action) {
+	    		case 'check-email':
+	    			$this->checkExistEmail();
+	    			break;
+	    		case 'check-dien-thoai':
+	    			$this->checkExistPhone();
+	    			break;
+	    		case 'check-cmnd':
+	    			$this->checkExistCMND();
+	    			break;
+	    		
+	    		default:
+	    			echo json_encode(false);
+	    			break;
+	    	}
+	    	exit();
+	    }
+
+	    public function checkExistCMND()
+	    {
+	    	$cmnd = $this->input->post('cmnd');
+	    	$cmndCheck = $this->Mhethong->checkExistCMND($cmnd, $this->__user);
+	    	echo json_encode(!!$cmndCheck);
+	    }
+
+	    public function checkExistPhone()
+	    {
+	    	$dienThoai = $this->input->post('dienthoai');
+	    	$dienThoaiCheck = $this->Mhethong->checkExistPhone($dienThoai, $this->__user);
+	    	echo json_encode(!!$dienThoaiCheck);
+	    }
+
+	    public function checkExistEmail()
+	    {
+	    	$email = $this->input->post('email');
+	    	$emailCheck = $this->Mhethong->checkExistEmail($email, $this->__user);
+	    	echo json_encode(!!$emailCheck);
 	    }
 
 	    public function login()
@@ -32,7 +76,7 @@
 	    	$taiKhoan = [
 	    		'sTendangnhap' => $this->input->post('signup_email'),
 	    		'sMatkhau' => sha1($this->input->post('signup_password')),
-	    		'bTrangthai' => 1,
+	    		'iTrangthai' => ($this->input->post('phanloai') == 2) ? 3 : 1,
 	    	];
 	    	$resultTaiKhoan = $this->Mhethong->taoTaiKhoan($taiKhoan);
 	    	if (!$resultTaiKhoan) {
@@ -58,7 +102,7 @@
 	    		'sDiachi' => $this->input->post('diachi'),
 	    		'sEmail' => $this->input->post('signup_email'),
 	    		'iSoCCCD' => $this->input->post('cmnd'),
-	    		'bPhanloai' => $this->input->post('nguoiban') ? 2 : 1,
+	    		'iPhanloai' => $this->input->post('phanloai'),
 	    	];
 
 	    	$resultNguoiDung = $this->Mhethong->taoNguoiDung($nguoiDung);
@@ -81,7 +125,7 @@
 
 	    public function logout()
 	    {
-	    	$this->session->sess_destroy();
+	    	$this->session->unset_userdata('user');
 			return redirect(base_url(), 'refresh');
 			exit();
 	    }

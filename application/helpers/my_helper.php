@@ -47,4 +47,8 @@
     	return $mapArray;
     }
 
+    function reload() {
+    	exit('<script>window.location.reload()</script>');
+    }
+
 ?>

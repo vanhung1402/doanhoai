@@ -4,6 +4,9 @@
 .flex.align-middle {
 	align-items: center;
 }
+.flex.justify-content-between {
+	justify-content: space-between;
+}
 
 .hidden {
 	display: none;
@@ -11,4 +14,8 @@
 
 #main {
 	margin-top: 110px;
+}
+
+.datepicker {
+	font-size: 13px;
 }

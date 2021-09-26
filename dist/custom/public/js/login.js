@@ -99,9 +99,86 @@ jQuery(document).ready(function ($) {
         }
         $form_login.find('form').first().submit();
     });
-    $form_signup.find('input[type="submit"]').on('click', function (event) {
+    $form_signup.find('input[type="submit"]').on('click', async function (event) {
+        event.preventDefault();
 
+        let ngaySinh = $('#ngaysinh').val().trim().split().reverse().join('-');
+        let todayDate = new Date();
+        todayDate = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
+        if (ngaySinh > todayDate) {
+            showMessage('warning', 'Ngày sinh không hợp lệ!');
+            return false;
+        }
+        
+        let email = $('#signup_email').val();
+        if (await checkEmail(email)) {
+            showMessage('error', 'Email đã được sử dụng, vui lòng kiểm tra lại');
+            $('#signup_email').focus();
+            return false;      
+        }
+        
+        let dienthoai = $('#dienthoai').val();
+        if (await checkDienThoai(dienthoai)) {
+            showMessage('error', 'Số điện thoại đã được sử dụng, vui lòng kiểm tra lại');
+            $('#dienthoai').focus();
+            return false;      
+        }
+
+        let cmnd = $('#cmnd').val();
+        if (await checkCMND(cmnd)) {
+            showMessage('error', 'Số CCCD đã được sử dụng, vui lòng kiểm tra lại');
+            $('#cmnd').focus();
+            return false;      
+        }
+
+        let password = $('#signup_password').val();
+        if (password.length < 6) {
+            showMessage('warning', 'Vui lòng nhập mật khẩu tối thiếu 6 ký tự');
+            return false;   
+        }
+
+        $form_signup.find('form').first().submit();
     });
+
+    const checkEmail = async (email) => {
+        const responseCheck = await $.ajax({
+            url: url + 'hethong',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                action: 'check-email',
+                email
+            },
+        });
+        return responseCheck;
+    }
+
+    const checkDienThoai = async (dienThoai) => {
+        const responseCheck = await $.ajax({
+            url: url + 'hethong',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                action: 'check-dien-thoai',
+                dienthoai: dienThoai
+            },
+        });
+        return responseCheck;
+    }
+
+    const checkCMND = async (cmnd) => {
+        const responseCheck = await $.ajax({
+            url: url + 'hethong',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                action: 'check-cmnd',
+                cmnd
+            },
+        });
+        return responseCheck;
+    }
+
     //IE9 placeholder fallback
     //credits http://www.hagenburger.net/BLOG/HTML5-Input-Placeholder-Fix-With-jQuery.html
     if (!Modernizr.input.placeholder) {

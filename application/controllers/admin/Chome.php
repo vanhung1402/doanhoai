@@ -1,6 +1,6 @@
 <?php
 
-	class Chome extends CI_Controller
+	class Chome extends MY_Controller
 	{
 	    public function __construct()
 	    {

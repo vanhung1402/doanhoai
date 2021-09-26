@@ -4,30 +4,40 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>{$title}</title>
-    <link href="dist/templates/admin/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="dist/templates/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet">
-    <link href="dist/templates/admin/assets/css/app.css?ver=1.0.01" rel="stylesheet">
-    <link href="dist/templates/admin/assets/images/favicon.svg" rel="shortcut icon" type="image/x-icon">
-    <link href="dist/custom/admin/css/app.css" rel="stylesheet">
+    <link href="{$url}dist/templates/admin/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="{$url}dist/templates/admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet">
+    <link href="{$url}dist/templates/admin/assets/css/app.css?ver=1.0.01" rel="stylesheet">
+    <link href="{$url}dist/templates/admin/assets/images/favicon.svg" rel="shortcut icon" type="image/x-icon">
+    <link href="{$url}dist/templates/public/libs/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="{$url}dist/custom/admin/css/app.css" rel="stylesheet">
+    <base href="{$url}">
+    <script src="{$url}dist/custom/admin/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="app">
         <div class="active" id="sidebar">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img alt="" src="dist/templates/admin/assets/images/logo.svg" srcset="">
+                    <img alt="" src="{$url}dist/templates/admin/assets/images/logo.svg" srcset="">
                     </img>
                 </div>
                 <div class="sidebar-menu">
-                    <ul class="menu">
+                    <ul class="menu" id="custom-sidebar">
                         <li class="sidebar-title">
                             Menu
                         </li>
                         <li class="sidebar-item active ">
-                            <a class="sidebar-link" href="index.html">
+                            <a class="sidebar-link" href="{$url}admin">
                                 <i data-feather="home" width="20">
                                 </i>
                                 <span>Trang chủ</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{$url}admin/taikhoan">
+                                <i data-feather="user" width="20">
+                                </i>
+                                <span>Quản lý tài khoản</span>
                             </a>
                         </li>
                         <li class="sidebar-item has-sub">
@@ -37,9 +47,9 @@
                                 <span>Quản lý sản phẩm</span>
                             </a>
                             <ul class="submenu ">
-                                <li>
-                                    <a href="admin/them-san-pham">Thêm sản phẩm</a>
-                                </li>
+                                <li><a href="admin/loai-hang">Danh mục loại hàng</a></li>
+                                <li><a href="admin/mau-sac">Danh mục màu sắc</a></li>
+                                <li><a href="admin/kich-thuoc">Danh mục kích thước</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -52,7 +62,7 @@
         </div>
         <div id="main">
             <nav class="navbar navbar-header navbar-expand navbar-light">
-                <a class="sidebar-toggler" href="#">
+                <a class="sidebar-toggler cursor-pointer">
                     <span class="navbar-toggler-icon">
                     </span>
                 </a>
@@ -65,11 +75,11 @@
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle nav-link-lg nav-link-user" data-bs-toggle="dropdown" href="#">
                                 <div class="avatar me-1">
-                                    <img alt="" src="dist/templates/admin/assets/images/avatar/avatar-s-1.png" srcset="">
+                                    <img alt="" src="{$url}dist/templates/admin/assets/images/avatar/avatar-s-1.png" srcset="">
                                     </img>
                                 </div>
                                 <div class="d-none d-md-block d-lg-inline-block">
-                                    Hi, Saugi
+                                    Hi, {$user.sTendangnhap}
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -83,9 +93,14 @@
                                     </i>
                                     Settings
                                 </a>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#doi-mat-khau">
+                                    <i data-feather="key">
+                                    </i>
+                                    Change password
+                                </a>
                                 <div class="dropdown-divider">
                                 </div>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{$url}admin/logout">
                                     <i data-feather="log-out">
                                     </i>
                                     Logout
