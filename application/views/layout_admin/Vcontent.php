@@ -8,7 +8,7 @@
 		'title' 	=> isset($data['title']) ? $data['title'] : 'Đấu giá Chilin',
 		'url' 		=> base_url(),
 		'user' 		=> $user,
-		// 'quyen' 	=> $quyen,
+		'route' 	=> $data['route'],
 	);
 
 	$data_footer 				= array(

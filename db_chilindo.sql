@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 27, 2021 at 02:01 AM
+-- Generation Time: Sep 27, 2021 at 11:16 PM
 -- Server version: 10.3.31-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 7.4.23
 
@@ -117,6 +117,14 @@ CREATE TABLE `tbl_kichthuoc` (
   `sTensize` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tbl_kichthuoc`
+--
+
+INSERT INTO `tbl_kichthuoc` (`iMasize`, `sTensize`) VALUES
+(1, 'Size M'),
+(2, 'Size L');
+
 -- --------------------------------------------------------
 
 --
@@ -126,8 +134,16 @@ CREATE TABLE `tbl_kichthuoc` (
 CREATE TABLE `tbl_loaihang` (
   `iMaloaihang` int(11) NOT NULL,
   `sTenloaihang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `bTrangthai` bit(3) NOT NULL
+  `iTrangthai` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_loaihang`
+--
+
+INSERT INTO `tbl_loaihang` (`iMaloaihang`, `sTenloaihang`, `iTrangthai`) VALUES
+(2, 'Giày dép 1', 1),
+(3, 'Đồ gia dụng', 1);
 
 -- --------------------------------------------------------
 
@@ -139,6 +155,13 @@ CREATE TABLE `tbl_mausac` (
   `iMamausac` int(11) NOT NULL,
   `sTenmausac` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_mausac`
+--
+
+INSERT INTO `tbl_mausac` (`iMamausac`, `sTenmausac`) VALUES
+(2, 'Trắng');
 
 -- --------------------------------------------------------
 
@@ -432,19 +455,19 @@ ALTER TABLE `tbl_donmuahang`
 -- AUTO_INCREMENT for table `tbl_kichthuoc`
 --
 ALTER TABLE `tbl_kichthuoc`
-  MODIFY `iMasize` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iMasize` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_loaihang`
 --
 ALTER TABLE `tbl_loaihang`
-  MODIFY `iMaloaihang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iMaloaihang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_mausac`
 --
 ALTER TABLE `tbl_mausac`
-  MODIFY `iMamausac` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iMamausac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_nguoidung`

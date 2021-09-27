@@ -13,15 +13,15 @@
 	    	if ($iMataikhoan = $this->input->post('mokhoa')) {
 	    		$resutlAction = $this->Mtaikhoan->setTrangThaiTaiKhoan($iMataikhoan, 1);
 	    		$resutlAction ? setMessage('success', 'Mở khóa thành công') : setMessage('error', 'Đã có lỗi xảy ra, vui lòng thử lại sau');
-	    		return redirect(base_url('admin/taikhoan'), 'refresh');
+	    		return redirect(base_url('admin/tai-khoan'), 'refresh');
 	    	} else if ($iMataikhoan = $this->input->post('khoa')) {
 	    		$resutlAction = $this->Mtaikhoan->setTrangThaiTaiKhoan($iMataikhoan, 2);
 	    		$resutlAction ? setMessage('success', 'Khóa thành công') : setMessage('error', 'Đã có lỗi xảy ra, vui lòng thử lại sau');
-	    		return redirect(base_url('admin/taikhoan'), 'refresh');
+	    		return redirect(base_url('admin/tai-khoan'), 'refresh');
 	    	} else if ($iMataikhoan = $this->input->post('duyet')) {
 	    		$resutlAction = $this->Mtaikhoan->setTrangThaiTaiKhoan($iMataikhoan, 1);
 	    		$resutlAction ? setMessage('success', 'Duyệt thành công') : setMessage('error', 'Đã có lỗi xảy ra, vui lòng thử lại sau');
-	    		return redirect(base_url('admin/taikhoan'), 'refresh');
+	    		return redirect(base_url('admin/tai-khoan'), 'refresh');
 	    	}
 
 	    	$action = $this->input->post('action');
@@ -48,6 +48,9 @@
 			$temp['data'] 			= [
 				'danhSachTaiKhoan' 	=> $danhSachTaiKhoan,
 				'trangThaiTaiKhoan' => $trangThaiTaiKhoan,
+				'route' 			=> [
+					'title' 		=> 'Quản lý tài khoản',
+				]
 			];
 			$temp['template'] 		= 'admin/taikhoan/Vtaikhoan';
 	    	$this->load->view('layout_admin/Vcontent', $temp);	
@@ -79,7 +82,7 @@
 	    	} else {
 	    		setMessage('error', 'Cấp tài khoản nào được ghi nhận');
 	    	}
-	    	return redirect(base_url('admin/taikhoan'), 'refresh');
+	    	return redirect(base_url('admin/tai-khoan'), 'refresh');
 	    }
 	}
 

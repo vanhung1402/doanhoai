@@ -1,3 +1,6 @@
+body {
+	font-size: 14px;
+}
 .main-content {
 	min-height: calc(100vh - 140px);
 }
@@ -7,15 +10,42 @@
 .cursor-pointer {
 	cursor: pointer;
 }
+.text-right {
+	text-align: right;
+}
 
 table.table.table-bordered {
   border-collapse: collapse;
 }
-
-table.table.table-borderedtr {
+table.table.table-bordered tr th {
+	text-align: center;
+}
+table.table.table-bordered tr {
 	border: 1px solid inherit;
+}
+.btn-group-sm>.btn, .btn-sm.btn-xs {
+	padding: 3px 5px;
+}
+.table>:not(caption)>*>* {
+		padding: 5px 8px;
+}
+.dataTable-wrapper .dataTable-top, .dataTable-wrapper .dataTable-bottom {
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .sidebar-wrapper .menu .submenu li a {
-	padding-left: 1.9rem;	
+	padding-left: 1.8rem;	
+}
+
+.page-title {
+	margin-bottom: 20px;
+}
+.form-group label {
+	text-transform: none;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
 }

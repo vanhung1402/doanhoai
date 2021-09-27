@@ -31,7 +31,7 @@
                                 <div class="form-group position-relative has-icon-left">
                                     <label for="username">Username</label>
                                     <div class="position-relative">
-                                        <input type="text" class="form-control" id="username" name="username" required>
+                                        <input type="text" class="form-control" id="username" name="username" required autofocus>
                                         <div class="form-control-icon">
                                             <i data-feather="user"></i>
                                         </div>

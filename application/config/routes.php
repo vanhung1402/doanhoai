@@ -18,4 +18,9 @@ $route['admin/logout'] 			= 'admin/Clogin/logout';
 $route['admin/change-password'] = 'admin/Clogin/changePassword';
 $route['admin'] 				= 'admin/Chome';
 
-$route['admin/taikhoan'] 		= 'admin/taikhoan/Ctaikhoan';
+$route['admin/tai-khoan'] 		= 'admin/taikhoan/Ctaikhoan';
+
+// Danh mục
+$route['admin/loai-hang'] 		= 'admin/danhmuc/Cloaihang';
+$route['admin/mau-sac'] 		= 'admin/danhmuc/Cmausac';
+$route['admin/kich-thuoc'] 		= 'admin/danhmuc/Ckichthuoc';

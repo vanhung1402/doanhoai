@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{$url}admin/taikhoan">
+                            <a class="sidebar-link" href="{$url}admin/tai-khoan">
                                 <i data-feather="user" width="20">
                                 </i>
                                 <span>Quản lý tài khoản</span>
@@ -111,3 +111,20 @@
                 </div>
             </nav>
             <div class="main-content container-fluid">
+                {if !empty($route)}
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3 class="text-uppercase">{$route.title}</h3>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{$url}admin">Trang chủ</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{$route.title}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                {/if}
