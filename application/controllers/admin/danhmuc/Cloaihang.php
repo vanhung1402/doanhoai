@@ -11,7 +11,7 @@
 	    public function index() {
 	    	$data = [
 	    		'route' => [
-	    			'title' 		=> 'Quản lý loại hàng',
+	    			'title' 		=> 'tbl_loaihang',
 	    		]
 	    	];
 	    	$action = $this->input->post('action');
@@ -84,6 +84,88 @@
     			setMessage('error', 'Không có thay đổi nào được ghi nhận, vui lòng kiểm tra lại');
     		}
 	    	return redirect(base_url('admin/loai-hang'), 'refresh');
+	    }
+
+	    public function danhMucLoaiHang()
+	    {
+	    	
+	    	$data = [
+	    		'route' => [
+	    			'title' 		=> 'Danh mục loại hàng',
+	    		]
+	    	];
+	    	$action = $this->input->post('action');
+	    	switch ($action) {
+	    		case 'them-loai-hang':
+	    			$this->themDanhMucLoaiHang();
+	    			break;
+	    		case 'cap-nhap-loai-hang':
+	    			$this->capNhapDanhMucLoaiHang();
+	    			break;
+	    		case 'xoa-loai-hang':
+	    			$this->xoaDanhMucLoaiHang();
+	    			break;
+	    		
+	    		default:
+	    			break;
+	    	}
+	    	if ($iMaloaihang = $this->input->get('id')) {
+	    		$data['sua'] = $this->Mloaihang->layDanhMucLoaiHang($iMaloaihang);
+	    	}
+	    	$data['danhSachLoaiHang'] 	= $this->Mloaihang->danhSachLoaiHang();
+	    	$data['danhMucLoaiHang'] 	= $this->Mloaihang->danhMucLoaiHang();
+			$temp['data'] 				= $data;
+			$temp['template'] 			= 'admin/danhmuc/Vdanhmucloaihang';
+	    	$this->load->view('layout_admin/Vcontent', $temp);	
+	    }
+
+	    private function themDanhMucLoaiHang()
+	    {
+	    	$tenLoaiHang = trim($this->input->post('ten-loai-hang'));
+	    	$loaiHang = $this->input->post('loai-hang');
+	    	$kiemTra = $this->Mloaihang->kiemTraTenDanhMuc($tenLoaiHang, $loaiHang);
+	    	if ($kiemTra) {
+	    		setMessage('error', 'Tên danh mục loại hàng này đã tồn tại, vui lòng kiểm tra lại');
+	    	} else {
+	    		$resultCreate = $this->Mloaihang->themDanhMucLoaiHang($tenLoaiHang, $loaiHang);
+	    		if ($resultCreate) {
+	    			setMessage('success', 'Thêm danh mục loại hàng thành công');
+	    		} else {
+	    			setMessage('error', 'Không có thay đổi nào được ghi nhận, vui lòng kiểm tra lại');
+	    		}
+	    	}
+	    	return redirect(base_url('admin/danh-muc-loai-hang'), 'refresh');
+	    }
+
+	    private function xoaDanhMucLoaiHang()
+	    {
+	    	$iMaloaihang = $this->input->post('id-xoa');
+	    	$resultRemove = $this->Mloaihang->xoaDanhMucLoaiHang($iMaloaihang);
+	    	if ($resultRemove) {
+    			setMessage('success', 'Xóa danh mục loại hàng thành công');
+    		} else {
+    			setMessage('error', 'Không có thay đổi nào được ghi nhận, vui lòng kiểm tra lại');
+    		}
+	    	return redirect(base_url('admin/danh-muc-loai-hang'), 'refresh');
+	    }
+
+	    private function capNhapDanhMucLoaiHang()
+	    {
+	    	$iMaloaihang = $this->input->get('id');
+	    	$tenLoaiHang = trim($this->input->post('ten-loai-hang'));
+	    	$loaiHang = $this->input->post('loai-hang');
+	    	$kiemTra = $this->Mloaihang->kiemTraTen($tenLoaiHang, $loaiHang, $iMaloaihang);
+	    	if ($kiemTra) {
+	    		setMessage('error', 'Tên danh mục loại hàng không được trùng, vui lòng kiểm tra lại');
+	    	} else {
+	    		$resultUpdate = $this->Mloaihang->capNhapDanhMucLoaiHang($tenLoaiHang, $loaiHang, $iMaloaihang);
+	    		if ($resultUpdate) {
+	    			setMessage('success', 'Cập nhập danh mục loại hàng thành công');
+	    		} else {
+	    			setMessage('error', 'Không có thay đổi nào được ghi nhận, vui lòng kiểm tra lại');
+	    		}
+	    	}
+	    	return redirect(base_url('admin/danh-muc-loai-hang?id=' . $iMaloaihang), 'refresh');
 	    }
 	}
 

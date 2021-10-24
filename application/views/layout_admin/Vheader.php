@@ -33,12 +33,17 @@
                                 <span>Trang chủ</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{$url}admin/tai-khoan">
+                        <li class="sidebar-item has-sub">
+                            <a class="sidebar-link" href="#">
                                 <i data-feather="user" width="20">
                                 </i>
                                 <span>Quản lý tài khoản</span>
                             </a>
+                            <ul class="submenu ">
+                                <li><a href="{$url}admin/tai-khoan">Tài khoản nhân viên HT</a></li>
+                                <li><a href="{$url}admin/tai-khoan?phan-loai=1">Tài khoản khách hàng</a></li>
+                                <li><a href="{$url}admin/tai-khoan?phan-loai=2">Tài khoản chủ hàng</a></li>
+                            </ul>
                         </li>
                         <li class="sidebar-item has-sub">
                             <a class="sidebar-link" href="#">
@@ -47,7 +52,8 @@
                                 <span>Quản lý sản phẩm</span>
                             </a>
                             <ul class="submenu ">
-                                <li><a href="admin/loai-hang">Danh mục loại hàng</a></li>
+                                <li><a href="admin/loai-hang">tbl_loaihang</a></li>
+                                <li><a href="admin/danh-muc-loai-hang">Danh mục loại hàng</a></li>
                                 <li><a href="admin/mau-sac">Danh mục màu sắc</a></li>
                                 <li><a href="admin/kich-thuoc">Danh mục kích thước</a></li>
                             </ul>

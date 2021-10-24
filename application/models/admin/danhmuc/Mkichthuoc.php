@@ -18,16 +18,21 @@
 
 	    public function themKichThuoc($tenSize)
 	    {
+	    	$session = $this->session->userdata('user_admin');
 	    	$this->db->insert('tbl_kichthuoc', [
 	    		'sTensize' => $tenSize,
+	    		'iNguoithem' => $session['iMataikhoan']
 	    	]);
 	    	return $this->db->affected_rows();
 	    }
 
 	    public function capNhapKichThuoc($tenSize, $iMasize)
 	    {
+	    	$session = $this->session->userdata('user_admin');
 	    	$this->db->where('iMasize', $iMasize);
-	    	$this->db->update('tbl_kichthuoc', ['sTensize' => $tenSize]);
+	    	$this->db->update('tbl_kichthuoc', [
+	    		'sTensize' => $tenSize, 'iNguoithem' => $session['iMataikhoan']
+	    	]);
 	    	return $this->db->affected_rows();
 	    }
 

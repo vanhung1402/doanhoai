@@ -2,7 +2,7 @@
 	$user 						= $this->session->userdata('user');
 	// pr($user);
 	$trangThaiTaiKhoan 		= [
-		1 => 'Đang mở',
+		1 => 'Đã duyệt',
 		2 => 'Đang khóa',
 		3 => 'Chưa xác thực',
 	];

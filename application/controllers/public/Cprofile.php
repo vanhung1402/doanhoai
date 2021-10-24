@@ -15,7 +15,15 @@
 
 	    public function index()
 	    {
+	    	$data = [];
+
+	    	$sp = $this->input->get('sp');
+	    	if ($sp) {
+	    		$data['sua'] = $this->Mhethong->laySanPham($sp);
+	    	}
+
 	    	$action = $this->input->post('action');
+
 	    	switch ($action) {
 	    		case 'cap-nhap-shop':
 	    			$this->capNhapShop();
@@ -24,21 +32,90 @@
 	    		case 'doi-mat-khau':
 	    			$this->doiMatKhau();
 	    			break;
+
+	    		case 'them-san-pham':
+	    			$this->themSanPham();
+	    			break;
+
+	    		case 'sua-san-pham':
+	    			$this->suaSanPham($sp, $data['sua']);
+	    			break;
+
+	    		case 'xoa-san-pham':
+	    			$this->xoaSanPham();
+	    			break;
 	    		
 	    		default:
 	    			// code...
 	    			break;
 	    	}
-	    	$data = [];
 	    	if ($this->__user['iPhanloai'] == 2) {
 	    		$taiKhoan = [
 		    		'sTendangnhap' => $this->__user['sTendangnhap'],
 		    	];
 	    		$data['nguoiBan'] 	= $this->Mhethong->dangNhap($taiKhoan);
 	    	}
+
+	    	$whereDanhSachSanPham = [
+	    		'iNguoithem' => $this->__user['iManguoidung'],
+	    	];
+
+	    	$data['danhMucLoaiHang'] 	= $this->Mhethong->danhMucLoaiHang();
+	    	$data['danhSachMauSac'] 	= $this->Mhethong->danhSachMauSac();
+	    	$data['danhSachKichThuoc'] 	= $this->Mhethong->danhSachKichThuoc();
+	    	$data['danhSachSanPham'] 	= $this->Mhethong->danhSachSanPham($whereDanhSachSanPham);
 			$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vprofile';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
+	    }
+
+	    private function xoaSanPham()
+	    {
+	    	$sanPham = $this->input->post('san-pham');
+	    	$result = $this->Mhethong->xoaSanPham($sanPham);
+	    	if ($result) {
+	    		setMessage('success', 'Xóa sản phẩm thành công!');
+	    	} else {
+	    		setMessage('error', 'Xóa sản phẩm không thành công!');
+	    	}
+	    	return redirect('profile', 'refresh');
+	    }
+
+	    private function themSanPham()
+	    {
+	    	$sanPham = $this->input->post('sanPham');
+	    	$chiTiet = $this->input->post('chiTiet');
+	    	$result = $this->Mhethong->themSanPham($sanPham, $chiTiet);
+	    	die(json_encode($result));
+	    }
+
+	    private function suaSanPham($maSanPham, $sanPham)
+	    {
+	    	if (empty($sanPham)) {
+	    		setMessage('error', 'Không thể xóa sản phẩm này!');
+	    		die(json_encode(false));
+	    	} else {
+	    		$sanPhamSua = $this->input->post('sanPham');
+
+	    		$moi = $this->input->post('chiTietThemMoi');
+	    		$chiTietThemMoi = [];
+	    		foreach ($moi as $sp) {
+	    			$sp['iMasanpham'] = $maSanPham;
+	    			$chiTietThemMoi[] = $sp;
+	    		}
+
+	    		$sua = $this->input->post('chiTietSuaDoi');
+	    		$chiTietSuaDoi = [];
+	    		foreach ($sua as $sp) {
+	    			$sp['iMasanpham'] = $maSanPham;
+	    			$chiTietSuaDoi[] = $sp;
+	    		}
+
+	    		$chiTietBiXoa = $this->input->post('chiTietBiXoa');
+
+	    		$result = $this->Mhethong->suaSanPham($maSanPham, $sanPhamSua, $chiTietThemMoi, $chiTietSuaDoi, $chiTietBiXoa);
+	    		die(json_encode($result));
+	    	}
 	    }
 
 	    public function doiMatKhau()
@@ -55,32 +132,30 @@
 
 	    public function capNhapShop()
 	    {
-	    	if ($this->input->post('logoshop')) {
-		    	$fileLogo = $this->uploadFile('logoshop', 'shop/logo/');
-		    	if (isset($fileLogo['error'])) {
-		    		setMessage('error', 'File logo shop có vấn đề, vui lòng thử lại');
-		    		return redirect(base_url('profile'), 'refresh');
-		    	}	
-	    	} else {
-	    		$fileLogo['success']['filename'] = null;
-	    	}
-	    	if ($this->input->post('giayphep')) {
-	    	
-	    	$fileGiayPhep = $this->uploadFile('giayphep', 'shop/giayphep/');
-		    	if (isset($fileGiayPhep['error'])) {
-		    		setMessage('error', 'File giấy phép có vấn đề, vui lòng thử lại');
-		    		return redirect(base_url('profile'), 'refresh');
-		    	}
-	    	} else {
-	    		$fileGiayPhep['success']['filename'] = null;
-	    	}
+	    	$logo = $_FILES['logoshop'];
+	    	$giayPhep = $_FILES['giayphep'];
 
 	    	$shop = [
 	    		'sTenshop' => $this->input->post('tenshop'),
 	    		'sMotashop' => $this->input->post('mota'),
-	    		'sMotahinhanh' => $fileLogo['success']['filename'],
-	    		'sGiayphepkinhdoanh' => $fileGiayPhep['success']['filename'],
 	    	];
+
+	    	if (file_exists($logo['tmp_name']) && $logo['size']) {
+		    	$fileLogo = $this->uploadFile('logoshop', 'shop/logo/');
+		    	if (isset($fileLogo['error'])) {
+		    		setMessage('error', 'File logo shop có vấn đề, vui lòng thử lại');
+		    		return redirect(base_url('profile'), 'refresh');
+		    	}
+		    	$shop['sMotahinhanh'] = $fileLogo['success']['file_name'];
+	    	}
+	    	if (file_exists($giayPhep['tmp_name']) && $giayPhep['size']) {
+	    		$fileGiayPhep = $this->uploadFile('giayphep', 'shop/giayphep/');
+		    	if (isset($fileGiayPhep['error'])) {
+		    		setMessage('error', 'File giấy phép có vấn đề, vui lòng thử lại');
+		    		return redirect(base_url('profile'), 'refresh');
+		    	}
+		    	$shop['sGiayphepkinhdoanh'] = $fileGiayPhep['success']['file_name'];
+	    	}
 
 	    	$resultUpdate = $this->Mhethong->capNhapNguoiDung($shop, $this->__user['iManguoidung']);
 	    	if ($resultUpdate) {
@@ -94,7 +169,7 @@
 	    public function uploadFile($inputName, $folder) {
 	    	$config['upload_path'] = './files/' . $folder;
 	        $config['allowed_types'] = 'gif|jpg|png|pdf';
-	        $config['max_size'] = 2000;
+	        $config['max_size'] = 3000;
 
 	        $this->load->library('upload', $config);
 

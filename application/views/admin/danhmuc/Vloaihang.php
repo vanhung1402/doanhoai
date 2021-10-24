@@ -30,7 +30,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="text-center">Danh mục loại hàng</h5>
+                    <h5 class="text-center">Danh sách loại hàng</h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered" id="datatable">
@@ -53,10 +53,12 @@
                                         <a class="btn btn-outline-primary btn-sm btn-xs" href="{$url}admin/loai-hang?id={$loaiHang.iMaloaihang}" title="Sửa loại hàng">
                                             <i data-feather="edit"></i>
                                         </a>
+                                        {if !$loaiHang.iMadanhmuclh}
                                         <input class="hidden" type="text" name="action" value="xoa-loai-hang">
                                         <button class="btn btn-outline-danger btn-sm btn-xs" name="id-xoa" value="{$loaiHang.iMaloaihang}" onclick="return confirm('Xác nhận thực hiện thao tác')" title="Xóa loại hàng">
                                             <i data-feather="trash"></i>
                                         </button>
+                                        {/if}
                                     </form>
                                 </td>
                             </tr>

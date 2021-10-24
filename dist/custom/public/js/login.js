@@ -102,7 +102,8 @@ jQuery(document).ready(function ($) {
     $form_signup.find('input[type="submit"]').on('click', async function (event) {
         event.preventDefault();
 
-        let ngaySinh = $('#ngaysinh').val().trim().split().reverse().join('-');
+        let ngaySinh = $('#ngaysinh').val();
+        ngaySinh = ngaySinh.split('/').reverse().join('-');
         let todayDate = new Date();
         todayDate = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
         if (ngaySinh > todayDate) {

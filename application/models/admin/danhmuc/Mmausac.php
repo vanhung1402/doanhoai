@@ -18,16 +18,22 @@
 
 	    public function themMauSac($tenMauSac)
 	    {
+	    	$session = $this->session->userdata('user_admin');
 	    	$this->db->insert('tbl_mausac', [
 	    		'sTenmausac' => $tenMauSac,
+	    		'iNguoithem' => $session['iMataikhoan']
 	    	]);
 	    	return $this->db->affected_rows();
 	    }
 
 	    public function capNhapMauSac($tenMauSac, $iMamausac)
 	    {
+	    	$session = $this->session->userdata('user_admin');
 	    	$this->db->where('iMamausac', $iMamausac);
-	    	$this->db->update('tbl_mausac', ['sTenmausac' => $tenMauSac]);
+	    	$this->db->update('tbl_mausac', [
+	    		'sTenmausac' => $tenMauSac, 
+	    		'iNguoithem' => $session['iMataikhoan']
+	    	]);
 	    	return $this->db->affected_rows();
 	    }
 

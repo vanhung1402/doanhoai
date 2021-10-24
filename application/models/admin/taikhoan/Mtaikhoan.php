@@ -7,7 +7,7 @@
 	        parent::__construct();
 	    }
 
-	    public function getAllTaiKhoan()
+	    public function getAllTaiKhoan($trangThai = null, $phanLoai = null)
 	    {
 			$userAdmin = $this->session->userdata('user_admin');
 
@@ -15,8 +15,17 @@
 	    	$this->db->from('tbl_taikhoan tk');
 	    	$this->db->join('tbl_quyen_taikhoan q_tk', 'tk.iMataikhoan = q_tk.iMataikhoan', 'inner');
 	    	$this->db->join('tbl_quyen q', 'q_tk.iMaquyen = q.iMaquyen', 'inner');
-	    	$this->db->join('tbl_nguoidung nd', 'tk.iMataikhoan = nd.iMataikhoan', 'left');
 	    	$this->db->where('q_tk.iMaquyen <', $userAdmin['iMaquyen']);
+	    	if ($trangThai) {
+	    		$this->db->where('iTrangthai', $trangThai);
+	    	}
+	    	if ($phanLoai) {
+	    		$this->db->join('tbl_nguoidung nd', 'tk.iMataikhoan = nd.iMataikhoan', 'inner');
+	    		$this->db->where('iPhanloai', $phanLoai);
+	    	} else {
+	    		$this->db->join('tbl_nguoidung nd', 'tk.iMataikhoan = nd.iMataikhoan', 'left');
+	    		$this->db->where('iPhanloai IS NULL');
+	    	}
 	    	return $this->db->get()->result_array();
 	    }
 
@@ -51,6 +60,14 @@
 	    {
 	    	$this->db->where($taiKhoan);
 	    	return $this->db->get('tbl_taikhoan')->row_array();
+	    }
+
+	    public function getTaiKhoanKhachHang($iMataikhoan)
+	    {
+	    	$this->db->from('tbl_taikhoan tk');
+	    	$this->db->join('tbl_nguoidung nd', 'tk.iMataikhoan = nd.iMataikhoan', 'inner');
+	    	$this->db->where('tk.iMataikhoan', $iMataikhoan);
+	    	return $this->db->get()->row_array();	
 	    }
 
 	}

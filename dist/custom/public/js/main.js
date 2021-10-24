@@ -1,4 +1,7 @@
 const url = document.getElementsByTagName('base')[0].getAttribute('href');
+var currentUrl = window.location.href
+var urlObj = new URL(currentUrl);
+
 function showMessage(type, msg){
     (type === 'success') ? type = 'info' : '';
     const title_msg = {

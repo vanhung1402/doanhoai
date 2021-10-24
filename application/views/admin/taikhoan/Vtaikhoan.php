@@ -3,22 +3,24 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-        	<h5 class="text-center">Danh sách tài khoản</h5>
+        	<h5 class="text-center">Danh sách tài khoản {if empty($phanLoai)}quản trị{else if ($phanLoai == 1)}khách hàng{else}chủ hàng{/if}</h5>
         </div>
         <div class="card-body">
 			<div id="taikhoan">
 				<div class="table-container">
+					{if empty($phanLoai)}
 					<div class="action form-group">
 						<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cap-tai-khoan"><i data-feather="user-plus"></i>&emsp; Cấp tài khoản</button>
 					</div>
+					{/if}
 					<table class="table table-bordered" id="datatable">
 						<thead>
 							<tr>
 								<th>#</th>
 								<th>Tài khoản</th>
+								{if !empty($phanLoai)}
 								<th>Người dùng</th>
-								<th>Phân loại</th>
-								<th>Quyền</th>
+								{/if}
 								<th>Trạng thái</th>
 								<th>Tác vụ</th>
 							</tr>
@@ -28,11 +30,11 @@
 							<tr>
 								<td class="text-center">{$key + 1}</td>
 								<td>{$taiKhoan.sTendangnhap}</td>
+								{if !empty($phanLoai)}
 								<td>{$taiKhoan.sTennguoidung}</td>
-								<td>{if empty($taiKhoan.iPhanloai)}Quản trị hệ thống{else}Người dùng{/if}</td>
-								<td>{$taiKhoan.sTenquyen}</td>
-								<td>{$trangThaiTaiKhoan[$taiKhoan.iTrangthai]}</td>
-								<td class="text-right">
+								{/if}
+								<td class="text-center"><span class="badge bg-{$tttk[$taiKhoan.iTrangthai].color}">{$tttk[$taiKhoan.iTrangthai].title}</span></td>
+								<td class="text-center">
 									<form method="post">
 										{if $taiKhoan.iTrangthai == 1}
 										<button name="khoa" onclick="return confirm('Xác nhận thực hiện thao tác')" value="{$taiKhoan.iMataikhoan}" class="btn btn-outline-warning btn-sm btn-xs" type="submit" title="Khóa quyền truy cập tài khoản"><i data-feather="lock"></i></button>
@@ -41,7 +43,7 @@
 										<button name="mokhoa" onclick="return confirm('Xác nhận thực hiện thao tác')" value="{$taiKhoan.iMataikhoan}" class="btn btn-outline-light btn-sm btn-xs" type="submit" title="Mở khóa tài khoản"><i data-feather="unlock"></i></button>
 										{/if}
 										{if $taiKhoan.iTrangthai == 3}
-										<button name="duyet" onclick="return confirm('Xác nhận thực hiện thao tác')" value="{$taiKhoan.iMataikhoan}" class="btn btn-outline-success btn-sm btn-xs" type="submit" title="Xác thực tài khoản người bán"><i data-feather="check-square"></i></button>
+										<a href="{$url}admin/shop/{$taiKhoan.iMataikhoan}" class="btn btn-outline-success btn-sm btn-xs"><i data-feather="check-square"></i></a>
 										{/if}
 									</form>
 								</td>
