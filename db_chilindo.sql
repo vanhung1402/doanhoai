@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 27, 2021 at 11:16 PM
+-- Generation Time: Oct 25, 2021 at 08:30 AM
 -- Server version: 10.3.31-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 7.4.23
+-- PHP Version: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -67,6 +67,16 @@ CREATE TABLE `tbl_ct_sanpham` (
   `iSoluong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tbl_ct_sanpham`
+--
+
+INSERT INTO `tbl_ct_sanpham` (`iMactsanpham`, `iMasanpham`, `iMasize`, `iMamausac`, `iSoluong`) VALUES
+(10, 7, 6, 3, 10000),
+(11, 7, 5, 5, 50),
+(13, 7, 3, 3, 200),
+(14, 7, 5, 3, 10091);
+
 -- --------------------------------------------------------
 
 --
@@ -77,8 +87,20 @@ CREATE TABLE `tbl_danhmucloaihang` (
   `iMadanhmuclh` int(11) NOT NULL,
   `sTendanhmuclh` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `iMaloaihang` int(11) NOT NULL,
-  `bTrangthai` bit(3) NOT NULL
+  `iTrangthai` tinyint(4) NOT NULL,
+  `iNguoithem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_danhmucloaihang`
+--
+
+INSERT INTO `tbl_danhmucloaihang` (`iMadanhmuclh`, `sTendanhmuclh`, `iMaloaihang`, `iTrangthai`, `iNguoithem`) VALUES
+(11, 'Điện thoại', 5, 1, 21),
+(12, 'Máy tính', 5, 1, 21),
+(13, 'Bếp từ', 6, 1, 21),
+(14, 'Vợt cầu lông', 7, 1, 21),
+(15, 'Smart TV', 5, 1, 21);
 
 -- --------------------------------------------------------
 
@@ -114,16 +136,21 @@ CREATE TABLE `tbl_hinhanh_sanpham` (
 
 CREATE TABLE `tbl_kichthuoc` (
   `iMasize` int(11) NOT NULL,
-  `sTensize` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `sTensize` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `iNguoithem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_kichthuoc`
 --
 
-INSERT INTO `tbl_kichthuoc` (`iMasize`, `sTensize`) VALUES
-(1, 'Size M'),
-(2, 'Size L');
+INSERT INTO `tbl_kichthuoc` (`iMasize`, `sTensize`, `iNguoithem`) VALUES
+(3, 'Size M', 21),
+(4, 'Size L', 21),
+(5, '5 inch', 21),
+(6, '5.5 inch', 21),
+(7, '21 inch', 21),
+(8, '50 inch', 21);
 
 -- --------------------------------------------------------
 
@@ -134,16 +161,18 @@ INSERT INTO `tbl_kichthuoc` (`iMasize`, `sTensize`) VALUES
 CREATE TABLE `tbl_loaihang` (
   `iMaloaihang` int(11) NOT NULL,
   `sTenloaihang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `iTrangthai` tinyint(4) NOT NULL
+  `iTrangthai` tinyint(4) NOT NULL,
+  `iNguoithem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_loaihang`
 --
 
-INSERT INTO `tbl_loaihang` (`iMaloaihang`, `sTenloaihang`, `iTrangthai`) VALUES
-(2, 'Giày dép 1', 1),
-(3, 'Đồ gia dụng', 1);
+INSERT INTO `tbl_loaihang` (`iMaloaihang`, `sTenloaihang`, `iTrangthai`, `iNguoithem`) VALUES
+(5, 'Đồ điện tử', 1, 21),
+(6, 'Đồ gia dụng', 1, 21),
+(7, 'Dụng cụ thể thao', 1, 21);
 
 -- --------------------------------------------------------
 
@@ -153,15 +182,18 @@ INSERT INTO `tbl_loaihang` (`iMaloaihang`, `sTenloaihang`, `iTrangthai`) VALUES
 
 CREATE TABLE `tbl_mausac` (
   `iMamausac` int(11) NOT NULL,
-  `sTenmausac` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `sTenmausac` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `iNguoithem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_mausac`
 --
 
-INSERT INTO `tbl_mausac` (`iMamausac`, `sTenmausac`) VALUES
-(2, 'Trắng');
+INSERT INTO `tbl_mausac` (`iMamausac`, `sTenmausac`, `iNguoithem`) VALUES
+(3, 'Đen', 21),
+(4, 'Đỏ', 21),
+(5, 'Trắng', 21);
 
 -- --------------------------------------------------------
 
@@ -195,7 +227,8 @@ INSERT INTO `tbl_nguoidung` (`iManguoidung`, `iMataikhoan`, `sTennguoidung`, `dN
 (5, 17, 'Phùng Thị Huyền', '2021-09-14', b'111', '974052772', 'Hoa Binh', 'vanhung14.2.2017@gmail.com', 113702992, 1, 'Shop mun', '', 'e4c0dbffa4c953970ad8.jpg', 'Báo_cáo_tháng_12.jpg'),
 (6, 18, 'Bùi Văn Hùngsss', '2021-09-04', b'111', '03292221617', 'Hoa Binh', 'bacdau030s2@gmail.com', 1112121, 2, NULL, NULL, NULL, NULL),
 (7, 19, 'Chủ hàng', '2021-09-18', b'111', '03292226172', 'Hoa Binh', 'bacdau030ss2@gmail.com', 222121212, 2, NULL, NULL, NULL, NULL),
-(8, 20, 'Bùi Văn Hùng', '2021-09-15', b'111', '03292222617', 'Hoa Binh', 'vanhung14.2.20171@gmail.com', 1212, 2, 'Shop mun', 'Mô tả', NULL, NULL);
+(8, 20, 'Bùi Văn Hùng', '2021-09-15', b'111', '03292222617', 'Hoa Binh', 'vanhung14.2.20171@gmail.com', 1212, 2, 'Shop mun', 'Mô tả Chưa xác thựcMô tả Chưa xác thựcMô tả Chưa xác thựcMô tả Chưa xác thựcMô tả Chưa xác thựcMô tả Chưa xác thực', 'anh_the6.jpg', 'Screenshot_from_2021-07-24_21-50-211.png'),
+(9, 38, 'Phùng Thị Huyền', '2021-10-16', b'111', '03282632753', 'Hòa Bình', 'huyen@gmail.com', 121313, 2, 'Hoài chó', '(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tối đa 2MB)(tố', 'anh_the7.jpg', 'Screenshot_from_2021-07-24_22-25-51.png');
 
 -- --------------------------------------------------------
 
@@ -253,6 +286,7 @@ INSERT INTO `tbl_quyen_taikhoan` (`iMaquyen`, `iMataikhoan`) VALUES
 (1, 18),
 (1, 19),
 (1, 20),
+(1, 38),
 (2, 17),
 (9, 22),
 (9, 30),
@@ -278,8 +312,16 @@ CREATE TABLE `tbl_sanpham` (
   `sThuonghieu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sChatlieu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sTinhtrang` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `bTrangthai` bit(3) NOT NULL
+  `iTrangthai` tinyint(4) NOT NULL,
+  `iNguoithem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_sanpham`
+--
+
+INSERT INTO `tbl_sanpham` (`iMasanpham`, `iMadanhmuclh`, `sTensanpham`, `sVideo`, `sMota`, `sThuonghieu`, `sChatlieu`, `sTinhtrang`, `iTrangthai`, `iNguoithem`) VALUES
+(7, 11, 'iPhone 13', '', 'al;dahlkdj', 'Apple IPhone', 'Kính', 'Nguyên seal', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -303,8 +345,8 @@ INSERT INTO `tbl_taikhoan` (`iMataikhoan`, `sTendangnhap`, `sMatkhau`, `iTrangth
 (17, 'hung.buivan1', '356a192b7913b04c54574d18c28d46e6395428ab', 2),
 (18, 'bacdau030s2@gmail.com', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1),
 (19, 'bacdau030ss2@gmail.com', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1),
-(20, 'vanhung14.2.20171@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 3),
-(21, 'admin', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1),
+(20, 'vanhung14.2.20171@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1),
+(21, 'admin', '4aa4308c0c9cb7c2a5421d77ee0ba228d11410fe', 1),
 (22, 'nhanvien', '356a192b7913b04c54574d18c28d46e6395428ab', 1),
 (26, 'hung.buivan2', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1),
 (30, 'hung.buivan111', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1),
@@ -312,7 +354,8 @@ INSERT INTO `tbl_taikhoan` (`iMataikhoan`, `sTendangnhap`, `sMatkhau`, `iTrangth
 (32, '17A10010043', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 2),
 (33, '17A100100431', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1),
 (35, '17A1001004311', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1),
-(37, '17A10010043111', '2ea6201a068c5fa0eea5d81a3863321a87f8d533', 1);
+(37, '17A10010043111', '2ea6201a068c5fa0eea5d81a3863321a87f8d533', 1),
+(38, 'huyen@gmail.com', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 1);
 
 --
 -- Indexes for dumped tables
@@ -349,7 +392,8 @@ ALTER TABLE `tbl_ct_sanpham`
 --
 ALTER TABLE `tbl_danhmucloaihang`
   ADD PRIMARY KEY (`iMadanhmuclh`),
-  ADD KEY `iMaloaihang` (`iMaloaihang`);
+  ADD KEY `iMaloaihang` (`iMaloaihang`),
+  ADD KEY `iNguoithem` (`iNguoithem`);
 
 --
 -- Indexes for table `tbl_donmuahang`
@@ -367,19 +411,22 @@ ALTER TABLE `tbl_hinhanh_sanpham`
 -- Indexes for table `tbl_kichthuoc`
 --
 ALTER TABLE `tbl_kichthuoc`
-  ADD PRIMARY KEY (`iMasize`);
+  ADD PRIMARY KEY (`iMasize`),
+  ADD KEY `iNguoithem` (`iNguoithem`);
 
 --
 -- Indexes for table `tbl_loaihang`
 --
 ALTER TABLE `tbl_loaihang`
-  ADD PRIMARY KEY (`iMaloaihang`);
+  ADD PRIMARY KEY (`iMaloaihang`),
+  ADD KEY `tbl_loaihang_ibfk_1` (`iNguoithem`);
 
 --
 -- Indexes for table `tbl_mausac`
 --
 ALTER TABLE `tbl_mausac`
-  ADD PRIMARY KEY (`iMamausac`);
+  ADD PRIMARY KEY (`iMamausac`),
+  ADD KEY `iNguoithem` (`iNguoithem`);
 
 --
 -- Indexes for table `tbl_nguoidung`
@@ -414,7 +461,8 @@ ALTER TABLE `tbl_quyen_taikhoan`
 --
 ALTER TABLE `tbl_sanpham`
   ADD PRIMARY KEY (`iMasanpham`),
-  ADD KEY `iMadanhmuclh` (`iMadanhmuclh`);
+  ADD KEY `iMadanhmuclh` (`iMadanhmuclh`),
+  ADD KEY `tbl_sanpham_ibfk_2` (`iNguoithem`);
 
 --
 -- Indexes for table `tbl_taikhoan`
@@ -437,13 +485,13 @@ ALTER TABLE `tbl_binhluan`
 -- AUTO_INCREMENT for table `tbl_ct_sanpham`
 --
 ALTER TABLE `tbl_ct_sanpham`
-  MODIFY `iMactsanpham` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iMactsanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_danhmucloaihang`
 --
 ALTER TABLE `tbl_danhmucloaihang`
-  MODIFY `iMadanhmuclh` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iMadanhmuclh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_donmuahang`
@@ -455,25 +503,25 @@ ALTER TABLE `tbl_donmuahang`
 -- AUTO_INCREMENT for table `tbl_kichthuoc`
 --
 ALTER TABLE `tbl_kichthuoc`
-  MODIFY `iMasize` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `iMasize` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_loaihang`
 --
 ALTER TABLE `tbl_loaihang`
-  MODIFY `iMaloaihang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `iMaloaihang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_mausac`
 --
 ALTER TABLE `tbl_mausac`
-  MODIFY `iMamausac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `iMamausac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_nguoidung`
 --
 ALTER TABLE `tbl_nguoidung`
-  MODIFY `iManguoidung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `iManguoidung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_phiendaugia`
@@ -491,13 +539,13 @@ ALTER TABLE `tbl_quyen`
 -- AUTO_INCREMENT for table `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
-  MODIFY `iMasanpham` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iMasanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_taikhoan`
 --
 ALTER TABLE `tbl_taikhoan`
-  MODIFY `iMataikhoan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `iMataikhoan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables
@@ -523,21 +571,40 @@ ALTER TABLE `tbl_ct_phiendaugia`
 -- Constraints for table `tbl_ct_sanpham`
 --
 ALTER TABLE `tbl_ct_sanpham`
-  ADD CONSTRAINT `tbl_ct_sanpham_ibfk_1` FOREIGN KEY (`iMasanpham`) REFERENCES `tbl_sanpham` (`iMasanpham`),
-  ADD CONSTRAINT `tbl_ct_sanpham_ibfk_2` FOREIGN KEY (`iMamausac`) REFERENCES `tbl_mausac` (`iMamausac`),
-  ADD CONSTRAINT `tbl_ct_sanpham_ibfk_3` FOREIGN KEY (`iMasize`) REFERENCES `tbl_kichthuoc` (`iMasize`);
+  ADD CONSTRAINT `tbl_ct_sanpham_ibfk_1` FOREIGN KEY (`iMasanpham`) REFERENCES `tbl_sanpham` (`iMasanpham`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_ct_sanpham_ibfk_2` FOREIGN KEY (`iMamausac`) REFERENCES `tbl_mausac` (`iMamausac`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_ct_sanpham_ibfk_3` FOREIGN KEY (`iMasize`) REFERENCES `tbl_kichthuoc` (`iMasize`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_danhmucloaihang`
 --
 ALTER TABLE `tbl_danhmucloaihang`
-  ADD CONSTRAINT `tbl_danhmucloaihang_ibfk_1` FOREIGN KEY (`iMaloaihang`) REFERENCES `tbl_loaihang` (`iMaloaihang`);
+  ADD CONSTRAINT `tbl_danhmucloaihang_ibfk_1` FOREIGN KEY (`iMaloaihang`) REFERENCES `tbl_loaihang` (`iMaloaihang`),
+  ADD CONSTRAINT `tbl_danhmucloaihang_ibfk_2` FOREIGN KEY (`iNguoithem`) REFERENCES `tbl_taikhoan` (`iMataikhoan`);
 
 --
 -- Constraints for table `tbl_hinhanh_sanpham`
 --
 ALTER TABLE `tbl_hinhanh_sanpham`
   ADD CONSTRAINT `tbl_hinhanh_sanpham_ibfk_1` FOREIGN KEY (`iMasanpham`) REFERENCES `tbl_sanpham` (`iMasanpham`);
+
+--
+-- Constraints for table `tbl_kichthuoc`
+--
+ALTER TABLE `tbl_kichthuoc`
+  ADD CONSTRAINT `tbl_kichthuoc_ibfk_1` FOREIGN KEY (`iNguoithem`) REFERENCES `tbl_taikhoan` (`iMataikhoan`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_loaihang`
+--
+ALTER TABLE `tbl_loaihang`
+  ADD CONSTRAINT `tbl_loaihang_ibfk_1` FOREIGN KEY (`iNguoithem`) REFERENCES `tbl_taikhoan` (`iMataikhoan`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_mausac`
+--
+ALTER TABLE `tbl_mausac`
+  ADD CONSTRAINT `tbl_mausac_ibfk_1` FOREIGN KEY (`iNguoithem`) REFERENCES `tbl_taikhoan` (`iMataikhoan`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_nguoidung`
@@ -556,7 +623,8 @@ ALTER TABLE `tbl_quyen_taikhoan`
 -- Constraints for table `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
-  ADD CONSTRAINT `tbl_sanpham_ibfk_1` FOREIGN KEY (`iMadanhmuclh`) REFERENCES `tbl_danhmucloaihang` (`iMadanhmuclh`);
+  ADD CONSTRAINT `tbl_sanpham_ibfk_1` FOREIGN KEY (`iMadanhmuclh`) REFERENCES `tbl_danhmucloaihang` (`iMadanhmuclh`),
+  ADD CONSTRAINT `tbl_sanpham_ibfk_2` FOREIGN KEY (`iNguoithem`) REFERENCES `tbl_nguoidung` (`iManguoidung`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
