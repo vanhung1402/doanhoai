@@ -15,9 +15,9 @@
     <!-- <div id="preloader"></div> -->
 
     <!-- JavaScript Libraries -->
-    <script src="{$url}dist/templates/public/libs/jquery/jquery.min.js"></script>
-    <script src="{$url}dist/templates/public/libs/jquery/jquery-migrate.min.js"></script>
-    <script src="{$url}dist/templates/public/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="{$url}dist/templates/public/libs/jquery/jquery.min.js"></script> -->
+    <!-- <script src="{$url}dist/templates/public/libs/jquery/jquery-migrate.min.js"></script> -->
+    <!-- <script src="{$url}dist/templates/public/libs/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <script src="{$url}dist/templates/public/libs/easing/easing.min.js"></script>
     <script src="{$url}dist/templates/public/libs/mobile-nav/mobile-nav.js"></script>
     <script src="{$url}dist/templates/public/libs/wow/wow.min.js"></script>

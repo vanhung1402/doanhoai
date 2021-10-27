@@ -166,7 +166,7 @@
 							<div class="col-md-7">
                                 <div class="form-group">
                                     <label for="tenshop">Tên shop <span class="text-danger">*</span></label>
-                                    <input type="text" name="tenshop" id="tenshop" class="form-control" value="{$nguoiBan.sTenshop}" required>
+                                    <input type="text" name="tenshop" id="tenshop" class="form-control" value="{$nguoiBan.sTenshop}" required autofocus>
                                 </div>
                                 <div class="form-group">
                                     <label for="logoshop">Ảnh logo (tối đa 2MB) {if empty($nguoiBan.sMotahinhanh)}<span class="text-danger">*</span>{/if}</label>
@@ -231,101 +231,103 @@
 					<h3 class="text-center text-bold text-uppercase">Thêm sản phẩm</h3>
 				</div>
 				<div class="panel-body">
-					<div class="row" id="form-san-pham">
-						<div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="ten-san-pham">Tên sản phẩm <span class="text-danger">*</span></label>
-                                <input type="text" name="ten-san-pham" class="form-control" id="ten-san-pham" placeholder="VD: điện thoại, giày, dép..." value="{if !empty($sua)}{$sua.sanPham.sTensanpham}{/if}" required>
-                            </div>
-						</div>
-						<div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="thuong-hieu">Thương hiệu <span class="text-danger">*</span></label>
-                                <input type="text" name="thuong-hieu" class="form-control" id="thuong-hieu" required placeholder="VD: Apple, Samsung, Xiaomi..." value="{if !empty($sua)}{$sua.sanPham.sThuonghieu}{/if}">
-                            </div>
-						</div>
-						<div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="chat-lieu">Chất liệu <span class="text-danger">*</span></label>
-                                <input type="text" name="chat-lieu" class="form-control" id="chat-lieu" required placeholder="Gốm, kính, nhựa..." value="{if !empty($sua)}{$sua.sanPham.sChatlieu}{/if}">
-                            </div>
-						</div>
-						<div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="tinh-trang">Tình trạng <span class="text-danger">*</span></label>
-                                <input type="text" name="tinh-trang" class="form-control" id="tinh-trang" required placeholder="VD: nguyên chiếc, 99%, like new..." value="{if !empty($sua)}{$sua.sanPham.sTinhtrang}{/if}">
-                            </div>
-						</div>
-						<div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="loai-hang">Loại hàng <span class="text-danger">*</span></label>
-                                <select name="loai-hang" id="loai-hang" class="form-control select2">
-                                	{foreach $danhMucLoaiHang as $loaiHang}
-                                	<option {if !empty($sua) && $sua.sanPham.iMadanhmuclh == $loaiHang.iMadanhmuclh}selected{/if} value="{$loaiHang.iMadanhmuclh}">{$loaiHang.sTendanhmuclh}</option>
-                                	{/foreach}
-                                </select>
-                            </div>
+					<form method="POST" enctype="multipart/form-data">
+						<div class="row" id="form-san-pham">
+							<div class="col-sm-12">
+	                            <div class="form-group">
+	                                <label for="ten-san-pham">Tên sản phẩm <span class="text-danger">*</span></label>
+	                                <input type="text" name="ten-san-pham" class="form-control" id="ten-san-pham" placeholder="VD: điện thoại, giày, dép..." value="{if !empty($sua)}{$sua.sanPham.sTensanpham}{/if}" required>
+	                            </div>
+							</div>
+							<div class="col-sm-4">
+	                            <div class="form-group">
+	                                <label for="thuong-hieu">Thương hiệu <span class="text-danger">*</span></label>
+	                                <input type="text" name="thuong-hieu" class="form-control" id="thuong-hieu" required placeholder="VD: Apple, Samsung, Xiaomi..." value="{if !empty($sua)}{$sua.sanPham.sThuonghieu}{/if}">
+	                            </div>
+							</div>
+							<div class="col-sm-4">
+	                            <div class="form-group">
+	                                <label for="chat-lieu">Chất liệu <span class="text-danger">*</span></label>
+	                                <input type="text" name="chat-lieu" class="form-control" id="chat-lieu" required placeholder="Gốm, kính, nhựa..." value="{if !empty($sua)}{$sua.sanPham.sChatlieu}{/if}">
+	                            </div>
+							</div>
+							<div class="col-sm-4">
+	                            <div class="form-group">
+	                                <label for="tinh-trang">Tình trạng <span class="text-danger">*</span></label>
+	                                <input type="text" name="tinh-trang" class="form-control" id="tinh-trang" required placeholder="VD: nguyên chiếc, 99%, like new..." value="{if !empty($sua)}{$sua.sanPham.sTinhtrang}{/if}">
+	                            </div>
+							</div>
+							<div class="col-sm-4">
+	                            <div class="form-group">
+	                                <label for="loai-hang">Loại hàng <span class="text-danger">*</span></label>
+	                                <select name="loai-hang" id="loai-hang" class="form-control select2">
+	                                	{foreach $danhMucLoaiHang as $loaiHang}
+	                                	<option {if !empty($sua) && $sua.sanPham.iMadanhmuclh == $loaiHang.iMadanhmuclh}selected{/if} value="{$loaiHang.iMadanhmuclh}">{$loaiHang.sTendanhmuclh}</option>
+	                                	{/foreach}
+	                                </select>
+	                            </div>
 
-                            <div class="form-group">
-                                <label for="video">Video</label>
-                                <input type="file" accept="video/*" name="video" class="form-control file-input" id="video">
-                            </div>
+	                            <div class="form-group">
+	                                <label for="video">Video</label>
+	                                <input type="file" accept="video/*" name="video" class="form-control file-input" id="video">
+	                            </div>
+							</div>
+							<div class="col-sm-8">
+	                            <div class="form-group">
+	                                <label for="tinh-trang">Mô tả</label>
+	                                <textarea name="mo-ta" id="mo-ta" cols="30" rows="5" class="form-control">{if !empty($sua)}{$sua.sanPham.sMota}{/if}</textarea>
+	                            </div>
+							</div>
+							<div class="col-sm-12">
+								<table id="list-chi-tiet" class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>Màu sắc</th>
+											<th>Kích thước</th>
+											<th>Số lượng</th>
+											<th>Tác vụ</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr id="chi-tiet-root" class="chi-tiet" data-id="0">
+											<td>
+												<select class="mau-sac form-control" name="mau-sac">
+													{foreach $danhSachMauSac as $mauSac}
+													<option value="{$mauSac.iMamausac}">{$mauSac.sTenmausac}</option>
+													{/foreach}
+												</select>
+											</td>
+											<td>
+												<select class="kich-thuoc form-control" name="kich-thuoc">
+													{foreach $danhSachKichThuoc as $kichThuoc}
+													<option value="{$kichThuoc.iMasize}">{$kichThuoc.sTensize}</option>
+													{/foreach}
+												</select>
+											</td>
+											<td>
+												<input type="number" name="so-luong" class="form-control so-luong" min="1" placeholder="VD: 1, 2, 5, 10, 50, ...">
+											</td>
+											<td class="text-right">
+												<button class="btn btn-sm btn-danger btn-xoa-chi-tiet"><i class="fa fa-times"></i></button>
+											</td>
+										</tr>	
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="4" class="text-right">
+												<button id="them-chi-tiet" class="btn btn-sm btn-info"><i class="fa fa-plus"></i>&emsp;Thêm chi tiết mới</button>
+											</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="col-sm-12 mt-3 text-center">
+								<button type="button" id="btn-save" class="btn-get-started btn-save text-bold">
+									<i class="fa fa-save" aria-hidden="true"></i>&emsp;Lưu
+								</button>
+							</div>
 						</div>
-						<div class="col-sm-8">
-                            <div class="form-group">
-                                <label for="tinh-trang">Mô tả</label>
-                                <textarea name="mo-ta" id="mo-ta" cols="30" rows="5" class="form-control">{if !empty($sua)}{$sua.sanPham.sMota}{/if}</textarea>
-                            </div>
-						</div>
-						<div class="col-sm-12">
-							<table id="list-chi-tiet" class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>Màu sắc</th>
-										<th>Kích thước</th>
-										<th>Số lượng</th>
-										<th>Tác vụ</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr id="chi-tiet-root" class="chi-tiet" data-id="0">
-										<td>
-											<select class="mau-sac form-control" name="mau-sac">
-												{foreach $danhSachMauSac as $mauSac}
-												<option value="{$mauSac.iMamausac}">{$mauSac.sTenmausac}</option>
-												{/foreach}
-											</select>
-										</td>
-										<td>
-											<select class="kich-thuoc form-control" name="kich-thuoc">
-												{foreach $danhSachKichThuoc as $kichThuoc}
-												<option value="{$kichThuoc.iMasize}">{$kichThuoc.sTensize}</option>
-												{/foreach}
-											</select>
-										</td>
-										<td>
-											<input type="number" name="so-luong" class="form-control so-luong" min="1" placeholder="VD: 1, 2, 5, 10, 50, ...">
-										</td>
-										<td class="text-right">
-											<button class="btn btn-sm btn-danger btn-xoa-chi-tiet"><i class="fa fa-times"></i></button>
-										</td>
-									</tr>	
-								</tbody>
-								<tfoot>
-									<tr>
-										<th colspan="4" class="text-right">
-											<button id="them-chi-tiet" class="btn btn-sm btn-info"><i class="fa fa-plus"></i>&emsp;Thêm chi tiết mới</button>
-										</th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-						<div class="col-sm-12 mt-3 text-center">
-							<button id="btn-save" class="btn-get-started btn-save text-bold">
-								<i class="fa fa-save" aria-hidden="true"></i>&emsp;Lưu
-							</button>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -357,6 +359,9 @@
 						<td class="text-center">{$sp.soChiTiet}</td>
 						<td class="text-right">
 							<form method="post">
+								<a href="{$url}dau-gia/san-pham?sp={$sp.iMasanpham}" class="btn btn-sm btn-success">
+									<i class="fa fa-cog"></i>
+								</a>
 								<a href="{$url}profile?sp={$sp.iMasanpham}" class="btn btn-sm btn-info">
 									<i class="fa fa-edit"></i>
 								</a>

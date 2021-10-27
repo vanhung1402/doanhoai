@@ -85,23 +85,27 @@ $(document).ready(function() {
 		}
 	});
 
-	const suaSanPham = (sanPham, chiTietThemMoi, chiTietSuaDoi) => {
+	const suaSanPham = async (sanPham, chiTietThemMoi, chiTietSuaDoi) => {
+		const fileObj = $('#video');
+		const fileUpload = fileObj.prop('files')[0] ? await uploadFile(fileObj) : '';
+		const newSanPham = { ...sanPham, sVideo: fileUpload };
+
 		$.ajax({
 			url: window.location.href,
 			type: 'POST',
 			dataType: 'JSON',
 			data: {
 				action: 'sua-san-pham',
-				sanPham,
+				sanPham: newSanPham,
 				chiTietThemMoi,
 				chiTietSuaDoi,
-				chiTietBiXoa
+				chiTietBiXoa,
 			},
 		})
 		.done(function(res) {
 			console.log(res);
 			if (res) {
-				// window.location.reload();
+				window.location.reload();
 			}
 		})
 		.fail(function(err) {
@@ -111,15 +115,39 @@ $(document).ready(function() {
 		
 	}
 
-	const themSanPham = (sanPham, chiTiet) => {
+	const uploadFile = async ($objectFile) => {
+		var form = new FormData();
+		form.append("uploadedFile", $objectFile.prop('files')[0]);
+
+		const uploadResult = await $.ajax({
+            type: "POST",
+            url: "http://localhost/upload-file-service/upload.php",
+            mimeType: "multipart/form-data",
+            processData: false,
+            contentType: false,
+            data: form,
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        const uploadResultJson = JSON.parse(uploadResult);
+        return (uploadResultJson.status) ? uploadResultJson.path.replace('./', '') : '';
+	}
+
+	const themSanPham = async (sanPham, chiTiet) => {
+		const fileObj = $('#video');
+		const fileUpload = fileObj.prop('files')[0] ? await uploadFile(fileObj) : '';
+		const newSanPham = { ...sanPham, sVideo: fileUpload };
+
 		$.ajax({
 			url: window.location.href,
 			type: 'POST',
 			dataType: 'JSON',
+            mimeType: 'multipart/form-data',
 			data: {
 				action: 'them-san-pham',
-				sanPham,
-				chiTiet
+				sanPham: newSanPham,
+				chiTiet,
 			},
 		})
 		.done(function(res) {

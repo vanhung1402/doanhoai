@@ -11,6 +11,7 @@ $route['login'] 					= 'public/Chethong/login';
 $route['logout'] 					= 'public/Chethong/logout';
 $route['hethong'] 					= 'public/Chethong';
 $route['profile'] 					= 'public/Cprofile';
+$route['dau-gia/san-pham'] 			= 'public/Csanpham';
 
 // Admin
 $route['admin/login'] 				= 'admin/Clogin';

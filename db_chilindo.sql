@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 25, 2021 at 08:30 AM
+-- Generation Time: Oct 27, 2021 at 07:26 PM
 -- Server version: 10.3.31-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 7.4.24
 
@@ -75,7 +75,8 @@ INSERT INTO `tbl_ct_sanpham` (`iMactsanpham`, `iMasanpham`, `iMasize`, `iMamausa
 (10, 7, 6, 3, 10000),
 (11, 7, 5, 5, 50),
 (13, 7, 3, 3, 200),
-(14, 7, 5, 3, 10091);
+(14, 7, 5, 3, 10091),
+(16, 9, 6, 3, 10000);
 
 -- --------------------------------------------------------
 
@@ -242,8 +243,16 @@ CREATE TABLE `tbl_phiendaugia` (
   `dThoigianketthuc` datetime NOT NULL,
   `iBuocgia` int(11) NOT NULL,
   `iGiakhoidiem` int(11) NOT NULL,
-  `bTrangthaiphiendaugia` bit(4) NOT NULL COMMENT 'Phiên đấu giá chưa diễn ra, sắp diễn ra, đang diễn ra, đã diễn ra(thành công/không thành công)'
+  `iKetqua` tinyint(4) NOT NULL COMMENT 'Phiên đấu giá chưa diễn ra, sắp diễn ra, đang diễn ra, đã diễn ra(thành công/không thành công)',
+  `iMactsanpham` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_phiendaugia`
+--
+
+INSERT INTO `tbl_phiendaugia` (`iMaphiendaugia`, `dThoigianbatdau`, `dThoigianketthuc`, `iBuocgia`, `iGiakhoidiem`, `iKetqua`, `iMactsanpham`) VALUES
+(1, '2021-10-27 19:24:58', '2021-10-31 19:24:58', 3, 3, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -321,7 +330,8 @@ CREATE TABLE `tbl_sanpham` (
 --
 
 INSERT INTO `tbl_sanpham` (`iMasanpham`, `iMadanhmuclh`, `sTensanpham`, `sVideo`, `sMota`, `sThuonghieu`, `sChatlieu`, `sTinhtrang`, `iTrangthai`, `iNguoithem`) VALUES
-(7, 11, 'iPhone 13', '', 'al;dahlkdj', 'Apple IPhone', 'Kính', 'Nguyên seal', 1, 8);
+(7, 11, 'iPhone 13', 'uploaded_files/92fa5db43ce0e2384afed7be86f708dc.mp4', 'al;dahlkdj', 'Apple IPhone', 'Kính', 'Nguyên seal', 1, 8),
+(9, 11, 'Sony XZ2', 'uploaded_files/98bfb1db70dba87f0abb2747f950dfb7.mp4', '', 'Sony', 'Kính', 'Nguyên seal', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -441,7 +451,8 @@ ALTER TABLE `tbl_nguoidung`
 -- Indexes for table `tbl_phiendaugia`
 --
 ALTER TABLE `tbl_phiendaugia`
-  ADD PRIMARY KEY (`iMaphiendaugia`);
+  ADD PRIMARY KEY (`iMaphiendaugia`),
+  ADD KEY `iMactsanpham` (`iMactsanpham`);
 
 --
 -- Indexes for table `tbl_quyen`
@@ -485,7 +496,7 @@ ALTER TABLE `tbl_binhluan`
 -- AUTO_INCREMENT for table `tbl_ct_sanpham`
 --
 ALTER TABLE `tbl_ct_sanpham`
-  MODIFY `iMactsanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `iMactsanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_danhmucloaihang`
@@ -527,7 +538,7 @@ ALTER TABLE `tbl_nguoidung`
 -- AUTO_INCREMENT for table `tbl_phiendaugia`
 --
 ALTER TABLE `tbl_phiendaugia`
-  MODIFY `iMaphiendaugia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iMaphiendaugia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_quyen`
@@ -539,7 +550,7 @@ ALTER TABLE `tbl_quyen`
 -- AUTO_INCREMENT for table `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
-  MODIFY `iMasanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `iMasanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_taikhoan`
@@ -611,6 +622,12 @@ ALTER TABLE `tbl_mausac`
 --
 ALTER TABLE `tbl_nguoidung`
   ADD CONSTRAINT `tbl_nguoidung_ibfk_1` FOREIGN KEY (`iMataikhoan`) REFERENCES `tbl_taikhoan` (`iMataikhoan`);
+
+--
+-- Constraints for table `tbl_phiendaugia`
+--
+ALTER TABLE `tbl_phiendaugia`
+  ADD CONSTRAINT `tbl_phiendaugia_ibfk_1` FOREIGN KEY (`iMactsanpham`) REFERENCES `tbl_ct_sanpham` (`iMactsanpham`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_quyen_taikhoan`
