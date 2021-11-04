@@ -1,4 +1,5 @@
 const url = document.getElementsByTagName('base')[0].getAttribute('href');
+const utl_files = 'http://localhost/upload-file-service/uploaded_files/';
 var currentUrl = window.location.href
 var urlObj = new URL(currentUrl);
 
@@ -29,4 +30,15 @@ $(document).ready(function() {
 	    autoclose: true,
 	    todayHighlight: true,
 	});
+
+    $.each($('.format-number'), function() {
+        const thisValue = $(this).text();
+        $(this).text(numeral(thisValue).format('0,0'));
+    });
+
+    $(document).on('keyup', '.input-format-number', function(event) {
+        event.preventDefault();
+        const thisValue = $(this).val();
+        $(this).val(numeral(thisValue).format('0,0'));
+    });
 });

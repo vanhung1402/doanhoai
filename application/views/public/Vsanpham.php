@@ -1,7 +1,7 @@
 <link href="{$url}dist/custom/public/css/sanpham.css" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="dist/custom/public/libs/moment.js/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
@@ -85,6 +85,9 @@
   <table class="table table-bordered">
     <thead>
       <tr>
+        <th colspan="5">Danh sách chi tiết sản phẩm</th>
+      </tr>
+      <tr>
         <th>#</th>
         <th>Màu sắc</th>
         <th>Kích thước</th>
@@ -98,8 +101,8 @@
         <td class="text-center">{$k + 1}</td>
         <td>{$ct.sTenmausac}</td>
         <td>{$ct.sTensize}</td>
-        <td>{$ct.iSoluong}</td>
-        <td class="text-center">
+        <td class="text-right format-number">{$ct.iSoluong}</td>
+        <td class="text-right">
           {if $ct.iSoluong}
           <button value="{$ct.iMactsanpham}" type="button" class="btn btn-sm btn-primary btn-dau-gia" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-gavel"></i> &nbsp; Mở phiên đấu giá</button>
           {/if}
@@ -150,13 +153,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="gia-khoi-diem">Giá khởi điểm (VNĐ)</label>
-                <input type="number" min="1" id="gia-khoi-diem" class="form-control">
+                <input type="text" min="1" id="gia-khoi-diem" class="form-control input-format-number">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="buoc-gia">Bước giá (VNĐ)</label>
-                <input type="number" min="1" id="buoc-gia" class="form-control">
+                <input type="text" min="1" id="buoc-gia" class="form-control input-format-number">
               </div>
             </div>
           </div>
@@ -169,16 +172,42 @@
     </div>
   </div>
 </section>
+<section id="dau-gia" class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th colspan="8">Danh sách phiên đấu giá</th>
+      </tr>
+      <tr>
+        <th>#</th>
+        <th>Chi tiết sản phẩm</th>
+        <th>Thời gian</th>
+        <th>Giá khởi điểm</th>
+        <th>Bước giá</th>
+        <th>Trạng thái</th>
+        <th>Kết quả</th>
+        <th>Tác vụ</th>
+      </tr>
+    </thead>
+    <tbody id="list-dau-gia">
+      
+    </tbody>
+  </table>
+</section>
 {literal}
 <script type="text/javascript">
   let chiTietDauGia = 0;
   let timeStartValue = null;
   let timeEndValue = null;
+  let mapDauGiaList = [];
+  let trangThai = 1;
+  let maPhienEdit = 0;
 
   $(document).ready(function() {
     $('.btn-dau-gia').click(function(event) {
       let sp = $(this).val();
       chiTietDauGia = sp;
+      trangThai = 1;
     });
     var timeStart = $('#time-start').datetimepicker({
       useCurrent: true,
@@ -203,22 +232,73 @@
     });
 
     const setDauGia = (dauGia) => {
+      const action = trangThai === 1 ? 'set-dau-gia' : 'update-dau-gia';
       $.ajax({
         url: window.location.href,
         type: 'POST',
         dataType: 'JSON',
         data: {
-          action: 'set-dau-gia',
+          action,
           dauGia
         },
       })
       .done(function(res) {
-        console.log("Success: ", res);
+        if (res) getDanhSachDauGia();
+        $('#exampleModal').modal('hide');
       })
       .fail(function(err) {
         console.log("Error: ", err);
       });
-      
+    }
+
+    const renderDauGia = (listDauGia) => {
+      mapDauGiaList = listDauGia;
+
+      let dauGiaHtml = listDauGia.map(function(ct, index) {
+        return `<tr>
+          <td class="text-center">${index + 1}</td>
+          <td>
+            <p><b>Màu:</b> ${ct.sTenmausac}</p>
+            <p><b>Kích thước:</b> ${ct.sTensize}</p>
+          </td>
+          <td>
+            <p><b>Bắt đầu:</b> ${ct.batDau}</p>
+            <p><b>Kết thúc:</b> ${ct.ketThuc}</p>
+          </td>
+          <td class="text-right">${numeral(ct.iGiakhoidiem).format('0,0')} VNĐ</td>
+          <td class="text-right">${numeral(ct.iBuocgia).format('0,0')} VNĐ</td>
+          <td class="text-right">${getTrangThaiPhien(ct)}</td>
+          <td></td>
+          <td class="text-right">
+            ${getButtonPhienDauGia(ct)}
+          </td>
+        </tr>`;
+      });
+
+      $('#list-dau-gia').html(dauGiaHtml);
+    }
+
+    const getTrangThaiPhien = (phien) => {
+      const thoiGianBatDau = new Date(phien.dThoigianbatdau).getTime();
+      const thoiGianKetThuc = new Date(phien.dThoigianketthuc).getTime();
+      const timestamps = new Date().getTime();
+      if ((timestamps + 7200000) < thoiGianBatDau) return '<span class="badge badge-primary">Chưa diễn ra</span>';
+      if (timestamps < thoiGianBatDau) return '<span class="badge badge-warning">Chuẩn bị diễn ra</span>';
+      if (timestamps >= thoiGianBatDau && timestamps <= thoiGianKetThuc) return '<span class="badge-success badge">Đang diễn ra</span>';
+      return '<span class="badge badge-info">Đã kết thúc</span>';
+    }
+
+    const getButtonPhienDauGia = (phien) => {
+      const thoiGianBatDau = new Date(phien.dThoigianbatdau).getTime();
+      const thoiGianKetThuc = new Date(phien.dThoigianketthuc).getTime();
+      const timestamps = new Date().getTime();
+
+      const editAvailable = (timestamps < thoiGianBatDau) || (timestamps > thoiGianKetThuc && !phien.iKetqua);
+
+      const btnEdit = editAvailable ? `<button type="button" class="btn btn-xs btn-info edit-phien" value="${phien.iMaphiendaugia}">
+          <i class="fa fa-edit"></i>
+        </button>` : ``;
+      return `${btnEdit}`;
     }
 
     const getDauGiaInput = () => {
@@ -226,8 +306,8 @@
       const dauGia = {
         dThoigianbatdau: timeStartValue,
         dThoigianketthuc: timeEndValue,
-        iBuocgia: $('#buoc-gia').val(),
-        iGiakhoidiem: $('#gia-khoi-diem').val(),
+        iBuocgia: $('#buoc-gia').val().replaceAll(',', ''),
+        iGiakhoidiem: $('#gia-khoi-diem').val().replaceAll(',', ''),
         iMactsanpham: chiTietDauGia,
         iKetqua: 1,
       };
@@ -238,12 +318,44 @@
           return;
         }
       }
+      if (trangThai === 2) dauGia.iMaphiendaugia = maPhienEdit;
       return check ? dauGia : false;
     }
 
     const getDanhSachDauGia = () => {
-      
-    }
+      $.ajax({
+        url: window.location.href,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+          action: 'danh-sach-dau-gia',
+        },
+      })
+      .done(function(res) {
+        console.table(res)
+        renderDauGia(res);
+      })
+      .fail(function(err) {
+        console.log("Error: ", err);
+      });
+    };
+
+    getDanhSachDauGia();    
+
+    $(document).on('click', '.edit-phien', function(event) {
+      event.preventDefault();
+      maPhienEdit = $(this).val();
+      const phien = mapDauGiaList.find((phien) => phien.iMaphiendaugia == maPhienEdit);
+      if (!phien) return;
+
+      trangThai = 2;
+      chiTietDauGia = phien.iMactsanpham;
+      $('#exampleModal').modal();
+      $('#buoc-gia').val(numeral(phien.iBuocgia).format('0,0'));
+      $('#gia-khoi-diem').val(numeral(phien.iGiakhoidiem).format('0,0'));
+      $('#time-start').data("DateTimePicker").date(new Date(phien.dThoigianbatdau));
+      $('#time-end').data("DateTimePicker").date(new Date(phien.dThoigianketthuc));
+    });
   });
 </script>
 {/literal}

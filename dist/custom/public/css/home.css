@@ -1,0 +1,55 @@
+.auction-box {
+	height: 450px;
+	position: relative;
+	padding: 10px !important;
+}
+.image-thumbnail {
+	height: 250px;
+	text-align: center;
+}
+.image-thumbnail img {
+	height: 100%;
+	object-fit: cover;
+}
+.auction-info {
+	position: absolute;
+	bottom: 0;
+	width: calc(100% - 20px);
+	padding: 10px;
+}
+.auction-info .title {
+	min-height: 64px;
+  	text-overflow: ellipsis;
+  	overflow: hidden;
+  	text-align: left;
+}
+.trang-thai {
+	padding: 10px 0;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+}
+.trang-thai span:first-child {
+	color: #e8434a;
+}
+.trang-thai span:last-child {
+	text-align: right;
+}
+.trang-thai span:last-child i {
+	background-color: #1ab7ea;
+	border-radius: 50%;
+	color: #FFF;
+	padding: 4px;
+}
+
+.view-more {
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+	transition: all ease .5s;
+
+}
+.view-more:hover {
+	color: #1ab7ea;
+}

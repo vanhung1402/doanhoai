@@ -5,7 +5,7 @@
 table.table tr th {
   text-align: center;
 }
-table.table tr th, table.table tr td {
+table.table thead tr th, table.table tbody tr td {
   vertical-align: middle;
 }
 .video-carousel{

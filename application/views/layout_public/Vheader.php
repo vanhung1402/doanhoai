@@ -62,8 +62,16 @@
                         <a class="open-modal-account" href="#0">Đăng nhập</a>
                     </li>
                     {else}
-                    <li><a href="{$url}profile">{$user.sTennguoidung}</a></li>
-                    <li><a href="{$url}logout" title="Đăng xuất"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                    <li class="drop-down"><a href="{$url}profile">Xin chào, {$user.sTennguoidung}</a>
+                        <ul>
+                            <li><a href="{$url}profile">Thông tin tài khoản</a></li>
+                            <li><a href="{$url}chu-hang/san-pham">Thêm sản phẩm</a></li>
+                            <li><a href="{$url}chu-hang/danh-sach-san-pham">Danh sách sản phẩm</a></li>
+                            <!-- <li><a href="{$url}">Danh sách phiên đấu giá</a></li> -->
+                            <li><a href="{$url}doi-mat-khau">Đổi mật khẩu</a></li>
+                            <li><a href="{$url}logout">Đăng xuất</a></li>
+                        </ul>
+                    </li>
                     {/if}
                 </ul>
             </nav><!-- .main-nav -->

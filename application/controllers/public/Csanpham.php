@@ -17,7 +17,13 @@
 	    		case 'set-dau-gia':
 	    			$this->setDauGia();
 	    			break;
-	    		
+	    		case 'update-dau-gia':
+	    			$this->updateDauGia();
+	    			break;
+	    		case 'danh-sach-dau-gia': {
+	    			$this->danhSachDauGia();
+	    			break;
+	    		}
 	    		default:
 	    			// code...
 	    			break;
@@ -44,6 +50,20 @@
 	    	$dauGia = $this->input->post('dauGia');
 	    	$result = $this->Msanpham->setDauGia($dauGia);
 	    	die(json_encode($result));
+	    }
+
+	    public function updateDauGia() {
+	    	$dauGia = $this->input->post('dauGia');
+	    	$maPhien = $dauGia['iMaphiendaugia'];
+	    	unset($dauGia['iMaphiendaugia']);
+	    	$result = $this->Msanpham->updateDauGia($dauGia, $maPhien);
+	    	die(json_encode($result));
+	    }
+
+	    public function danhSachDauGia() {
+	    	$iMasanpham = $this->input->get('sp');
+	    	$danhSachDauGiaSanPham = $this->Msanpham->getDanhSachDauGiaSanPham($iMasanpham);
+	    	die(json_encode($danhSachDauGiaSanPham));
 	    }
 	}
 
