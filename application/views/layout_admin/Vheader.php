@@ -40,7 +40,9 @@
                                 <span>Quản lý tài khoản</span>
                             </a>
                             <ul class="submenu ">
+                                {if $user.iMaquyen == 10}
                                 <li><a href="{$url}admin/tai-khoan">Tài khoản nhân viên HT</a></li>
+                                {/if}
                                 <li><a href="{$url}admin/tai-khoan?phan-loai=1">Tài khoản khách hàng</a></li>
                                 <li><a href="{$url}admin/tai-khoan?phan-loai=2">Tài khoản chủ hàng</a></li>
                             </ul>

@@ -84,8 +84,8 @@
                 <div class="cd-user-modal-container">
                     <!-- this is the container wrapper -->
                     <ul class="cd-switcher">
-                        <li><a>Đăng nhập</a></li>
-                        <li><a>Đăng ký</a></li>
+                        <li><a style="color: #000000 !important">Đăng nhập</a></li>
+                        <li><a style="color: #000000 !important">Đăng ký</a></li>
                     </ul>
 
                     <div id="cd-login">
