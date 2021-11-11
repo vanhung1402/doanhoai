@@ -65,6 +65,10 @@
 						<i class="fa fa-gavel"></i>&emsp;Place Bid
 					</button>
 				</div>
+				{else}
+				<div id="owner" class="alert alert-warning text-center">
+					Bạn không thể tham gia phiên đấu giá của chính bạn
+				</div>
 				{/if}
 				<div id="finished" class="hidden alert alert-warning text-center">
 					Phiên đấu giá đã kết thúc!
@@ -77,6 +81,5 @@
 <script src="{$url}dist/custom/public/js/daugia.js"></script>
 <script type="text/javascript">
 	let timer = new Date('{$phien.dThoigianketthuc}').getTime();
-	console.log(new Date('{$phien.dThoigianketthuc}'));
 	let current  = new Date().getTime();
 </script>

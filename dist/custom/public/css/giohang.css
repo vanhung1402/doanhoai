@@ -1,0 +1,66 @@
+.item-container {
+	border: 1px solid #1ab7ea;
+	border-radius: 3px;
+	margin-bottom: 20px;
+	position: relative;
+}
+.check-items {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+.item-container:nth-child(odd) {
+	border-left: 5px solid #1ab7ea;
+	border-right: 1px solid #1ab7ea;
+	padding-right: 4px;	
+}
+.item-container:nth-child(even) {
+	border-right: 5px solid #1ab7ea;
+	border-left: 1px solid #1ab7ea;	
+	padding-left: 4px;
+}
+.item-thumb {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-right: 1px solid #1ab7ea;
+	padding: 10px;
+	height: 100%;
+}
+.item-thumb img {
+	height: 125px;
+	object-fit: fill;
+}
+.item-detail {
+	padding: 10px 0;
+}
+.item-detail h5 {
+	font-weight: bold;
+}
+.item-detail p {
+	margin-bottom: 5px;
+}
+.total {
+	box-shadow: 0 0 15px #0003;
+	padding: 15px;
+}
+.btn-checkout {
+	text-align: center;
+	background-color: #1ab7ea;
+	color: #FFF;
+	border: 1px solid #1ab7ea;
+	padding: 10px 12px;
+	transition: all ease .5s;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.btn-checkout:focus {
+	outline: none;
+}
+.btn-checkout:hover {
+	background-color: #FFF;
+	color: #1ab7ea;
+}

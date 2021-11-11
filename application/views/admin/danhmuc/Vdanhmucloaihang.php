@@ -60,6 +60,7 @@
                                 <td>{$loaiHang.sTenloaihang}</td>
                                 <td>{$loaiHang.iTrangthai}</td>
                                 <td class="text-center">
+                                    {if $user.iMaquyen != 10}
                                     <form method="post">
                                         <a class="btn btn-outline-primary btn-sm btn-xs" href="{$url}admin/danh-muc-loai-hang?id={$loaiHang.iMadanhmuclh}" title="Sửa danh mục loại hàng">
                                             <i data-feather="edit"></i>
@@ -71,6 +72,7 @@
                                         </button>
                                         {/if}
                                     </form>
+                                    {/if}
                                 </td>
                             </tr>
                             {/foreach}

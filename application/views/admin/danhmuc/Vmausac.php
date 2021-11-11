@@ -13,12 +13,14 @@
                             <input type="text" name="ten-mau-sac" id="ten-mau-sac" class="form-control" required {if isset($sua)}value="{$sua.sTenmausac}"{/if}>
                         </div>
                         <div class="form-group text-center">
+                            {if $user.iMaquyen != 10}
                             {if isset($sua)}
                             <input class="hidden" type="text" name="action" value="cap-nhap-mau-sac">
                             <button type="submit" class="btn btn-info"><i data-feather="save"></i>&emsp;Cập nhập</button>
                             {else}
                             <input class="hidden" type="text" name="action" value="them-mau-sac">
                             <button type="submit" class="btn btn-success"><i data-feather="plus"></i>&emsp;Thêm</button>
+                            {/if}
                             {/if}
                         </div>
                     </form>

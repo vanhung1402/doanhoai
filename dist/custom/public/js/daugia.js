@@ -68,19 +68,19 @@ $(document).ready(function() {
 	}
 
 	const setTimer = () => {
-		const subTimer = timer - current;
-		const toDateTime = new Date(subTimer);
-
-		let sds = Math.floor(subTimer / 1000);
-		let days = sds > 86400 ? Math.floor(sds / 86400) : 0;
-
-		let hours = toDateTime.getHours();
-		let minutes = toDateTime.getMinutes();
-		let seconds = toDateTime.getSeconds();
+		let seconds = Math.floor((timer / 1000) - (current / 1000));
+		let days = seconds > 86400 ? Math.floor(seconds / 86400) : 0;
+		days = days < 10 ? `0${days}` : days;
+		seconds %= 86400;
+		let hours = seconds > 3600 ? Math.floor(seconds / 3600) : 0;
 		hours = hours < 10 ? `0${hours}` : hours;
+		seconds %= 3600;
+		let minutes = seconds > 60 ? Math.floor(seconds / 60) : 0;
 		minutes = minutes < 10 ? `0${minutes}` : minutes;
+		seconds %= 60;
 		seconds = seconds < 10 ? `0${seconds}` : seconds;
-		$('#hours').text(hours);
+
+		$('#hours').text(hours + days * 24);
 		$('#minutes').text(minutes);
 		$('#seconds').text(seconds);
 	}

@@ -74,12 +74,52 @@
 
 	    public function getCartUser($taiKhoan)
 	    {
-	    	$this->db->select('iMaphiendaugia, iMucgiadau');
+	    	$temp = $this->getUserBidsNull($taiKhoan);
+	    	$userBidsNull = [];
+	    	$bidIds = [];
+	    	foreach ($temp as $bid) {
+	    		$bidIds[] = $bid['iMaphiendaugia'];
+	    		$userBidsNull[$bid['iMaphiendaugia']] = $bid;
+	    	}
+
+	    	$bidsWin = $this->getBidsWin($bidIds);
+	    	foreach ($bidsWin as $bid) {
+	    		if ($userBidsNull[$bid['iMaphiendaugia']]['iMucgiadau'] != $bid['iGiathang']) {
+	    			unset($userBidsNull[$bid['iMaphiendaugia']]);
+	    		}
+	    	}
+	    	return $userBidsNull;
+	    }
+
+	    public function getBidsWin($bidIds)
+	    {
+	    	if (!$bidIds) return null;
+	    	$this->db->select('ctp.iMaphiendaugia, MAX(iMucgiadau) iGiathang');
+	    	$this->db->from('tbl_ct_phiendaugia ctp');
+	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
+	    	$this->db->where_in('ctp.iMaphiendaugia', $bidIds);
+	    	$this->db->where('dThoigianketthuc < NOW()');
 	    	$this->db->where('iMadonmua', NULL);
-	    	$this->db->where('iMataikhoan', $taiKhoan);
-	    	$this->db->having('iMucgiadau = MAX(iMucgiadau)');
-	    	$this->db->group_by('iMaphiendaugia');
-	    	return $this->db->get('tbl_ct_phiendaugia')->result_array();
+	    	$this->db->group_by('ctp.iMaphiendaugia');
+	    	return $this->db->get()->result_array();
+	    }
+
+	    public function getUserBidsNull($taiKhoan) {
+	    	$this->db->select('sTenmausac, sTensize, sTensanpham, ctp.iMaphiendaugia, MAX(iMucgiadau) iMucgiadau, sTenshop');
+	    	$this->db->from('tbl_ct_phiendaugia ctp');
+	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    	$this->db->join('tbl_nguoidung nd', 'sp.iNguoithem = nd.iManguoidung', 'left');
+	    	$this->db->join('tbl_danhmucloaihang dmlh', 'sp.iMadanhmuclh = dmlh.iMadanhmuclh', 'inner');
+	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
+	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
+	    	$this->db->where('iMadonmua', NULL);
+	    	$this->db->where('ctp.iMataikhoan', $taiKhoan);
+	    	$this->db->where('dThoigianketthuc < NOW()');
+	    	$this->db->order_by('iMucgiadau', 'desc');
+	    	$this->db->group_by('ctp.iMaphiendaugia');
+	    	return $this->db->get()->result_array();
 	    }
 	}
 

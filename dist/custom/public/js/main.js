@@ -54,7 +54,7 @@ $(document).ready(function() {
             },
         })
         .done(function(res) {
-            console.table(res);
+            $('#total-uncheck').text(Object.keys(res).length);
         })
         .fail(function(err) {
             console.log("Error: ", err);
@@ -64,4 +64,5 @@ $(document).ready(function() {
     getCart();
 
     $('#current_url').val(encodeURI(window.location.href));
+    $('#logout').attr('href', `${url}logout?back=${window.location.href}`);
 });

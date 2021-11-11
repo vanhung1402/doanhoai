@@ -128,8 +128,9 @@
 
 	    public function logout()
 	    {
+	    	$back = $this->input->get('back') ? $this->input->get('back') : base_url();
 	    	$this->session->unset_userdata('user');
-			return redirect(base_url(), 'refresh');
+			return redirect($back, 'refresh');
 			exit();
 	    }
 	}

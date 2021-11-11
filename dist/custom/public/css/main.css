@@ -10,8 +10,15 @@
 #header nav ul li.drop-down ul li a {
   color: #000000de !important;
 }
+body {
+  background-color: #f5f8fd;
+}
 main {
   font-family: Nunito;
+  margin: 25px auto;
+}
+#topbar .container {
+  background-color: inherit;
 }
 .flex {
 	display: flex;
@@ -30,7 +37,9 @@ main {
 #main {
 	margin-top: 110px;
 }
-
+.container {
+  background-color: #FFF;
+}
 .datepicker {
 	font-size: 13px;
 }

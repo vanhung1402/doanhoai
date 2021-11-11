@@ -59,7 +59,7 @@
                     <li class="active"><a href="{$url}"><i class="fa fa-home"></i>&nbsp; Trang chủ</a></li>
                     {if empty($user)}
                     <li>
-                        <a class="open-modal-account" id="open-login" href="#0"><i class="fa fa-sign-in"></i>&nbsp; Đăng nhập</a>
+                        <a class="open-modal-account" id="open-login"><i class="fa fa-sign-in"></i>&nbsp; Đăng nhập</a>
                     </li>
                     {else}
                     <li>
@@ -72,7 +72,7 @@
                             <li><a href="{$url}chu-hang/danh-sach-san-pham">Danh sách sản phẩm</a></li>
                             <!-- <li><a href="{$url}">Danh sách phiên đấu giá</a></li> -->
                             <li><a href="{$url}doi-mat-khau">Đổi mật khẩu</a></li>
-                            <li><a href="{$url}logout">Đăng xuất</a></li>
+                            <li><a id="logout" href="{$url}logout">Đăng xuất</a></li>
                         </ul>
                     </li>
                     {/if}
@@ -84,8 +84,8 @@
                 <div class="cd-user-modal-container">
                     <!-- this is the container wrapper -->
                     <ul class="cd-switcher">
-                        <li><a href="#0">Đăng nhập</a></li>
-                        <li><a href="#0">Đăng ký</a></li>
+                        <li><a>Đăng nhập</a></li>
+                        <li><a>Đăng ký</a></li>
                     </ul>
 
                     <div id="cd-login">
@@ -101,7 +101,7 @@
                             <p class="fieldset">
                                 <label class="image-replace cd-password" for="signin-password">Password</label>
                                 <input class="full-width has-padding has-border" id="signin-password" type="text" placeholder="Password" name="password">
-                                <a href="#0" class="hide-password">Hide</a>
+                                <a class="hide-password">Hide</a>
                                 <span class="cd-error-message">Không được bỏ trống!</span>
                             </p>
 
@@ -204,7 +204,7 @@
 
                         <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
                     </div> <!-- cd-reset-password -->
-                    <a href="#0" class="cd-close-form">Close</a>
+                    <a class="cd-close-form">Close</a>
                 </div> <!-- cd-user-modal-container -->
             </div> <!-- cd-user-modal -->
         </div>
