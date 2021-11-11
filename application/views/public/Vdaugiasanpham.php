@@ -1,6 +1,7 @@
 <link href="{$url}dist/custom/public/css/daugia.css" rel="stylesheet">
 
-<div class="container pt-3">
+<br>
+<div class="container pt-3 pb-3">
 	<div class="product-info row">
 		<div class="col-sm-4">
 			<div id="carousel-images" class="carousel slide" data-ride="carousel">
@@ -75,6 +76,17 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<br><br>
+	<div class="product-detail">
+		<div class="row">
+			<div class="col-sm-3"><b>Cửa hàng: </b>{$sanpham.sTenshop}</div>
+			<div class="col-sm-3"><b>Thương hiệu: </b>{$sanpham.sThuonghieu}</div>
+			<div class="col-sm-3"><b>Chất liệu: </b>{$sanpham.sChatlieu}</div>
+			<div class="col-sm-3"><b>Tình trạng: </b>{$sanpham.sTinhtrang}</div>
+		</div>
+		<br>
+		<p><b>Mô tả: </b>{$sanpham.sMota}</p>
 	</div>
 </div>
 

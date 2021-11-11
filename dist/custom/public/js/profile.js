@@ -76,7 +76,14 @@ $(document).ready(function() {
 				showMessage('error', 'Chi tiết sản phẩm không được trùng màu sắc và kích thước');
 				return;
 			}
-			console.log(sanPham);
+			if ($('#anh').attr('required') && !$('#anh').prop('files')[0]) {
+				showMessage('error', 'Vui lòng chọn ảnh cho sản phẩm');
+				return;
+			}
+			if ($('#anh').prop('files').length > 4) {
+				showMessage('error', 'Chỉ được chọn nhiều nhất 4 ảnh');
+				return;
+			}
 			if (urlObj.searchParams.get('sp')) {
 				suaSanPham(sanPham, chiTietThemMoi, chiTietSuaDoi);
 			} else {
@@ -135,8 +142,10 @@ $(document).ready(function() {
 	}
 
 	const themSanPham = async (sanPham, chiTiet) => {
-		const fileObj = $('#video');
-		const fileUpload = fileObj.prop('files')[0] ? await uploadFile(fileObj) : '';
+		const fileVideoObj = $('#video');
+		const fileAnhObj = $('#anh');
+		return;
+		const fileUpload = fileVideoObj.prop('files')[0] ? await uploadFile(fileVideoObj) : '';
 		const newSanPham = { ...sanPham, sVideo: fileUpload };
 
 		$.ajax({

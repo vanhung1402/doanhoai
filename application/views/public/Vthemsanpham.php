@@ -132,6 +132,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="anh">Ảnh {if empty($sua)}<span class="text-danger">*</span>{/if}</label>
+                                <input type="file" accept="image/*" name="anh" class="form-control file-input" multiple="true" id="anh" {if empty($sua)}required{/if}>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="video">Video</label>
                                 <input type="file" accept="video/*" name="video" class="form-control file-input" id="video">
                             </div>
@@ -139,7 +144,7 @@
 						<div class="col-sm-8">
                             <div class="form-group">
                                 <label for="tinh-trang">Mô tả</label>
-                                <textarea name="mo-ta" id="mo-ta" cols="30" rows="5" class="form-control">{if !empty($sua)}{$sua.sanPham.sMota}{/if}</textarea>
+                                <textarea name="mo-ta" id="mo-ta" cols="30" rows="9" class="form-control">{if !empty($sua)}{$sua.sanPham.sMota}{/if}</textarea>
                             </div>
 						</div>
 						<div class="col-sm-12">
