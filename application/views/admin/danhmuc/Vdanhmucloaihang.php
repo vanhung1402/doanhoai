@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{$url}dist/templates/admin/assets/vendors/simple-datatables/style.css">
 <link rel="stylesheet" href="{$url}dist/templates/admin/assets/vendors/choices.js/choices.min.css" />
 <div class="row">
+    {if $user.iMaquyen != 10}
     <div class="col-sm-4">
         <section class="section">
             <div class="card">
@@ -22,7 +23,6 @@
                             </select>
                         </div>
                         <div class="form-group text-center">
-                            {if $user.iMaquyen != 10}
                             {if isset($sua)}
                             <input class="hidden" type="text" name="action" value="cap-nhap-loai-hang">
                             <button type="submit" class="btn btn-info"><i data-feather="save"></i>&emsp;Cập nhập</button>
@@ -30,14 +30,14 @@
                             <input class="hidden" type="text" name="action" value="them-loai-hang">
                             <button type="submit" class="btn btn-success"><i data-feather="plus"></i>&emsp;Thêm</button>
                             {/if}
-                            {/if}
                         </div>
                     </form>
                 </div>
             </div>
         </section>  
     </div>
-    <div class="col-sm-8">
+    {/if}
+    <div class="col-sm-{if $user.iMaquyen != 10}12{else}8{/if}">
         <section class="section">
             <div class="card">
                 <div class="card-header">
