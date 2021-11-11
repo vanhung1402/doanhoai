@@ -166,9 +166,10 @@
 	    	$this->db->where('iNguoithem', $session['iManguoidung']);
 	    	$sanPham = $this->db->get('tbl_sanpham')->row_array();
 
-	    	$this->db->select('ctsp.*, iMaphiendaugia');
+	    	$this->db->select('ctsp.*, ctp.iMaphiendaugia');
 	    	$this->db->from('tbl_ct_sanpham ctsp');
-	    	$this->db->join('tbl_ct_phiendaugia ctp', 'ctsp.iMactsanpham = ctp.iMactsanpham', 'left');
+	    	$this->db->join('tbl_phiendaugia pdg', 'ctsp.iMactsanpham = pdg.iMactsanpham', 'left');
+	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
 	    	$this->db->where('iMasanpham', $maSanPham);
 	    	$this->db->group_by('iMactsanpham');
 	    	$chiTiet = $this->db->get()->result_array();

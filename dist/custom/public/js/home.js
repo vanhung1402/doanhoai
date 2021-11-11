@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 	const renderCurrentAuction = async (limit, type = null) => {
 		let current = new Date();
-		let start = moment(current).format('YYYY/MM/DD kk:mm:ss');
+		let start = moment(current).format('YYYY-MM-DD hh:mm:ss');
 		const listDauGia = await getAuction(start, start, limit);
 
 		switch (type) {
@@ -48,7 +48,7 @@ $(document).ready(function() {
                     	<img src="${utl_files}red.png" alt="${dg.sTensanpham}" />
                     </div>
                     <div class="auction-info">
-	                    <h4 class="title"><a href="${url}dau-gia-san-pham?san-pham=${dg.iMaphiendaugia}">${dg.sTensanpham}</a></h4>
+	                    <h4 class="title"><a href="${url}dau-gia-san-pham?phien=${dg.iMaphiendaugia}">${dg.sTensanpham}</a></h4>
 	                    <div class="chi-tiet">
 	                    	<b>Màu: </b>${dg.sTenmausac} - <b>Size: </b>${dg.sTensize}
 	                    </div>

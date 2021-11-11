@@ -1,0 +1,71 @@
+#carousel-images {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+#carousel-images ol.carousel-indicators li {
+	background-color: #1ab7ea !important;
+}
+
+.ten-san-pham {
+	color: #027ca5;
+	font-weight: 800;
+}
+.times span {
+	color: #c35;
+	font-weight: 800;
+	font-size: 24px;
+}
+.times span:nth-child(odd) {
+	background-color: #fbfbfb;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+
+.dau-gia >div p:first-child {
+	margin: 25px 0px 10px;
+	color: #555;
+}
+.dau-gia >div p:last-child {
+	font-weight: 800;	
+}
+
+.action >div {
+	display: flex;
+	align-items: center;
+}
+.action span {
+	font-size: 24px;
+	color: #027ca5;
+	font-weight: 800;
+	padding: 0px 10px;
+	border: 1px solid #1ab7ea;
+	border-left: none;
+	border-right: none;
+	transition: all ease .5s;
+	cursor: pointer;
+}
+.action span:hover {
+	color: #1ab7ea;	
+}
+.action button {
+	display: flex;
+	align-items: center;
+	background-color: #1ab7ea;
+	color: #FFF;
+	border: 1px solid #1ab7ea;
+	padding: 10px 12px;
+	transition: all ease .5s;
+}
+.action button#btn-place-bid {
+	font-size: 14px;
+	padding: 7.5px 12px;
+	margin-left: 10px;
+}
+.action button:focus {
+	outline: none;
+}
+.action button:hover {
+	background-color: #FFF;
+	color: #1ab7ea;
+}

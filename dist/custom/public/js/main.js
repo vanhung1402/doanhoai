@@ -3,6 +3,8 @@ const utl_files = 'http://localhost/upload-file-service/uploaded_files/';
 var currentUrl = window.location.href
 var urlObj = new URL(currentUrl);
 
+let getCart;
+
 function showMessage(type, msg){
     (type === 'success') ? type = 'info' : '';
     const title_msg = {
@@ -41,4 +43,25 @@ $(document).ready(function() {
         const thisValue = $(this).val();
         $(this).val(numeral(thisValue).format('0,0'));
     });
+
+    getCart = () => {
+        $.ajax({
+            url,
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                action: 'get-cart'
+            },
+        })
+        .done(function(res) {
+            console.table(res);
+        })
+        .fail(function(err) {
+            console.log("Error: ", err);
+        });
+    }
+
+    getCart();
+
+    $('#current_url').val(encodeURI(window.location.href));
 });

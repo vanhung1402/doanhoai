@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 27, 2021 at 07:26 PM
+-- Generation Time: Nov 12, 2021 at 12:29 AM
 -- Server version: 10.3.31-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 7.4.24
+-- PHP Version: 7.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,13 +45,35 @@ CREATE TABLE `tbl_binhluan` (
 
 CREATE TABLE `tbl_ct_phiendaugia` (
   `iMataikhoan` int(11) NOT NULL,
-  `iMactsanpham` int(11) NOT NULL,
   `iMaphiendaugia` int(11) NOT NULL,
   `dThoigiandaugia` datetime NOT NULL,
-  `fMucgiadau` int(11) NOT NULL,
-  `bTrangthaidaugia` bit(2) NOT NULL,
-  `iMadonmua` int(11) NOT NULL
+  `iMucgiadau` int(11) NOT NULL,
+  `iTrangthaidaugia` tinyint(4) NOT NULL,
+  `iMadonmua` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_ct_phiendaugia`
+--
+
+INSERT INTO `tbl_ct_phiendaugia` (`iMataikhoan`, `iMaphiendaugia`, `dThoigiandaugia`, `iMucgiadau`, `iTrangthaidaugia`, `iMadonmua`) VALUES
+(17, 31, '2021-11-10 00:38:35', 160100, 1, NULL),
+(17, 31, '2021-11-10 00:38:49', 235100, 1, NULL),
+(18, 6, '2021-11-11 00:54:19', 20000, 1, NULL),
+(18, 6, '2021-11-11 00:54:22', 25000, 1, NULL),
+(18, 30, '2021-11-11 00:54:49', 410000, 1, NULL),
+(20, 6, '2021-11-10 00:46:55', 15000, 1, NULL),
+(20, 30, '2021-11-10 00:45:17', 310000, 1, NULL),
+(20, 31, '2021-11-09 23:36:44', 10100, 1, NULL),
+(20, 31, '2021-11-09 23:37:29', 25100, 1, NULL),
+(20, 31, '2021-11-09 23:37:30', 40100, 1, NULL),
+(20, 31, '2021-11-09 23:37:31', 70100, 1, NULL),
+(20, 31, '2021-11-10 00:31:37', 100100, 1, NULL),
+(20, 31, '2021-11-10 00:31:52', 130100, 1, NULL),
+(20, 31, '2021-11-10 00:38:45', 205100, 1, NULL),
+(20, 31, '2021-11-10 00:38:54', 265100, 1, NULL),
+(20, 31, '2021-11-10 00:49:51', 370100, 1, NULL),
+(20, 31, '2021-11-10 00:50:49', 385100, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -76,7 +98,8 @@ INSERT INTO `tbl_ct_sanpham` (`iMactsanpham`, `iMasanpham`, `iMasize`, `iMamausa
 (11, 7, 5, 5, 50),
 (13, 7, 3, 3, 200),
 (14, 7, 5, 3, 10091),
-(16, 9, 6, 3, 10000);
+(16, 9, 6, 3, 10000),
+(17, 10, 3, 5, 10000);
 
 -- --------------------------------------------------------
 
@@ -252,7 +275,37 @@ CREATE TABLE `tbl_phiendaugia` (
 --
 
 INSERT INTO `tbl_phiendaugia` (`iMaphiendaugia`, `dThoigianbatdau`, `dThoigianketthuc`, `iBuocgia`, `iGiakhoidiem`, `iKetqua`, `iMactsanpham`) VALUES
-(1, '2021-10-27 19:24:58', '2021-10-31 19:24:58', 3, 3, 1, 10);
+(1, '2021-10-27 19:24:58', '2021-10-31 19:24:58', 3, 3, 1, 10),
+(2, '2021-10-28 20:03:46', '2021-10-31 20:03:46', 10000000, 100000, 1, 10),
+(3, '2021-10-29 20:06:48', '2021-10-30 20:06:48', 100100, 10000, 1, 11),
+(4, '2021-10-28 20:08:03', '2021-10-29 20:08:03', 10, 5, 1, 11),
+(5, '2021-10-27 20:09:03', '2021-10-28 20:08:59', 5, 4, 1, 11),
+(6, '2021-11-03 17:05:16', '2021-11-30 17:05:16', 5000, 10000, 1, 16),
+(7, '2021-11-03 20:05:16', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(8, '2021-11-03 20:05:16', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(9, '2021-11-03 20:05:16', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(10, '2021-11-03 20:05:16', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(11, '2021-11-03 20:05:16', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(12, '2021-11-03 20:05:16', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(13, '2021-11-03 18:35:52', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(14, '2021-11-03 18:35:52', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(15, '2021-11-03 18:35:52', '2021-11-03 21:05:16', 5000, 12000, 1, 16),
+(16, '2021-11-03 18:35:52', '2021-11-03 21:05:16', 15000, 12000, 1, 16),
+(17, '2021-11-03 18:35:52', '2021-11-03 18:45:52', 5000, 10000, 1, 16),
+(18, '2021-11-03 20:18:27', '2021-11-03 20:23:27', 5000, 10000, 1, 11),
+(19, '2021-11-03 23:36:07', '2021-11-04 00:36:07', 5000, 10000, 1, 11),
+(20, '2021-11-04 01:00:07', '2021-11-05 00:36:07', 5000, 10000, 1, 11),
+(21, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(22, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(23, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(24, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(25, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(26, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(27, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(28, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(29, '2021-11-03 23:39:48', '2021-11-04 23:39:48', 1115000, 12000, 1, 14),
+(30, '2021-11-08 23:36:14', '2021-11-24 23:36:14', 100000, 10000, 1, 17),
+(31, '2021-11-09 00:04:33', '2021-11-10 01:00:58', 15000, 10000, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -331,7 +384,8 @@ CREATE TABLE `tbl_sanpham` (
 
 INSERT INTO `tbl_sanpham` (`iMasanpham`, `iMadanhmuclh`, `sTensanpham`, `sVideo`, `sMota`, `sThuonghieu`, `sChatlieu`, `sTinhtrang`, `iTrangthai`, `iNguoithem`) VALUES
 (7, 11, 'iPhone 13', 'uploaded_files/92fa5db43ce0e2384afed7be86f708dc.mp4', 'al;dahlkdj', 'Apple IPhone', 'Kính', 'Nguyên seal', 1, 8),
-(9, 11, 'Sony XZ2', 'uploaded_files/98bfb1db70dba87f0abb2747f950dfb7.mp4', '', 'Sony', 'Kính', 'Nguyên seal', 1, 8);
+(9, 11, 'Sony XZ2', 'uploaded_files/98bfb1db70dba87f0abb2747f950dfb7.mp4', '', 'Sony', 'Kính', 'Nguyên seal', 1, 8),
+(10, 15, 'Áo khoác Cadigan', '', 'Áo khoác cardigan dành cho con trai', 'Sando', 'Vải coton', 'Mới', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -383,9 +437,8 @@ ALTER TABLE `tbl_binhluan`
 -- Indexes for table `tbl_ct_phiendaugia`
 --
 ALTER TABLE `tbl_ct_phiendaugia`
-  ADD PRIMARY KEY (`iMataikhoan`,`iMaphiendaugia`),
+  ADD PRIMARY KEY (`iMataikhoan`,`iMaphiendaugia`,`dThoigiandaugia`),
   ADD KEY `tbl_ct_phiendaugia_ibfk_2` (`iMaphiendaugia`),
-  ADD KEY `tbl_ct_phiendaugia_ibfk_3` (`iMactsanpham`),
   ADD KEY `iMadonmua` (`iMadonmua`);
 
 --
@@ -496,7 +549,7 @@ ALTER TABLE `tbl_binhluan`
 -- AUTO_INCREMENT for table `tbl_ct_sanpham`
 --
 ALTER TABLE `tbl_ct_sanpham`
-  MODIFY `iMactsanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `iMactsanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_danhmucloaihang`
@@ -538,7 +591,7 @@ ALTER TABLE `tbl_nguoidung`
 -- AUTO_INCREMENT for table `tbl_phiendaugia`
 --
 ALTER TABLE `tbl_phiendaugia`
-  MODIFY `iMaphiendaugia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iMaphiendaugia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tbl_quyen`
@@ -550,7 +603,7 @@ ALTER TABLE `tbl_quyen`
 -- AUTO_INCREMENT for table `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
-  MODIFY `iMasanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `iMasanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_taikhoan`
@@ -575,7 +628,6 @@ ALTER TABLE `tbl_binhluan`
 ALTER TABLE `tbl_ct_phiendaugia`
   ADD CONSTRAINT `tbl_ct_phiendaugia_ibfk_1` FOREIGN KEY (`iMataikhoan`) REFERENCES `tbl_taikhoan` (`iMataikhoan`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_ct_phiendaugia_ibfk_2` FOREIGN KEY (`iMaphiendaugia`) REFERENCES `tbl_phiendaugia` (`iMaphiendaugia`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_ct_phiendaugia_ibfk_3` FOREIGN KEY (`iMactsanpham`) REFERENCES `tbl_ct_sanpham` (`iMactsanpham`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_ct_phiendaugia_ibfk_4` FOREIGN KEY (`iMadonmua`) REFERENCES `tbl_donmuahang` (`iMadonmua`) ON UPDATE CASCADE;
 
 --

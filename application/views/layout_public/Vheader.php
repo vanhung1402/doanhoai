@@ -56,13 +56,16 @@
 
             <nav class="main-nav float-right d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="{$url}">Home</a></li>
+                    <li class="active"><a href="{$url}"><i class="fa fa-home"></i>&nbsp; Trang chủ</a></li>
                     {if empty($user)}
                     <li>
-                        <a class="open-modal-account" href="#0">Đăng nhập</a>
+                        <a class="open-modal-account" id="open-login" href="#0"><i class="fa fa-sign-in"></i>&nbsp; Đăng nhập</a>
                     </li>
                     {else}
-                    <li class="drop-down"><a href="{$url}profile">Xin chào, {$user.sTennguoidung}</a>
+                    <li>
+                        <a href="{$url}gio-hang"><i class="fa fa-shopping-cart"></i>&nbsp; Giỏ hàng (<span id="total-uncheck">0</span>)</a>
+                    </li>
+                    <li class="drop-down"><a href="{$url}profile"><i class="fa fa-cog"></i>&nbsp; Xin chào, {$user.sTennguoidung}</a>
                         <ul>
                             <li><a href="{$url}profile">Thông tin tài khoản</a></li>
                             <li><a href="{$url}chu-hang/san-pham">Thêm sản phẩm</a></li>
@@ -106,6 +109,7 @@
                                 <input name="login" class="full-width" type="submit" value="ĐĂNG NHẬP">
                                 <input name="islogin" type="hidden" value="login">
                             </p>
+                            <input type="text" class="hidden" id="current_url" name="current_url">
                         </form>
 
                         <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>

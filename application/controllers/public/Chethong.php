@@ -61,13 +61,16 @@
 	    	];
 
 	    	$nguoiDung = $this->Mhethong->dangNhap($taiKhoan);
+	    	$back = $this->input->post('current_url');
+	    	$back = $back ? $back : base_url();
+
 	    	if ($nguoiDung) {
 	    		$this->session->set_userdata('user', $nguoiDung);
 	    	} else {
 	    		setMessage('error', 'Tài khoản/mật khẩu không chính xác');
-	    		return redirect(base_url(), 'refresh');
+	    		return redirect($back, 'refresh');
 	    	}
-	    	return redirect(base_url(), 'refresh');
+	    	return redirect($back, 'refresh');
 	    }
 
 	    public function signup()
