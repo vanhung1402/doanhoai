@@ -3,7 +3,7 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-        	<h5 class="text-center">Danh sách tài khoản {if empty($phanLoai)}quản trị{else if ($phanLoai == 1)}khách hàng{else}chủ hàng{/if}</h5>
+        	<h5 class="text-center">Danh sách tài khoản {if empty($phanLoai)}nhân viên hệ thống{else if ($phanLoai == 1)}khách hàng{else}chủ hàng{/if}</h5>
         </div>
         <div class="card-body">
 			<div id="taikhoan">
