@@ -1,86 +1,4 @@
-<style type="text/css">
-	#myTabContent {
-		padding: 20px;
-		border: 1px solid #ccc;
-		border-top: none;
-	}
-	.panel {
-		margin-bottom: 10px;
-	}
-	.panel-heading {
-		border-bottom: 1px solid #ccc;
-	}
-	.panel-body {
-		padding: 10px 5px;
-	}
-	.shop-logo {
-		width: 10vw;
-		height: 10vw;
-		object-fit: cover;
-		border: 1px solid #ccc;
-		border-radius: 50%;
-		display: inline-flex;
-		justify-content: center;
-		overflow: hidden;
-		margin-right: 15px;
-	}
-	.shop-logo img {
-		height: 100%;
-	}
-	.mv-120 {
-		min-width: 120px;
-	}
-	.mv-80 {
-		min-width: 80px;
-	}
-	.logo-info {
-		display: flex;
-		align-items: center;
-	}
-	.file-input {
-		display: flex;
-		align-items: center;
-		height: calc(1.5em + .75rem + 12px);;
-	}
-	.btn-save {
-		background: #1bb1dc;
-	    border: 0;
-	    border-radius: 3px;
-	    padding: 8px 30px;
-	    color: #fff;
-	    transition: 0.3s;
-	}
-	.btn-save:hover {
-		background: #0a98c0;
-	    cursor: pointer
-	}
-	.text-bold {
-		font-weight: bold;
-	}
-	table.table tr th {
-		text-align: center;
-	}
-	table.table tr th:last-child {
-		text-align: right;
-	}
-	table.table tr th, table.table tr td {
-		vertical-align: middle;
-	}
-	@media only screen and (max-width: 756px) {
-		.logo-info {
-			flex-direction: column;
-		}
-		.shop-logo {
-			width: 55vw;
-			height: 55vw;
-			margin-right: 0;
-			margin-bottom: 15px;
-		}
-		.content-info {
-			width: 100%;
-		}
-	}
-</style>
+<link href="{$url}dist/custom/public/css/themsanpham.css" rel="stylesheet">
 
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
@@ -131,9 +49,21 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="anh">Ảnh {if empty($sua)}<span class="text-danger">*</span>{/if}</label>
+                            <div class="form-group" id="input-anh">
+                                <label for="anh">Ảnh <span class="text-danger {if !empty($sua)}hidden{/if}" id="input-anh-danger">*</span></label>
                                 <input type="file" accept="image/*" name="anh" class="form-control file-input" multiple="true" id="anh" {if empty($sua)}required{/if}>
+                                {if !empty($sua)}
+                                <div class="img-thumbs">
+                                	{foreach $sua.hinhAnh as $index => $anh}
+							        <div class="img-thumb">
+							          <img src="{$url_file}{$anh.sHinhanh}" alt="Thumbnail {$index}">
+							          <button class="btn-remove-img" value="{$anh.iMahinhanh}" type="button">
+							          	<i class="fa fa-times"></i>
+							          </button>
+							        </div>
+							        {/foreach}
+                                </div>	
+                                {/if}
                             </div>
 
                             <div class="form-group">
@@ -184,7 +114,7 @@
 								<tfoot>
 									<tr>
 										<th colspan="4" class="text-right">
-											<button id="them-chi-tiet" class="btn btn-sm btn-info"><i class="fa fa-plus"></i>&emsp;Thêm chi tiết mới</button>
+											<button id="them-chi-tiet" type="button" class="btn btn-sm btn-info"><i class="fa fa-plus"></i>&emsp;Thêm chi tiết mới</button>
 										</th>
 									</tr>
 								</tfoot>
@@ -201,7 +131,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="{$url}dist/custom/public/js/profile.js"></script>
+<script type="text/javascript" src="{$url}dist/custom/public/js/themsanpham.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		const themChiTiet = (chiTietValue) => {
@@ -222,4 +152,9 @@
 		{/foreach}
 	{/if}
 	});
+	{if !empty($sua)}
+	let maxHinhAnh = 3 - {sizeof($sua.hinhAnh)};
+	{else}
+	let maxHinhAnh = 3;
+	{/if}
 </script>

@@ -85,7 +85,20 @@
 	    {
 	    	$sanPham = $this->input->post('sanPham');
 	    	$chiTiet = $this->input->post('chiTiet');
+	    	$hinhAnh = $this->input->post('hinhAnh');
+
 	    	$result = $this->Mhethong->themSanPham($sanPham, $chiTiet);
+	    	
+	    	if ($result && $hinhAnh) {	    		
+		    	foreach ($hinhAnh as $index => $anh) {
+		    		$hinhAnh[$index]['iMasanpham'] = $result;
+		    	}
+		    	$resultHinhAnh = $this->Mhethong->themHinhAnh($hinhAnh);
+	    	}
+
+    		if ($result) {
+    			setMessage('success', 'Thêm sản phẩm thành công');
+    		}
 	    	die(json_encode($result));
 	    }
 
@@ -96,6 +109,7 @@
 	    		die(json_encode(false));
 	    	} else {
 	    		$sanPhamSua = $this->input->post('sanPham');
+	    		$hinhAnh = $this->input->post('hinhAnh');
 
 	    		$moi = $this->input->post('chiTietThemMoi');
 	    		$chiTietThemMoi = [];
@@ -112,8 +126,19 @@
 	    		}
 
 	    		$chiTietBiXoa = $this->input->post('chiTietBiXoa');
+	    		$anhBiXoa = $this->input->post('anhBiXoa');
 
-	    		$result = $this->Mhethong->suaSanPham($maSanPham, $sanPhamSua, $chiTietThemMoi, $chiTietSuaDoi, $chiTietBiXoa);
+		    	if ($hinhAnh) {	    		
+			    	foreach ($hinhAnh as $index => $anh) {
+			    		$hinhAnh[$index]['iMasanpham'] = $maSanPham;
+			    	}
+			    	$resultHinhAnh = $this->Mhethong->themHinhAnh($hinhAnh);
+		    	}
+
+	    		$result = $this->Mhethong->suaSanPham($maSanPham, $sanPhamSua, $chiTietThemMoi, $chiTietSuaDoi, $chiTietBiXoa, $anhBiXoa);
+	    		if ($result) {
+	    			setMessage('success', 'Cập nhập thông tin sản phẩm thành công');
+	    		}
 	    		die(json_encode($result));
 	    	}
 	    }

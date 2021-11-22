@@ -5,6 +5,22 @@
 #carousel-images ol.carousel-indicators li {
 	background-color: #1ab7ea !important;
 }
+.carousel-inner {
+	height: 385px;
+}
+.carousel-item {
+	height: 100%;
+}
+.carousel-item.active {
+	display: flex;
+	align-items: center;
+}
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
 .ten-san-pham {
 	color: #027ca5;
@@ -68,4 +84,13 @@
 .action button:hover {
 	background-color: #FFF;
 	color: #1ab7ea;
+}
+.video-carousel {
+	width:  100%;
+}
+.video-carousel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }

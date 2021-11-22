@@ -8,4 +8,6 @@ $(document).ready(function() {
 		$('#thanh-tien').text(numeral(total).format('0,0'));
 		$('#tong-tien').text(numeral(total + 49000).format('0,0'));
 	});
+
+	(!total) ? $('#thanh-toan').addClass('hidden') : $('#thanh-toan').removeClass('hidden');
 });

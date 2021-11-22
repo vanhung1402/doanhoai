@@ -32,6 +32,7 @@
 	    	$data = [
 	    		'sanPham' => $this->Msanpham->getSanPham($sp),
 	    		'chiTietSanPham' => $this->Msanpham->getChiTietSanPham($sp),
+	    		'hinhAnh' => $this->Msanpham->getHinhAnhSanPham($sp),
 	    	];
 
 	    	if (!$data['sanPham']) return redirect('/');

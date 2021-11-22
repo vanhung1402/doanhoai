@@ -20,7 +20,7 @@
 <section id="services" class="section-bg">
     <div class="container">
 
-        <header class="section-header">
+        <header class="section-header pt-5">
             <h3>Đang diễn ra</h3>
             <p>Các sản phẩm đang được đấu giá.</p>
         </header>

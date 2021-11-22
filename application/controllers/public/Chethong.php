@@ -70,6 +70,7 @@
 	    		setMessage('error', 'Tài khoản/mật khẩu không chính xác');
 	    		return redirect($back, 'refresh');
 	    	}
+	    	setMessage('success', 'Đăng nhập thành công');
 	    	return redirect($back, 'refresh');
 	    }
 
@@ -109,6 +110,7 @@
 	    	];
 
 	    	$resultNguoiDung = $this->Mhethong->taoNguoiDung($nguoiDung);
+	    	setMessage('success', 'Đăng ký thành công');
 	    	return redirect(base_url(), 'refresh');
 	    }
 
@@ -130,6 +132,7 @@
 	    {
 	    	$back = $this->input->get('back') ? $this->input->get('back') : base_url();
 	    	$this->session->unset_userdata('user');
+	    	setMessage('success', 'Đăng xuất thành công');
 			return redirect($back, 'refresh');
 			exit();
 	    }

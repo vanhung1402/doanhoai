@@ -6,10 +6,15 @@
 		<li class="breadcrumb-item" aria-current="page">Giỏ hàng</li>
 	</ol>
 </nav>
-<div class="container pt-3">
+<div class="container pt-3 pb-3">
 	<div class="row">
 	 	<div class="col-sm-8">
 	 		<div class="cart-items">
+	 			{if empty($gio_hang)}
+	 			<div class="alert alert-warning text-center" id="thanh-toan-warning">
+	 				<b>Không có sản phầm nào trong giỏ hàng</b>
+	 			</div>
+	 			{else}
 	 			{foreach $gio_hang as $item}
 	 			<div class="item-container">
 	 				<div class="row">
@@ -32,9 +37,10 @@
 	 				<input type="checkbox" class="check-items" value="{$item.iMaphiendaugia}" data-gia="{$item.iMucgiadau}" checked>
 	 			</div>
 	 			{/foreach}
+	 			{/if}
 	 		</div>
 	 	</div>
-	 	<div class="col-sm-4">
+	 	<div class="col-sm-4" id="thanh-toan-container">
 	 		<div class="total">
 	 			<h3 class="text-center font-weight-bold">THANH TOÁN</h3>
 	 			<p>

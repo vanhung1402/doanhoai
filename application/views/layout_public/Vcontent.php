@@ -12,14 +12,17 @@
 		'url' 		=> base_url(),
 		'user' 		=> $user,
 		'tttk' 		=> $trangThaiTaiKhoan,
+		'url_file' 	=> 'http://localhost/upload-file-service/',
 	);
 
 	$data_footer 				= array(
 		'url' 		=> base_url(),
+		'url_file' 	=> 'http://localhost/upload-file-service/',
 		'message' 	=> getMessage(),
 	);
 
 	$data['url']  				= base_url();
+	$data['url_file']  			= 'http://localhost/upload-file-service/';
 	$this->parser->parse('layout_public/Vheader', $data_header);
 	$this->parser->parse($template, $data);
 	$this->parser->parse('layout_public/Vfooter', $data_footer);

@@ -125,7 +125,7 @@
 									<a href="{$url}dau-gia/san-pham?sp={$sp.iMasanpham}" class="btn btn-sm btn-success">
 										<i class="fa fa-gavel"></i>
 									</a>
-									<a href="{$url}profile?sp={$sp.iMasanpham}" class="btn btn-sm btn-info">
+									<a href="{$url}chu-hang/san-pham?sp={$sp.iMasanpham}" class="btn btn-sm btn-info">
 										<i class="fa fa-edit"></i>
 									</a>
 									<input type="hidden" name="san-pham" value="{$sp.iMasanpham}">
