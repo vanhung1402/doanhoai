@@ -21,6 +21,7 @@
     <div class="container">
 
         <header class="section-header">
+            <br>
             <h3>Đang diễn ra</h3>
             <p>Các sản phẩm đang được đấu giá.</p>
         </header>

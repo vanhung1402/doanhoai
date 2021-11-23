@@ -28,7 +28,7 @@
         </section>  
     </div>
     {/if}
-    <div class="col-sm-{if $user.iMaquyen != 10}12{else}8{/if}">
+    <div class="col-sm-{if $user.iMaquyen != 10}8{else}12{/if}">
         <section class="section">
             <div class="card">
                 <div class="card-header">

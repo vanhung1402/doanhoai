@@ -100,25 +100,25 @@
 						<div class="col-sm-12">
                             <div class="form-group">
                                 <label for="ten-san-pham">Tên sản phẩm <span class="text-danger">*</span></label>
-                                <input type="text" name="ten-san-pham" class="form-control" id="ten-san-pham" placeholder="VD: điện thoại, giày, dép..." value="{if !empty($sua)}{$sua.sanPham.sTensanpham}{/if}" required>
+                                <input type="text" name="ten-san-pham" class="form-control" id="ten-san-pham" placeholder="VD: Quần âu nam kẻ" value="{if !empty($sua)}{$sua.sanPham.sTensanpham}{/if}" required>
                             </div>
 						</div>
 						<div class="col-sm-4">
                             <div class="form-group">
                                 <label for="thuong-hieu">Thương hiệu <span class="text-danger">*</span></label>
-                                <input type="text" name="thuong-hieu" class="form-control" id="thuong-hieu" required placeholder="VD: Apple, Samsung, Xiaomi..." value="{if !empty($sua)}{$sua.sanPham.sThuonghieu}{/if}">
+                                <input type="text" name="thuong-hieu" class="form-control" id="thuong-hieu" required placeholder="VD: Việt Nam..." value="{if !empty($sua)}{$sua.sanPham.sThuonghieu}{/if}">
                             </div>
 						</div>
 						<div class="col-sm-4">
                             <div class="form-group">
                                 <label for="chat-lieu">Chất liệu <span class="text-danger">*</span></label>
-                                <input type="text" name="chat-lieu" class="form-control" id="chat-lieu" required placeholder="Gốm, kính, nhựa..." value="{if !empty($sua)}{$sua.sanPham.sChatlieu}{/if}">
+                                <input type="text" name="chat-lieu" class="form-control" id="chat-lieu" required placeholder="VD: 100% cotton" value="{if !empty($sua)}{$sua.sanPham.sChatlieu}{/if}">
                             </div>
 						</div>
 						<div class="col-sm-4">
                             <div class="form-group">
                                 <label for="tinh-trang">Tình trạng <span class="text-danger">*</span></label>
-                                <input type="text" name="tinh-trang" class="form-control" id="tinh-trang" required placeholder="VD: nguyên chiếc, 99%, like new..." value="{if !empty($sua)}{$sua.sanPham.sTinhtrang}{/if}">
+                                <input type="text" name="tinh-trang" class="form-control" id="tinh-trang" required placeholder="VD: Mới" value="{if !empty($sua)}{$sua.sanPham.sTinhtrang}{/if}">
                             </div>
 						</div>
 						<div class="col-sm-4">
