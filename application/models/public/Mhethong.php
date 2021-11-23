@@ -129,17 +129,16 @@
 	    	$this->db->insert('tbl_sanpham', $sanPham);
 	    	$maSanPham = $this->db->insert_id();
 
-	    	if ($maSanPham && sizeof($chiTiet) > 0) {
+	    	if ($maSanPham && $chiTiet) {
 	    		$chiTietSanPham = [];
 	    		foreach ($chiTiet as $ct) {
 	    			$ct['iMasanpham'] = $maSanPham;
 	    			$chiTietSanPham[] = $ct;
 	    		}
 	    		$resultChiTiet = $this->db->insert_batch('tbl_ct_sanpham', $chiTietSanPham);
-	    		return $resultChiTiet;
 	    	}
 
-	    	return $resultSanPham;
+	    	return $maSanPham;
 	    }
 
 	    public function danhSachSanPham($where)
@@ -174,13 +173,24 @@
 	    	$this->db->group_by('iMactsanpham');
 	    	$chiTiet = $this->db->get()->result_array();
 
+	    	$hinhAnh = $this->getHinhAnhSanPham($maSanPham);
+
 	    	return [
 	    		'sanPham' => $sanPham,
 	    		'chiTiet' => $chiTiet,
+	    		'hinhAnh' => $hinhAnh, 
 	    	];
 	    }
 
-	    public function suaSanPham($maSanPham, $sanPhamSua, $chiTietThemMoi, $chiTietSuaDoi, $chiTietBiXoa)
+	    public function getHinhAnhSanPham($iMasanpham) {
+	    	$this->db->where([
+	    		'iMasanpham' => $iMasanpham,
+	    		'iTrangthai' => 1,
+	    	]);
+	    	return $this->db->get('tbl_hinhanh_sanpham')->result_array();
+	    }
+
+	    public function suaSanPham($maSanPham, $sanPhamSua, $chiTietThemMoi, $chiTietSuaDoi, $chiTietBiXoa, $anhBiXoa)
 	    {
 	    	$this->db->where('iMasanpham', $maSanPham);
 	    	$this->db->update('tbl_sanpham', $sanPhamSua);
@@ -200,8 +210,19 @@
 	    		$this->db->update_batch('tbl_ct_sanpham', $chiTietSuaDoi, 'iMactsanpham');	
 		    	$count += $this->db->affected_rows();
 	    	}
+	    	if ($anhBiXoa) {
+	    		$this->db->where_in('iMahinhanh', $anhBiXoa);
+		    	$this->db->delete('tbl_hinhanh_sanpham');	
+		    	$count += $this->db->affected_rows();	
+	    	}
 
 	    	return $count;
+	    }
+
+	    public function themHinhAnh($hinhAnh)
+	    {
+	    	$this->db->insert_batch('tbl_hinhanh_sanpham', $hinhAnh);
+	    	return $this->db->affected_rows();
 	    }
 	}
 

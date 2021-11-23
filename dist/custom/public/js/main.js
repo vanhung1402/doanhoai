@@ -1,7 +1,10 @@
 const url = document.getElementsByTagName('base')[0].getAttribute('href');
-const utl_files = 'http://localhost/upload-file-service/uploaded_files/';
+const url_files = 'http://localhost/upload-file-service/uploaded_files/';
+const url_file = 'http://localhost/upload-file-service/';
 var currentUrl = window.location.href
 var urlObj = new URL(currentUrl);
+
+const maxPostFileSize = 2048000;
 
 let getCart;
 
@@ -20,7 +23,7 @@ function showMessage(type, msg){
         position: 'top-right',
         loaderBg: '#ff6849',
         icon: type,
-        hideAfter: 2000,
+        hideAfter: 3000,
         stack: 6
     });
 }

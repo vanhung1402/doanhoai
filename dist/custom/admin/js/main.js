@@ -4,6 +4,8 @@ const pathName = window.location.pathname.replace('doanhoai/', '');
 let table = document.querySelector('#datatable');
 let dataTable = table && new simpleDatatables.DataTable(table);
 
+const maxPostFileSize = 2048000;
+
 function showMessage(type, msg){
     (type === 'success') ? type = 'info' : '';
     const title_msg = {

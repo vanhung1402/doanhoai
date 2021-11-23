@@ -6,29 +6,31 @@
 		<div class="col-sm-4">
 			<div id="carousel-images" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
-					<li data-target="#carousel-images" data-slide-to="0" class="active"></li>
-					<li data-target="#carousel-images" data-slide-to="1"></li>
-					<li data-target="#carousel-images" data-slide-to="2"></li>
+					{foreach $sanpham.hinhAnh as $index => $anh}
+					<li data-target="#carousel-images" data-slide-to="{$index}" class="index-carousel {if $index == 0}active{/if}"></li>
+					{/foreach}
+					{if $sanpham.sVideo}
+					<li data-target="#carousel-images" data-slide-to="{sizeof($sanpham.hinhAnh)}" class="index-carousel"></li>
+					{/if}
 				</ol>
 				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img class="d-block w-100" src="{$url}files/red.png" alt="First slide">
+					{foreach $sanpham.hinhAnh as $index => $anh}
+					<div class="carousel-item {if $index == 0}active{/if}">
+						<img class="d-block w-100" src="{$url_file}{$anh.sHinhanh}" alt="First slide">
 					</div>
+					{/foreach}
+
+					{if $sanpham.sVideo}
 					<div class="carousel-item">
-						<img class="d-block w-100" src="{$url}files/red.png" alt="Second slide">
+						<div class="video-carousel">
+							<video controls>
+								<source src="http://localhost/upload-file-service/{$sanpham.sVideo}" type="video/mp4">
+									Your browser does not support HTML video.
+							</video>
+						</div>
 					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="{$url}files/red.png" alt="Third slide">
-					</div>
+					{/if}
 				</div>
-				<a class="carousel-control-prev" href="#carousel-images" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carousel-images" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
 			</div>
 		</div>
 		<div class="col-sm-8">
@@ -55,14 +57,14 @@
 				</div>
 				{if $sanpham.iNguoithem !== $user.iManguoidung}
 				<div class="action flex align-middle" id="bid-action">
-					<button id="btn-giam-gia" class="btn-doi-gia" value="-{$phien.iBuocgia}">
+					<button id="btn-giam-gia" type="button" class="btn-doi-gia" value="-{$phien.iBuocgia}">
 						<i class="fa fa-minus"></i>
 					</button>
-					<span id="current-price" class="format-number">{$phien.iGiakhoidiem}</span>
+					<span id="current-price" type="button" class="format-number">{$phien.iGiakhoidiem}</span>
 					<button id="btn-tang-gia" class="btn-doi-gia" value="{$phien.iBuocgia}">
 						<i class="fa fa-plus"></i>
 					</button>
-					<button id="btn-place-bid">
+					<button id="btn-place-bid" type="button">
 						<i class="fa fa-gavel"></i>&emsp;Place Bid
 					</button>
 				</div>

@@ -1,4 +1,30 @@
 $(document).ready(function() {
+	let activeIndex = 0;
+	let maxIndex = $('.carousel-item').length - 1;
+
+	const setActiveItem = (index) => {
+		$('.carousel-indicators li').removeClass('active');
+		$(`.carousel-indicators li:eq(${index})`).addClass('active');
+		$('.carousel-inner .carousel-item').removeClass('active');
+		$(`.carousel-inner .carousel-item:eq(${index})`).addClass('active');
+		activeIndex = index;
+	}
+
+	$('.carousel-control-prev').click(function (e) {
+		e.preventDefault();
+		activeIndex = (activeIndex == 0) ? maxIndex : (activeIndex - 1);
+		setActiveItem(activeIndex);
+	});
+	$('.carousel-control-next').click(function (e) {
+		e.preventDefault();
+		activeIndex = (activeIndex == maxIndex) ? 0 : (activeIndex + 1);
+		setActiveItem(activeIndex);
+	});
+	$('.index-carousel').click(function (e) {
+		e.preventDefault();
+		let index = $(this).data('slide-to');
+		setActiveItem(index);
+	});
 	$('.btn-doi-gia').click(function(event) {
 		const buocGia = Number($(this).val());
 		const currentPrice = Number($('#current-price').text().trim().replaceAll(',', ''));

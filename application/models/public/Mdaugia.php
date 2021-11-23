@@ -12,7 +12,7 @@
 
 	    public function getAuctua($start, $end, $limit) {
 	    	$this->db->limit($limit);
-	    	$this->db->select('pdg.iMaphiendaugia, sTensanpham, sTenmausac, sTensize, dThoigianketthuc, iGiakhoidiem, max(iMucgiadau) as giaHientai');
+	    	$this->db->select('pdg.iMaphiendaugia, sp.iMasanpham, sTensanpham, sTenmausac, sTensize, dThoigianketthuc, iGiakhoidiem, max(iMucgiadau) as giaHientai');
 	    	$this->db->from('tbl_phiendaugia pdg');
 	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
 	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
@@ -23,10 +23,29 @@
 	    	$this->db->where('dThoigianketthuc >=', $end);
 	    	$this->db->order_by('dThoigianketthuc');
 	    	$this->db->group_by('pdg.iMaphiendaugia');
+	    	$phien = $this->db->get()->result_array();
+	    	$arrayMaSanPham = array_column($phien, 'iMasanpham');
+
 	    	return [
-	    		'listPhien' => $this->db->get()->result_array(),
+	    		'listPhien' => $phien,
 	    		'tongPhien' => $this->getSoPhien($start, $end),
+	    		'hinhAnh' 	=> $this->getHinhAnhSanPham($arrayMaSanPham),
 	    	];
+	    }
+
+	    public function getHinhAnhSanPham($arrayMaSanPham) {
+	    	if (!$arrayMaSanPham) return null;
+	    	$this->db->where([
+	    		'iTrangthai' => 1,
+	    	]);
+	    	$this->db->where_in('iMasanpham', $arrayMaSanPham);
+		    $arrayResult = $this->db->get('tbl_hinhanh_sanpham')->result_array();
+		    $anhSanPham = [];
+		    foreach ($arrayResult as $anh) {
+		    	if (!isset($anhSanPham[$anh['iMasanpham']])) $anhSanPham[$anh['iMasanpham']] = [];
+		    	$anhSanPham[$anh['iMasanpham']][] = $anh;
+		    }
+		    return $anhSanPham;
 	    }
 
 	    public function getSoPhien($start, $end) {
@@ -39,14 +58,18 @@
 
 	    public function getChiTietSanPham($ctsp)
 	    {
-	    	$this->db->select('sTenmausac, sTensize, sTensanpham, sMota, sChatlieu, sTinhtrang, sVideo, sTendanhmuclh, sp.iNguoithem');
+	    	$this->db->select('sp.iMasanpham, sTenmausac, sTensize, sTensanpham, sMota, sChatlieu, sTinhtrang, sVideo, sTendanhmuclh, sp.iNguoithem');
 	    	$this->db->from('tbl_ct_sanpham ctsp');
 	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
 	    	$this->db->join('tbl_danhmucloaihang dmlh', 'sp.iMadanhmuclh = dmlh.iMadanhmuclh', 'inner');
 	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
 	    	$this->db->where('iMactsanpham', $ctsp);
-	    	return $this->db->get()->row_array();
+	    	$sanpham = $this->db->get()->row_array();
+	    	if (!$sanpham) return null;
+	    	$hinhAnh = $this->getHinhAnhSanPham($sanpham['iMasanpham']);
+	    	$sanpham['hinhAnh'] = $hinhAnh[$sanpham['iMasanpham']];
+	    	return $sanpham;
 	    }
 
 	    public function getPhien($maPhien)
@@ -83,10 +106,12 @@
 	    	}
 
 	    	$bidsWin = $this->getBidsWin($bidIds);
-	    	foreach ($bidsWin as $bid) {
-	    		if ($userBidsNull[$bid['iMaphiendaugia']]['iMucgiadau'] != $bid['iGiathang']) {
-	    			unset($userBidsNull[$bid['iMaphiendaugia']]);
-	    		}
+	    	if ($bidsWin) {
+		    	foreach ($bidsWin as $bid) {
+		    		if ($userBidsNull[$bid['iMaphiendaugia']]['iMucgiadau'] != $bid['iGiathang']) {
+		    			unset($userBidsNull[$bid['iMaphiendaugia']]);
+		    		}
+		    	}
 	    	}
 	    	return $userBidsNull;
 	    }

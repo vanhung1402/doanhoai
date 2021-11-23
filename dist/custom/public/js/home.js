@@ -41,11 +41,12 @@ $(document).ready(function() {
 	const renderNewCurrentAuction = (listDauGia, current) => {
 		const newCurrentHTML = listDauGia.listPhien.map((dg) => {
 			let timeend = new Date(dg.dThoigianketthuc);
+			const hinhAnh = listDauGia.hinhAnh[Number(dg.iMasanpham)];
 			return `
 			<div class="col-md-6 col-lg-4" id="phien-${dg.iMaphiendaugia}" data-phien="${dg.iMaphiendaugia}">
                 <div class="box auction-box">
                     <div class="image-thumbnail">
-                    	<img src="${utl_files}red.png" alt="${dg.sTensanpham}" />
+                    	<img src="${url_file}${hinhAnh ? hinhAnh[0].sHinhanh : 'uploaded_files/red.png'}" alt="${dg.sTensanpham}" />
                     </div>
                     <div class="auction-info">
 	                    <h4 class="title"><a href="${url}dau-gia-san-pham?phien=${dg.iMaphiendaugia}">${dg.sTensanpham}</a></h4>

@@ -50,6 +50,14 @@
 	    	$this->db->where('ctsp.iMasanpham', $iMasanpham);
 	    	return $this->db->get()->result_array();	
 	    }
+
+	    public function getHinhAnhSanPham($iMasanpham) {
+	    	$this->db->where([
+	    		'iMasanpham' => $iMasanpham,
+	    		'iTrangthai' => 1,
+	    	]);
+	    	return $this->db->get('tbl_hinhanh_sanpham')->result_array();
+	    }
 	}
 
 ?>
