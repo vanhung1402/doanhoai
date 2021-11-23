@@ -46,5 +46,12 @@
         });
     </script>
     {/if}
+    {if !empty($signup)}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#open-login').click();
+        });
+    </script>
+    {/if}
 </body>
 </html>

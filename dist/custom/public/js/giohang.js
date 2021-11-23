@@ -1,13 +1,25 @@
 $(document).ready(function() {
-	$('.check-items').click(function(event) {
-		const checked = $(this).is(":checked");
-		let value = $(this).data('gia');
-		value = checked ? Number(value) : Number(`-${value}`);
-		total += value;
-		(!total) ? $('#thanh-toan').addClass('hidden') : $('#thanh-toan').removeClass('hidden');
+	const getTotalPrice = () => {
+		let total = 0;
+		$.each($('.check-items'), function(index, val) {
+			const checked = $(this).is(":checked");
+			const price = Number($(this).data('gia'));
+			total += checked ? price : 0;
+		});
 		$('#thanh-tien').text(numeral(total).format('0,0'));
 		$('#tong-tien').text(numeral(total + 49000).format('0,0'));
+
+		(!total) ? $('#thanh-toan').addClass('hidden') : $('#thanh-toan').removeClass('hidden');
+	}
+
+	$('.check-items').change(function(event) {
+		getTotalPrice();
 	});
 
-	(!total) ? $('#thanh-toan').addClass('hidden') : $('#thanh-toan').removeClass('hidden');
+	$('.check-shop').change(function (e) {
+		const checked = $(this).is(":checked");
+		$itemChecks = $(this).closest('.shop-container').find('.check-items');
+		checked ? $itemChecks.prop('checked', true) : $itemChecks.prop('checked', false);
+		$itemChecks.change();
+	});
 });

@@ -6,7 +6,6 @@
 		2 => 'Đang khóa',
 		3 => 'Chưa xác thực',
 	];
-	
 	$data_header 				= array(
 		'title' 	=> isset($data['title']) ? $data['title'] : 'Đấu giá Chilin',
 		'url' 		=> base_url(),
@@ -19,6 +18,7 @@
 		'url' 		=> base_url(),
 		'url_file' 	=> 'http://localhost/upload-file-service/',
 		'message' 	=> getMessage(),
+		'signup' 	=> $this->session->flashdata('signup_success'),
 	);
 
 	$data['url']  				= base_url();

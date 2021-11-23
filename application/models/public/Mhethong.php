@@ -148,6 +148,7 @@
 	    	$this->db->join('tbl_danhmucloaihang dm', 'sp.iMadanhmuclh = dm.iMadanhmuclh', 'inner');
 	    	$this->db->join('tbl_ct_sanpham ct', 'sp.iMasanpham = ct.iMasanpham', 'left');
 	    	$this->db->group_by('sp.iMasanpham');
+	    	$this->db->where($where);
 	    	return $this->db->get()->result_array();
 	    }
 

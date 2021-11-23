@@ -111,6 +111,7 @@
 
 	    	$resultNguoiDung = $this->Mhethong->taoNguoiDung($nguoiDung);
 	    	setMessage('success', 'Đăng ký thành công');
+	    	$this->session->set_flashdata('signup_success', true);
 	    	return redirect(base_url(), 'refresh');
 	    }
 

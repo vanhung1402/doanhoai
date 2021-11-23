@@ -68,8 +68,10 @@
                     <li class="drop-down"><a href="{$url}profile"><i class="fa fa-cog"></i>&nbsp; Xin chào, {$user.sTennguoidung}</a>
                         <ul>
                             <li><a href="{$url}profile">Thông tin tài khoản</a></li>
+                            {if $user.iMaquyen == 2 && $user.iTrangthai == 1}
                             <li><a href="{$url}chu-hang/san-pham">Thêm sản phẩm</a></li>
                             <li><a href="{$url}chu-hang/danh-sach-san-pham">Danh sách sản phẩm</a></li>
+                            {/if}
                             <!-- <li><a href="{$url}">Danh sách phiên đấu giá</a></li> -->
                             <li><a href="{$url}doi-mat-khau">Đổi mật khẩu</a></li>
                             <li><a id="logout" href="{$url}logout">Đăng xuất</a></li>
@@ -85,7 +87,7 @@
                     <!-- this is the container wrapper -->
                     <ul class="cd-switcher">
                         <li><a style="color: #000000 !important">Đăng nhập</a></li>
-                        <li><a style="color: #000000 !important">Đăng ký</a></li>
+                        <li><a id="signup" style="color: #000000 !important">Đăng ký</a></li>
                     </ul>
 
                     <div id="cd-login">

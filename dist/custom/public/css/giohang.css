@@ -12,10 +12,38 @@
 	height: 20px;
 	cursor: pointer;
 }
+.check-shop {
+	display: inline-flex;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+.header-shop h4 {
+	display: flex;
+	align-items: center;
+	font-weight: 800;
+}
+.header-shop input {
+	margin-right: 10px;
+}
+.header-shop label {
+	margin: 0;
+}
+.shop-container {
+	box-shadow: 0 0 15px #0003;
+	padding: 15px;
+	margin-bottom: 35px;
+}
+.shop-items {
+	border-top: 1px solid #ccc;
+}
 .item-container:nth-child(odd) {
 	border-left: 5px solid #1ab7ea;
 	border-right: 1px solid #1ab7ea;
 	padding-right: 4px;	
+}
+.item-container:nth-child(odd) .check-items {
+	right: 14px;
 }
 .item-container:nth-child(even) {
 	border-right: 5px solid #1ab7ea;

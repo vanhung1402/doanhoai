@@ -17,6 +17,7 @@
 	    	$session = $this->session->userdata('user');
 	    	$data = [];
 	    	$data['gio_hang'] 		= $this->Mdaugia->getCartUser($session['iMataikhoan']);
+	    	$data['gio_hang_map'] 	= handingArrayToMap($data['gio_hang'], 'iManguoidung');
 			$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vgiohang';
 	    	$this->load->view('layout_public/Vcontent', $temp);	

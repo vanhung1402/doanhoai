@@ -15,26 +15,34 @@
 	 				<b>Không có sản phầm nào trong giỏ hàng</b>
 	 			</div>
 	 			{else}
-	 			{foreach $gio_hang as $item}
-	 			<div class="item-container">
-	 				<div class="row">
-	 					<div class="col-sm-3">
-	 						<div class="item-thumb">
-	 							<img src="{$url}files/red.png" alt="ten_san_pham">
-	 						</div>
-	 					</div>
-
-	 					<div class="col-sm-9">
-	 						<div class="item-detail">
-	 							<h5>{$item.sTensanpham}</h5>
-	 							<p><b>Màu: </b>{$item.sTenmausac} - <b>Size: </b>{$item.sTensize}</p>
-	 							<p><b>Số lượng: </b>1</p>
-	 							<p><b>Cửa hàng: </b>{$item.sTenshop}</p>
-	 							<p class="text-right pr-2 font-weight-bold"><span class="format-number">{$item.iMucgiadau}</span> VNĐ</p>
-	 						</div>
-	 					</div>
+	 			{foreach $gio_hang_map as $shop_id => $shop}
+	 			<div class="shop-container">
+	 				<div class="header-shop">
+	 					<h4><input type="checkbox" class="check-shop" value="{$shop_id}" id="shop-{$shop_id}" checked><label for="shop-{$shop_id}">{$shop.0.sTenshop}</label></h4>
 	 				</div>
-	 				<input type="checkbox" class="check-items" value="{$item.iMaphiendaugia}" data-gia="{$item.iMucgiadau}" checked>
+	 				<div class="shop-items">
+	 					{foreach $shop as $item}
+			 			<div class="item-container">
+			 				<div class="row">
+			 					<div class="col-sm-3">
+			 						<div class="item-thumb">
+			 							<img src="{$url}files/red.png" alt="ten_san_pham">
+			 						</div>
+			 					</div>
+
+			 					<div class="col-sm-9">
+			 						<div class="item-detail">
+			 							<h5>{$item.sTensanpham}</h5>
+			 							<p><b>Màu: </b>{$item.sTenmausac} - <b>Size: </b>{$item.sTensize}</p>
+			 							<p><b>Số lượng: </b>1</p>
+			 							<p class="text-right pr-2 font-weight-bold"><span class="format-number">{$item.iMucgiadau}</span> VNĐ</p>
+			 						</div>
+			 					</div>
+			 				</div>
+			 				<input type="checkbox" class="check-items" value="{$item.iMaphiendaugia}" data-gia="{$item.iMucgiadau}" checked>
+			 			</div>
+			 			{/foreach}
+	 				</div>
 	 			</div>
 	 			{/foreach}
 	 			{/if}
@@ -61,7 +69,7 @@
 	 			</h4>
 		 		<div class="action text-center">
 		 			<button class="btn-checkout" id="thanh-toan">
-		 				Thanh Toán Ngay
+		 				Đặt hàng ngay
 		 			</button>
 		 		</div>
 	 		</div>

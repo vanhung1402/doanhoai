@@ -57,7 +57,7 @@
 	    	}
 
 	    	$whereDanhSachSanPham = [
-	    		'iNguoithem' => $this->__user['iManguoidung'],
+	    		'sp.iNguoithem' => $this->__user['iManguoidung'],
 	    	];
 
 	    	$data['danhMucLoaiHang'] 	= $this->Mhethong->danhMucLoaiHang();

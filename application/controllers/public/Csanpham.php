@@ -10,7 +10,7 @@
 
 	    public function index() {
 	    	$sp = $this->input->get('sp');
-	    	if (!$sp) return redirect('/');
+	    	if (!$sp) return redirect(base_url(), 'refresh');
 
 	    	$action = $this->input->post('action');
 	    	switch ($action) {

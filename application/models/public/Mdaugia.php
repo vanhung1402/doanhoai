@@ -130,7 +130,7 @@
 	    }
 
 	    public function getUserBidsNull($taiKhoan) {
-	    	$this->db->select('sTenmausac, sTensize, sTensanpham, ctp.iMaphiendaugia, MAX(iMucgiadau) iMucgiadau, sTenshop');
+	    	$this->db->select('sTenmausac, sTensize, sTensanpham, ctp.iMaphiendaugia, MAX(iMucgiadau) iMucgiadau, nd.iManguoidung, sTenshop');
 	    	$this->db->from('tbl_ct_phiendaugia ctp');
 	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
 	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
