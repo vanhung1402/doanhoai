@@ -15,12 +15,31 @@
 	    public function index()
 	    {
 	    	$session = $this->session->userdata('user');
+	    	$action = $this->input->post('action');
+	    	switch ($action) {
+	    		case 'submit-pay':
+	    			$this->pay();
+	    			break;
+	    		
+	    		default:
+	    			// code...
+	    			break;
+	    	}
 	    	$data = [];
 	    	$data['gio_hang'] 		= $this->Mdaugia->getCartUser($session['iMataikhoan']);
 	    	$data['gio_hang_map'] 	= handingArrayToMap($data['gio_hang'], 'iManguoidung');
 			$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vgiohang';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
+	    }
+
+	    public function pay()
+	    {
+	    	$donHang = $this->input->post('donHang');
+	    	$chiTiet = $this->input->post('chiTiet');
+
+	    	$result = $this->Mdaugia->taoDonHang($donHang, $chiTiet);
+	    	die(json_encode($result));
 	    }
 	}
 

@@ -32,7 +32,6 @@
 .shop-container {
 	box-shadow: 0 0 15px #0003;
 	padding: 15px;
-	margin-bottom: 35px;
 }
 .shop-items {
 	border-top: 1px solid #ccc;
@@ -71,7 +70,7 @@
 .item-detail p {
 	margin-bottom: 5px;
 }
-.total {
+.total, .pay {
 	box-shadow: 0 0 15px #0003;
 	padding: 15px;
 }

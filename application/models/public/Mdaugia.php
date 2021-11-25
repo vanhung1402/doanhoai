@@ -124,7 +124,6 @@
 	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
 	    	$this->db->where_in('ctp.iMaphiendaugia', $bidIds);
 	    	$this->db->where('dThoigianketthuc < NOW()');
-	    	$this->db->where('iMadonmua', NULL);
 	    	$this->db->group_by('ctp.iMaphiendaugia');
 	    	return $this->db->get()->result_array();
 	    }
@@ -145,6 +144,33 @@
 	    	$this->db->order_by('iMucgiadau', 'desc');
 	    	$this->db->group_by('ctp.iMaphiendaugia');
 	    	return $this->db->get()->result_array();
+	    }
+
+	    public function taoDonHang($donHang, $chiTiet)
+	    {
+	    	$this->db->insert('tbl_donmuahang', $donHang);
+	    	$id = $this->db->insert_id();
+	    	if ($id) {
+	    		$session = $this->session->userdata('user');
+	    		$affected_rows = 0;
+	    		foreach ($chiTiet as $ct) {
+	    			$chiTietDon = [
+	    				'iMataikhoan' => $session['iMataikhoan'],
+	    				'iMaphiendaugia' => $ct['iMaphiendaugia'],
+	    				'iMucgiadau' => $ct['iMucgiadau'],
+	    			];
+	    			$affected_rows += $this->setChiTietDon($chiTietDon, $id);
+	    		}
+	    		return $affected_rows;
+	    	}
+	    	return $id;
+	    }
+
+	    public function setChiTietDon($chiTiet, $donHangId)
+	    {
+			$this->db->where($chiTiet);
+			$this->db->update('tbl_ct_phiendaugia', ['iMadonmua' => $donHangId]);
+			return $this->db->affected_rows();
 	    }
 	}
 

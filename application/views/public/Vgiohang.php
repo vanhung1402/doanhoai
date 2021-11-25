@@ -8,7 +8,7 @@
 </nav>
 <div class="container pt-3 pb-3">
 	<div class="row">
-	 	<div class="col-sm-8">
+	 	<div class="col-md-8">
 	 		<div class="cart-items">
 	 			{if empty($gio_hang)}
 	 			<div class="alert alert-warning text-center" id="thanh-toan-warning">
@@ -16,7 +16,7 @@
 	 			</div>
 	 			{else}
 	 			{foreach $gio_hang_map as $shop_id => $shop}
-	 			<div class="shop-container">
+	 			<div class="shop-container mb-4">
 	 				<div class="header-shop">
 	 					<h4><input type="checkbox" class="check-shop" value="{$shop_id}" id="shop-{$shop_id}" checked><label for="shop-{$shop_id}">{$shop.0.sTenshop}</label></h4>
 	 				</div>
@@ -24,13 +24,13 @@
 	 					{foreach $shop as $item}
 			 			<div class="item-container">
 			 				<div class="row">
-			 					<div class="col-sm-3">
+			 					<div class="col-md-3">
 			 						<div class="item-thumb">
 			 							<img src="{$url}files/red.png" alt="ten_san_pham">
 			 						</div>
 			 					</div>
 
-			 					<div class="col-sm-9">
+			 					<div class="col-md-9">
 			 						<div class="item-detail">
 			 							<h5>{$item.sTensanpham}</h5>
 			 							<p><b>Màu: </b>{$item.sTenmausac} - <b>Size: </b>{$item.sTensize}</p>
@@ -48,7 +48,7 @@
 	 			{/if}
 	 		</div>
 	 	</div>
-	 	<div class="col-sm-4" id="thanh-toan-container">
+	 	<div class="col-md-4" id="thanh-toan-container">
 	 		<div class="total">
 	 			<h3 class="text-center font-weight-bold">THANH TOÁN</h3>
 	 			<p>
@@ -70,6 +70,30 @@
 		 		<div class="action text-center">
 		 			<button class="btn-checkout" id="thanh-toan">
 		 				Đặt hàng ngay
+		 			</button>
+		 		</div>
+	 		</div>
+	 		<div class="pay mt-4 hidden" id="pay">
+	 			<h3 class="text-center font-weight-bold">GIAO HÀNG</h3>
+	 			<div class="form-group">
+	 				<label for="fullname">Người nhận <span class="text-danger">*</span></label>
+	 				<input type="text" name="fullname" id="fullname" class="form-control" placeholder="Họ tên người nhận...">
+	 			</div>
+	 			<div class="form-group">
+	 				<label for="phone">Điện thoại <span class="text-danger">*</span></label>
+	 				<input type="text" name="phone" id="phone" class="form-control" placeholder="Điện thoại người nhận...">
+	 			</div>
+	 			<div class="form-group">
+	 				<label for="address">Địa chỉ <span class="text-danger">*</span></label>
+	 				<textarea name="address" id="address" cols="30" rows="4" class="form-control" placeholder="Số nhà, đường, phố..."></textarea>
+	 			</div>
+	 			<div class="form-group">
+	 				<label for="note">Ghi chú</label>
+	 				<textarea name="note" id="note" cols="30" rows="3" class="form-control" placeholder="Ghi chú hàng trong/ngoài giờ hành chính..."></textarea>
+	 			</div>
+		 		<div class="action text-center">
+		 			<button class="btn-checkout" id="dat-hang">
+		 				Xác nhận
 		 			</button>
 		 		</div>
 	 		</div>

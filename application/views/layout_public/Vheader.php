@@ -72,7 +72,7 @@
                             <li><a href="{$url}chu-hang/san-pham">Thêm sản phẩm</a></li>
                             <li><a href="{$url}chu-hang/danh-sach-san-pham">Danh sách sản phẩm</a></li>
                             {/if}
-                            <!-- <li><a href="{$url}">Danh sách phiên đấu giá</a></li> -->
+                            <li><a href="{$url}don-mua">Đơn mua</a></li>
                             <li><a href="{$url}doi-mat-khau">Đổi mật khẩu</a></li>
                             <li><a id="logout" href="{$url}logout">Đăng xuất</a></li>
                         </ul>

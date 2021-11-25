@@ -13,6 +13,9 @@ html {
 #header nav ul li.drop-down ul li a {
   color: #000000de !important;
 }
+.text-main {
+  color: #1ab7ea;
+}
 body {
   background-color: #f5f8fd;
 }
