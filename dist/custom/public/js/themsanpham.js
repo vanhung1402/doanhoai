@@ -43,6 +43,7 @@ $(document).ready(function() {
 
 			const chiTietThemMoi = [];
 			const chiTietSuaDoi = [];
+			let errorSoLuong = null;
 
 			$.each($('.chi-tiet'), function() {
 				$this = $(this);
@@ -55,6 +56,7 @@ $(document).ready(function() {
 					iMamausac: mauSac,
 					iSoluong: Number(soLuong)
 				};
+				if (chiTiet.iSoluong < 1) errorSoLuong = $this;
 
 				if (dataId) {
 					chiTiet.iMactsanpham = dataId;
@@ -65,6 +67,12 @@ $(document).ready(function() {
 					}
 				}
 			});
+
+			if (errorSoLuong) {
+				showMessage('error', 'Số lượng sản phẩm không được nhỏ hơn 1.');
+				errorSoLuong.find('.so-luong').focus();
+				return;
+			}
 
 			const chiTietConLai = [...chiTietThemMoi, ...chiTietSuaDoi];
 			const mapCheck = {};

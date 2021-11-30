@@ -51,7 +51,9 @@
                                 <th>Tên danh mục loại hàng</th>
                                 <th>Loại hàng</th>
                                 <th>Trạng thái</th>
+                                {if $user.iMaquyen != 10}
                                 <th>Tác vụ</th>
+                                {/if}
                             </tr>
                         </thead>
                         <tbody>
@@ -61,8 +63,8 @@
                                 <td>{$loaiHang.sTendanhmuclh}</td>
                                 <td>{$loaiHang.sTenloaihang}</td>
                                 <td>{$loaiHang.iTrangthai}</td>
+                                {if $user.iMaquyen != 10}
                                 <td class="text-center">
-                                    {if $user.iMaquyen != 10}
                                     <form method="post">
                                         <a class="btn btn-outline-primary btn-sm btn-xs" href="{$url}admin/danh-muc-loai-hang?id={$loaiHang.iMadanhmuclh}" title="Sửa danh mục loại hàng">
                                             <i data-feather="edit"></i>
@@ -74,8 +76,8 @@
                                         </button>
                                         {/if}
                                     </form>
-                                    {/if}
                                 </td>
+                                {/if}
                             </tr>
                             {/foreach}
                         </tbody>

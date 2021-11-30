@@ -63,3 +63,19 @@
 	border-style: solid;
 	padding: 5px 10px;
 }
+.form-search input:focus {
+	outline: none;
+}
+.form-search button {
+	background-color: #1ab7ea;
+	padding: 5px 30px;
+	border: 2px solid #1ab7ea;
+	color: #FFF;
+	transition: all ease .5s;
+	border-left: none;
+}
+.form-search button:hover, .form-search button:focus {
+	background-color: #FFF;
+	color: #1ab7ea;
+	outline: none;
+}

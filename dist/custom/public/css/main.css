@@ -16,6 +16,9 @@ html {
 .text-main {
   color: #1ab7ea;
 }
+#header a.hide-password {
+  color: #222 !important;
+}
 body {
   background-color: #f5f8fd;
 }

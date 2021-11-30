@@ -41,7 +41,9 @@
                                 <th>#</th>
                                 <th>Tên loại hàng</th>
                                 <th>Trạng thái</th>
+                                {if $user.iMaquyen != 10}
                                 <th>Tác vụ</th>
+                                {/if}
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +52,7 @@
                                 <td class="text-center">{$key + 1}</td>
                                 <td>{$loaiHang.sTenloaihang}</td>
                                 <td>{$loaiHang.iTrangthai}</td>
+                                {if $user.iMaquyen != 10}
                                 <td class="text-center">
                                     <form method="post">
                                         <a class="btn btn-outline-primary btn-sm btn-xs" href="{$url}admin/loai-hang?id={$loaiHang.iMaloaihang}" title="Sửa loại hàng">
@@ -63,6 +66,7 @@
                                         {/if}
                                     </form>
                                 </td>
+                                {/if}
                             </tr>
                             {/foreach}
                         </tbody>

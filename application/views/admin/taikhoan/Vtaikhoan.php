@@ -22,7 +22,9 @@
 								<th>Người dùng</th>
 								{/if}
 								<th>Trạng thái</th>
+                                {if $user.iMaquyen != 10 || empty($phanLoai)}
 								<th>Tác vụ</th>
+								{/if}
 							</tr>
 						</thead>
 						<tbody>
@@ -34,6 +36,7 @@
 								<td>{$taiKhoan.sTennguoidung}</td>
 								{/if}
 								<td class="text-center"><span class="badge bg-{$tttk[$taiKhoan.iTrangthai].color}">{$tttk[$taiKhoan.iTrangthai].title}</span></td>
+                                {if $user.iMaquyen != 10 || empty($phanLoai)}
 								<td class="text-center">
 									<form method="post">
 										{if $taiKhoan.iTrangthai == 1}
@@ -47,6 +50,7 @@
 										{/if}
 									</form>
 								</td>
+								{/if}
 							</tr>
 							{/foreach}
 						</tbody>

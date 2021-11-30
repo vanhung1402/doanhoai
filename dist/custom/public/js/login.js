@@ -103,31 +103,62 @@ jQuery(document).ready(function ($) {
         event.preventDefault();
 
         let ngaySinh = $('#ngaysinh').val();
-        ngaySinh = ngaySinh.split('/').reverse().join('-');
+        ngaySinh = ngaySinh.split('/');
+        ngaySinh = ngaySinh.reverse().join('-');
+        ngaySinh = new Date(ngaySinh);
+        ngaySinh = `${ngaySinh.getFullYear()}-${ngaySinh.getMonth() + 1}-${ngaySinh.getDate()}`;
         let todayDate = new Date();
         todayDate = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
-        if (ngaySinh > todayDate) {
+        console.log(ngaySinh, todayDate);
+
+        if (!$('#ngaysinh').val() || ngaySinh > todayDate) {
             showMessage('warning', 'Ngày sinh không hợp lệ!');
             return false;
         }
         
         let email = $('#signup_email').val();
         if (await checkEmail(email)) {
-            showMessage('error', 'Email đã được sử dụng, vui lòng kiểm tra lại');
+            showMessage('warning', 'Email đã được sử dụng, vui lòng kiểm tra lại');
             $('#signup_email').focus();
             return false;      
         }
         
+        const regNum = new RegExp('^[0-9]+$');
         let dienthoai = $('#dienthoai').val();
+        if (!dienthoai) {
+            showMessage('warning', 'Số điện thoại không hợp lệ');
+            $('#dienthoai').focus();
+            return false;
+        }
+        if (!regNum.test(dienthoai.toString())) {
+            showMessage('warning', 'Số điện thoại không được có ký tự đặc biệt');
+            $('#cmnd').focus();
+            return false;
+        }
+        if (dienthoai.length > 10) {
+            showMessage('warning', 'Số điện thoại không dài quá 10 ký tự');
+            $('#dienthoai').focus();
+            return false;
+        }
         if (await checkDienThoai(dienthoai)) {
-            showMessage('error', 'Số điện thoại đã được sử dụng, vui lòng kiểm tra lại');
+            showMessage('warning', 'Số điện thoại đã được sử dụng, vui lòng kiểm tra lại');
             $('#dienthoai').focus();
             return false;      
         }
 
         let cmnd = $('#cmnd').val();
+        if (!regNum.test(cmnd.toString())) {
+            showMessage('warning', 'Số CCCD chỉ nhận giá trị số');
+            $('#cmnd').focus();
+            return false;
+        }
+        if (cmnd.length > 12) {
+            showMessage('warning', 'Độ dài CCCD không quá 12 ký tự');
+            $('#cmnd').focus();
+            return false;   
+        }
         if (await checkCMND(cmnd)) {
-            showMessage('error', 'Số CCCD đã được sử dụng, vui lòng kiểm tra lại');
+            showMessage('warning', 'Số CCCD đã được sử dụng, vui lòng kiểm tra lại');
             $('#cmnd').focus();
             return false;      
         }

@@ -164,7 +164,7 @@
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label for="cmnd">Số CCCD <span class="text-danger">*</span></label>
-                                        <input type="number" name="cmnd" id="cmnd" class="form-control" required>
+                                        <input type="text" name="cmnd" id="cmnd" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-5">

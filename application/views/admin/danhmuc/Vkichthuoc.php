@@ -40,7 +40,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Tên kích thước</th>
+                                {if $user.iMaquyen != 10}
                                 <th>Tác vụ</th>
+                                {/if}
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +50,7 @@
                             <tr>
                                 <td class="text-center">{$key + 1}</td>
                                 <td>{$kichThuoc.sTensize}</td>
+                                {if $user.iMaquyen != 10}
                                 <td class="text-center">
                                     <form method="post">
                                         <a class="btn btn-outline-primary btn-sm btn-xs" href="{$url}admin/kich-thuoc?id={$kichThuoc.iMasize}" title="Sửa kích thước">
@@ -59,6 +62,7 @@
                                         </button>
                                     </form>
                                 </td>
+                                {/if}
                             </tr>
                             {/foreach}
                         </tbody>

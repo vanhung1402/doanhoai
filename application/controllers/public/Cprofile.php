@@ -168,7 +168,7 @@
 
 	    public function uploadFile($inputName, $folder) {
 	    	$config['upload_path'] = './files/' . $folder;
-	        $config['allowed_types'] = 'gif|jpg|png|pdf';
+	        $config['allowed_types'] = 'gif|jpeg|jpg|png|pdf';
 	        $config['max_size'] = 3000;
 
 	        $this->load->library('upload', $config);
