@@ -92,6 +92,30 @@
 	</div>
 </div>
 
+<br>
+
+<div class="container pt-3 pb-3">
+	<h4 class="text-center">Lịch sử đấu giá</h4>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Thời gian đấu giá</th>
+				<th>Người đấu giá</th>
+				<th>Mức giá</th>
+			</tr>
+		</thead>
+		<tbody id="lich-su">
+			{foreach $lichSu as $key => $ls}
+			<tr data-id="{$ls.iMataikhoan}-{$ls.iMucgiadau}">
+				<td>{$ls.tThoigian}</td>
+				<td>{$ls.sTennguoidung}</td>
+				<td><span class="format-number">{$ls.iMucgiadau}</span> VNĐ</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
+
 <script src="{$url}dist/custom/public/js/daugia.js"></script>
 <script type="text/javascript">
 	let timer = new Date('{$phien.dThoigianketthuc}').getTime();

@@ -33,6 +33,16 @@
 	    	];
 	    }
 
+	    public function lichSu($maPhien)
+	    {
+	    	$this->db->select('ctp.*, sTennguoidung, DATE_FORMAT(dThoigiandaugia, "%H:%i:%s %d/%m/%Y") as tThoigian');
+	    	$this->db->from('tbl_ct_phiendaugia ctp');
+	    	$this->db->join('tbl_nguoidung nd', 'ctp.iMataikhoan = nd.iMataikhoan', 'inner');
+	    	$this->db->where('iMaphiendaugia', $maPhien);
+	    	$this->db->order_by('dThoigiandaugia', 'desc');
+	    	return $this->db->get()->result_array();
+	    }
+
 	    public function getHinhAnhSanPham($arrayMaSanPham) {
 	    	if (!$arrayMaSanPham) return null;
 	    	$this->db->where([
@@ -82,7 +92,7 @@
 
 	    public function getThongTinPhienHienTai($maPhien) {
 	    	$this->db->limit(1);
-	    	$this->db->select('iMucgiadau, sTennguoidung');
+	    	$this->db->select('iMucgiadau, sTennguoidung, ctp.iMataikhoan, DATE_FORMAT(dThoigiandaugia, "%H:%i:%s %d/%m/%Y") as tThoigian');
 	    	$this->db->from('tbl_ct_phiendaugia ctp');
 	    	$this->db->join('tbl_nguoidung nd', 'ctp.iMataikhoan = nd.iMataikhoan', 'inner');
 	    	$this->db->where('ctp.iMaphiendaugia', $maPhien);

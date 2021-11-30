@@ -61,6 +61,20 @@ $(document).ready(function() {
 		submitBid(currentPrice);
 	});
 
+	const addHistory = (result) => {
+		const currentWin = $('#lich-su tr').first().data('id');
+		if (currentWin != `${result.iMataikhoan}-${result.iMucgiadau}`) {
+			let newHtml = `
+			<tr data-id="${result.iMataikhoan}-${result.iMucgiadau}">
+				<td>${result.tThoigian}</td>
+				<td>${result.sTennguoidung}</td>
+				<td><span class="format-number">${numeral(result.iMucgiadau).format('0,0')}</span> VNĐ</td>
+			</tr>
+			`;
+			$('#lich-su').prepend($(newHtml));
+		}
+	}
+
 	const setBidWin = (result) => {
 		$('#price-win').text(numeral(result.iMucgiadau).format('0,0'));
 		$('#bider-win').text(result.sTennguoidung);
@@ -69,6 +83,7 @@ $(document).ready(function() {
 		if (currentPrice < Number(result.iMucgiadau) + buocGia) {
 			$('#current-price').text(numeral(Number(result.iMucgiadau) + buocGia).format('0,0'));
 		}
+		addHistory(result);
 	}
 
 	const getCurrentBidResult = () => {

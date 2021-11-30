@@ -28,7 +28,7 @@
 	 		}
 
 	 		$data['sanpham'] 		= $this->Mdaugia->getChiTietSanPham($data['phien']['iMactsanpham']);
-	 		// pr($data['sanpham']);
+	    	$data['lichSu'] 		= $this->Mdaugia->lichSu($maPhien);
 			$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vdaugiasanpham';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
