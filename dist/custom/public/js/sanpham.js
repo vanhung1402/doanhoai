@@ -63,7 +63,7 @@ $(document).ready(function() {
           <td class="text-right">${numeral(ct.iGiakhoidiem).format('0,0')} VNĐ</td>
           <td class="text-right">${numeral(ct.iBuocgia).format('0,0')} VNĐ</td>
           <td class="text-right">${getTrangThaiPhien(ct)}</td>
-          <td></td>
+          <td class="text-right">${getKetQua(ct)}</td>
           <td class="text-right">
             ${getButtonPhienDauGia(ct)}
           </td>
@@ -71,6 +71,11 @@ $(document).ready(function() {
         });
         $('#list-dau-gia').html(dauGiaHtml);
     }
+
+    const getKetQua = (phien) => {
+        return phien.iMadonmua ? '<span class="badge badge-success">Thành công</span>' : '<span class="badge badge-warning">Không thành công<span>';
+    }
+
     const getTrangThaiPhien = (phien) => {
         const thoiGianBatDau = new Date(phien.dThoigianbatdau).getTime();
         const thoiGianKetThuc = new Date(phien.dThoigianketthuc).getTime();

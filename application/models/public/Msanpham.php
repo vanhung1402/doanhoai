@@ -42,11 +42,14 @@
 
 	    public function getDanhSachDauGiaSanPham($iMasanpham)
 	    {	
-	    	$this->db->select('*, DATE_FORMAT(dThoigianbatdau, "%H:%i %d/%m/%Y") as batDau, DATE_FORMAT(dThoigianketthuc, "%H:%i %d/%m/%Y") as ketThuc');
+	    	$this->db->select('*, DATE_FORMAT(dThoigianbatdau, "%H:%i %d/%m/%Y") as batDau, DATE_FORMAT(dThoigianketthuc, "%H:%i %d/%m/%Y") as ketThuc, iMadonmua');
 	    	$this->db->from('tbl_ct_sanpham ctsp');
 	    	$this->db->join('tbl_phiendaugia pdg', 'ctsp.iMactsanpham = pdg.iMactsanpham', 'inner');
 	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
+	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
+	    	$this->db->group_by('pdg.iMaphiendaugia');
+	    	$this->db->order_by('ctp.iMadonmua', 'desc');
 	    	$this->db->where('ctsp.iMasanpham', $iMasanpham);
 	    	return $this->db->get()->result_array();	
 	    }
