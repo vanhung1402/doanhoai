@@ -42,6 +42,23 @@
 			]);
 	    }
 
+	    public function dangNhapSession($taiKhoan)
+	    {
+	    	$thongTinTaiKhoan = $this->checkTaiKhoan($taiKhoan);
+	    	if (!$thongTinTaiKhoan) return false;
+
+	    	$quyenTaiKhoan = $this->checkQuyenTaiKhoan($thongTinTaiKhoan['iMataikhoan']);
+			if (!$quyenTaiKhoan) return false;	    	
+
+			$nguoiDung = $this->layThongTinNguoiDung(['iMataikhoan' => $thongTinTaiKhoan['iMataikhoan']]);
+
+			return array_merge($nguoiDung, [
+				'sTendangnhap' => $thongTinTaiKhoan['sTendangnhap'],
+				'iTrangthai' => $thongTinTaiKhoan['iTrangthai'],
+				'iMaquyen' => $quyenTaiKhoan['iMaquyen'],
+			]);
+	    }
+
 	    public function layThongTinNguoiDung($where)
 	    {
 	    	$this->db->where($where);

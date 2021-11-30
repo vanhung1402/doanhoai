@@ -17,7 +17,8 @@ $(document).ready(function() {
 
 	const renderCurrentAuction = async (limit, type = null) => {
 		let current = new Date();
-		let start = moment(current).format('YYYY-MM-DD hh:mm:ss');
+		let start = moment(current).format('YYYY-MM-DD HH:mm:ss');
+
 		const listDauGia = await getAuction(start, start, limit);
 
 		switch (type) {
@@ -33,8 +34,12 @@ $(document).ready(function() {
 	const reRenderCurrentAuction = (listDauGia, current) => {
 		listDauGia.listPhien.forEach( function(dg) {
 			let timeend = new Date(dg.dThoigianketthuc);
-			$(`#phien-${dg.iMaphiendaugia} .timer`).text(subTime(timeend, current));
-			$(`#phien-${dg.iMaphiendaugia} .current-costs`).html(`<i class="fa fa-gavel"></i> ${numeral(dg.giaHientai || dg.iGiakhoidiem).format('0,0')} VNĐ`);
+			if (timeend.getTime() < current.getTime()) {
+				$(`#phien-${dg.iMaphiendaugia}`).remove();
+			} else {
+				$(`#phien-${dg.iMaphiendaugia} .timer`).text(subTime(timeend, current));
+				$(`#phien-${dg.iMaphiendaugia} .current-costs`).html(`<i class="fa fa-gavel"></i> ${numeral(dg.giaHientai || dg.iGiakhoidiem).format('0,0')} VNĐ`);
+			}
 		});
 	};
 

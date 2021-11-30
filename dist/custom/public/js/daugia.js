@@ -106,7 +106,8 @@ $(document).ready(function() {
 		seconds %= 60;
 		seconds = seconds < 10 ? `0${seconds}` : seconds;
 
-		$('#hours').text(hours + days * 24);
+		days = Number(days);
+		$('#hours').text(hours + (days > 0 ? days * 24 : ''));
 		$('#minutes').text(minutes);
 		$('#seconds').text(seconds);
 	}

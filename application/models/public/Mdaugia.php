@@ -39,6 +39,7 @@
 	    		'iTrangthai' => 1,
 	    	]);
 	    	$this->db->where_in('iMasanpham', $arrayMaSanPham);
+	    	$this->db->order_by('iMahinhanh');
 		    $arrayResult = $this->db->get('tbl_hinhanh_sanpham')->result_array();
 		    $anhSanPham = [];
 		    foreach ($arrayResult as $anh) {
@@ -106,10 +107,15 @@
 	    	}
 
 	    	$bidsWin = $this->getBidsWin($bidIds);
+	    	$arrayMaSanPham = array_column($userBidsNull, 'iMasanpham');
+	    	$hinhAnh = $this->getHinhAnhSanPham($arrayMaSanPham);
 	    	if ($bidsWin) {
 		    	foreach ($bidsWin as $bid) {
 		    		if ($userBidsNull[$bid['iMaphiendaugia']]['iMucgiadau'] != $bid['iGiathang']) {
 		    			unset($userBidsNull[$bid['iMaphiendaugia']]);
+		    		} else {
+		    			$anh = isset($hinhAnh[$userBidsNull[$bid['iMaphiendaugia']]['iMasanpham']]) ? $hinhAnh[$userBidsNull[$bid['iMaphiendaugia']]['iMasanpham']] : [];
+		    			$userBidsNull[$bid['iMaphiendaugia']]['hinhAnh'] = $anh;
 		    		}
 		    	}
 	    	}
@@ -129,7 +135,7 @@
 	    }
 
 	    public function getUserBidsNull($taiKhoan) {
-	    	$this->db->select('sTenmausac, sTensize, sTensanpham, ctp.iMaphiendaugia, MAX(iMucgiadau) iMucgiadau, nd.iManguoidung, sTenshop');
+	    	$this->db->select('sp.iMasanpham, sTenmausac, sTensize, sTensanpham, ctp.iMaphiendaugia, MAX(iMucgiadau) iMucgiadau, nd.iManguoidung, sTenshop');
 	    	$this->db->from('tbl_ct_phiendaugia ctp');
 	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
 	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
@@ -171,6 +177,108 @@
 			$this->db->where($chiTiet);
 			$this->db->update('tbl_ct_phiendaugia', ['iMadonmua' => $donHangId]);
 			return $this->db->affected_rows();
+	    }
+
+	    public function getAllDonMua($iMataikhoan)
+	    {
+	    	$where = [
+	    		'ctp.iMataikhoan' => $iMataikhoan,
+	    	];
+	    	$this->db->select('ctp.*, dmh.*, sp.iMasanpham, sTenmausac, sTensanpham, sTensize, DATE_FORMAT(dThoigianlap, "%H:%i %d/%m/%Y") as tThoigianlap, sNguoimuahuy, sNguoibanhuy, sTenshop');
+	    	$this->db->from('tbl_ct_phiendaugia ctp');
+	    	$this->db->join('tbl_donmuahang dmh', 'ctp.iMadonmua = dmh.iMadonmua', 'inner');
+	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
+	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
+	    	$this->db->join('tbl_nguoidung nd', 'sp.iNguoithem = nd.iManguoidung', 'inner');
+	    	$this->db->where($where);
+	    	$this->db->where('ctp.iMadonmua IS NOT NULL');
+	    	$this->db->order_by('dThoigianlap', 'desc');
+	    	$donHang = $this->db->get()->result_array();
+	    	if (!$donHang) return null;
+	    	$arrayMaSanPham = array_column($donHang, 'iMasanpham');
+	    	$getHinhAnhSanPham = $this->getHinhAnhSanPham($arrayMaSanPham);
+
+	    	foreach ($donHang as $key => $dh) {
+	    		$donHang[$key]['hinhAnh'] = $getHinhAnhSanPham[$dh['iMasanpham']];
+	    	}
+
+	    	$mapDonHang = handingArrayToMap($donHang, 'iMadonmua');
+	    	return $mapDonHang;
+	    }
+
+	    public function getAllDonHang($iManguoidung)
+	    {
+	    	$where = [
+	    		'sp.iNguoithem' => $iManguoidung,
+	    	];
+	    	$this->db->select('ctp.*, dmh.*, sp.iMasanpham, sTenmausac, sTensanpham, sTensize, DATE_FORMAT(dThoigianlap, "%H:%i %d/%m/%Y") as tThoigianlap, sTennguoidung as nguoiMua, sNguoimuahuy, sNguoibanhuy');
+	    	$this->db->from('tbl_ct_phiendaugia ctp');
+	    	$this->db->join('tbl_donmuahang dmh', 'ctp.iMadonmua = dmh.iMadonmua', 'inner');
+	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
+	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
+	    	$this->db->join('tbl_nguoidung nd', 'ctp.iMataikhoan = nd.iMataikhoan', 'inner');
+	    	$this->db->where($where);
+	    	$this->db->where('ctp.iMadonmua IS NOT NULL');
+	    	$this->db->order_by('dThoigianlap', 'desc');
+	    	$donHang = $this->db->get()->result_array();
+	    	if (!$donHang) return null;
+	    	$arrayMaSanPham = array_column($donHang, 'iMasanpham');
+	    	$getHinhAnhSanPham = $this->getHinhAnhSanPham($arrayMaSanPham);
+
+	    	foreach ($donHang as $key => $dh) {
+	    		$donHang[$key]['hinhAnh'] = $getHinhAnhSanPham[$dh['iMasanpham']];
+	    	}
+
+	    	$mapDonHang = handingArrayToMap($donHang, 'iMadonmua');
+	    	return $mapDonHang;
+	    }
+
+	    public function huyDonMua($maDonMua, $lyDo, $iMataikhoan)
+	    {
+	    	$this->db->select('ctp.iMadonmua');
+	    	$this->db->from('tbl_donmuahang dmh');
+	    	$this->db->join('tbl_ct_phiendaugia ctp', 'dmh.iMadonmua = ctp.iMadonmua', 'inner');
+	    	$this->db->where([
+	    		'ctp.iMadonmua' => $maDonMua,
+	    		'ctp.iMataikhoan' => $iMataikhoan
+	    	]);
+	    	$donMua = $this->db->get()->row_array();
+	    	if (!$donMua) return null;
+	    	$this->db->where('iMadonmua', $maDonMua);
+	    	$this->db->update('tbl_donmuahang', [
+	    		'iTrangthai' => 5,
+	    		'sNguoimuahuy' => $lyDo,
+	    	]);
+	    	return $this->db->affected_rows();
+	    }
+
+
+	    public function huyDonHang($maDonMua, $lyDo, $iMataikhoan)
+	    {
+	    	$this->db->where('iMadonmua', $maDonMua);
+	    	$this->db->update('tbl_donmuahang', [
+	    		'iTrangthai' => 5,
+	    		'sNguoibanhuy' => $lyDo,
+	    	]);
+	    	return $this->db->affected_rows();
+	    }
+
+	    public function doiTrangThai($maDonMua, $trangThai)
+	    {
+	    	$this->db->where([
+	    		'iMadonmua' => $maDonMua,
+	    		'iTrangthai !=' => 5,
+	    	]);
+	    	$this->db->update('tbl_donmuahang', [
+	    		'iTrangthai' => $trangThai
+	    	]);
+	    	return $this->db->affected_rows();
 	    }
 	}
 

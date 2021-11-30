@@ -89,7 +89,7 @@
 	    	}
 
 	    	$quyenTaiKhoan = [
-	    		'iMaquyen' => 1,
+	    		'iMaquyen' => $this->input->post('phanloai'),
 	    		'iMataikhoan' => $resultTaiKhoan,
 	    	];
 	    	$resultQuyenTaiKhoan = $this->Mhethong->phanQuyenTaiKhoan($quyenTaiKhoan);

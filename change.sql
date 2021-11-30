@@ -4,3 +4,5 @@ ALTER TABLE `tbl_hinhanh_sanpham` ADD FOREIGN KEY (`iMasanpham`) REFERENCES `tbl
 
 ALTER TABLE `tbl_donmuahang` ADD `sDiachi` TEXT NOT NULL AFTER `dThoigianlap`, ADD `sSodienthoai` VARCHAR(20) NOT NULL AFTER `sDiachi`; 
 ALTER TABLE `tbl_donmuahang` CHANGE `bTrangthai` `iTrangthai` TINYINT NOT NULL; 
+
+ALTER TABLE `tbl_donmuahang` ADD `sNguoimuahuy` TEXT NULL AFTER `iTrangthai`, ADD `sNguoibanhuy` TEXT NULL AFTER `sNguoimuahuy`; 

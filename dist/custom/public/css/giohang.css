@@ -58,8 +58,9 @@
 	height: 100%;
 }
 .item-thumb img {
-	height: 125px;
-	object-fit: fill;
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
 }
 .item-detail {
 	padding: 10px 0;

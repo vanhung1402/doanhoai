@@ -26,7 +26,11 @@
 			 				<div class="row">
 			 					<div class="col-md-3">
 			 						<div class="item-thumb">
+			 							{if empty($item.hinhAnh)}
 			 							<img src="{$url}files/red.png" alt="ten_san_pham">
+			 							{else}
+			 							<img src="{$url_file}{$item.hinhAnh.0.sHinhanh}" alt="ten_san_pham">
+			 							{/if}
 			 						</div>
 			 					</div>
 

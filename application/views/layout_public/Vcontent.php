@@ -1,6 +1,13 @@
 <?php 
 	$user 						= $this->session->userdata('user');
 	// pr($user);
+
+	if ($user) {
+		$CI =& get_instance();
+		$this->load->model('public/Mhethong');
+		$user = $CI->Mhethong->dangNhapSession(['iMataikhoan' => $user['iMataikhoan']]);
+	}
+
 	$trangThaiTaiKhoan 		= [
 		1 => 'Đã duyệt',
 		2 => 'Đang khóa',

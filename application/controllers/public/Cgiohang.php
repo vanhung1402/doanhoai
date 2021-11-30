@@ -36,6 +36,7 @@
 	    public function pay()
 	    {
 	    	$donHang = $this->input->post('donHang');
+	    	$donHang['dThoigianlap'] = date('Y-m-d H:i');
 	    	$chiTiet = $this->input->post('chiTiet');
 
 	    	$result = $this->Mdaugia->taoDonHang($donHang, $chiTiet);

@@ -1,6 +1,6 @@
 <?php
 
-	class Cdonmua extends CI_Controller
+	class Cdonhang extends CI_Controller
 	{
 	    public function __construct()
 	    {
@@ -19,19 +19,17 @@
 	    		case 'huy-don-hang':
 	    			$this->huyDonHang();
 	    			break;
-	    		
 	    		case 'doi-trang-thai':
 	    			$this->doiTrangThai();
 	    			break;
-	    			
 	    		default:
 	    			// code...
 	    			break;
 	    	}
 	    	$data = [];
-	    	$data['donHang'] 		= $this->Mdaugia->getAllDonMua($this->__user['iMataikhoan']);
+	    	$data['donHang'] 		= $this->Mdaugia->getAllDonHang($this->__user['iManguoidung']);
 	        $temp['data'] 			= $data;
-			$temp['template'] 		= 'public/Vdonmua';
+			$temp['template'] 		= 'public/Vdonhang';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
 	    }
 
@@ -39,7 +37,7 @@
 	    {
 	    	$maDonMua = $this->input->post('maDonMua');
 	    	$lyDo = $this->input->post('lyDo');
-	    	$result = $this->Mdaugia->huyDonMua($maDonMua, $lyDo, $this->__user['iMataikhoan']);
+	    	$result = $this->Mdaugia->huyDonHang($maDonMua, $lyDo, $this->__user['iMataikhoan']);
 	    	die(json_encode($result));
 	    }
 

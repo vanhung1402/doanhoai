@@ -33,6 +33,7 @@
     <link href="{$url}dist/custom/public/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
     <base href="{$url}">
     <script src="{$url}dist/custom/admin/js/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -71,6 +72,7 @@
                             {if $user.iMaquyen == 2 && $user.iTrangthai == 1}
                             <li><a href="{$url}chu-hang/san-pham">Thêm sản phẩm</a></li>
                             <li><a href="{$url}chu-hang/danh-sach-san-pham">Danh sách sản phẩm</a></li>
+                            <li><a href="{$url}don-hang">Đơn hàng</a></li>
                             {/if}
                             <li><a href="{$url}don-mua">Đơn mua</a></li>
                             <li><a href="{$url}doi-mat-khau">Đổi mật khẩu</a></li>

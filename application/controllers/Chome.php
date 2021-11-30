@@ -15,6 +15,9 @@
 	    		case 'get-auctua':
 	    			$start = $this->input->post('start');
 	    			$end = $this->input->post('end');
+	    			// $start = date($start);
+	    			// $end = date($end);
+	    			// die(json_encode($start));
 	    			$limit = $this->input->post('limit');
 	    			$result = $this->Mdaugia->getAuctua($start, $end, $limit);
 	    			die(json_encode($result));

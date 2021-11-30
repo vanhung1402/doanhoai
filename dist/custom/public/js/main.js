@@ -8,23 +8,22 @@ const maxPostFileSize = 2048000;
 
 let getCart;
 
-function showMessage(type, msg){
-    (type === 'success') ? type = 'info' : '';
-    const title_msg = {
-        'success': 'Thành công',
-        'warning': 'Cảnh báo',
-        'info': 'Thông báo',
-        'error': 'Lỗi',
-    };
+var Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
-    $.toast({
-        heading: title_msg[type],
-        text: msg,
-        position: 'top-right',
-        loaderBg: '#ff6849',
-        icon: type,
-        hideAfter: 3000,
-        stack: 6
+function showMessage(type, msg){
+    Toast.fire({
+      icon: type,
+      title: msg
     });
 }
 

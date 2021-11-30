@@ -70,9 +70,7 @@ $(document).ready(function() {
 		  	result.isConfirmed ? huyDonHang(maDonMua, result.value.trim()) : $this.removeAttr('disabled');
 		  }
 		})
-
 	});
-
 
 	const doiTrangThai = (maDonMua, trangThai) => {
 		$.ajax({
@@ -87,7 +85,7 @@ $(document).ready(function() {
 		})
 		.done(function(res) {
 			console.log("Success: ", res);
-			res ? showMessage('success', 'Xác nhận thành công, chúc mừng bạn đã nhận được hàng') : showMessage('error', 'Xác nhận không thành công, vui lòng kiểm tra lại');
+			res ? showMessage('success', 'Thay đổi trạng thái đơn hàng thành công') : showMessage('error', 'Thay đổi trạng thái đơn hàng không thành công');
 		})
 		.fail(function(err) {
 			console.log("Error: ", err);
@@ -108,8 +106,8 @@ $(document).ready(function() {
 		$(this).attr('disabled', true);
 
 		Swal.fire({
-		  title: 'Bạn đã chắc chắn?',
-		  text: "Xác nhận đã nhận được hàng, không thể hủy đơn hàng sau khi thực hiện thao tác này!",
+		  title: 'Bạn chắc chắn muốn thay đổi trạng thái đơn hàng này?',
+		  text: "Xác nhận thay đổi, không thể hoàn lại trạng thái hiện tại của đơn hàng!",
 		  icon: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',

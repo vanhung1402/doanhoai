@@ -48,8 +48,18 @@
 	color: #333;
 	cursor: pointer;
 	transition: all ease .5s;
-
+	padding-bottom: 10px;
 }
 .view-more:hover {
 	color: #1ab7ea;
+}
+
+.form-search {
+	display: flex;
+}
+.form-search input {
+	width: 100%;
+	border-color: #1ab7ea;
+	border-style: solid;
+	padding: 5px 10px;
 }

@@ -4,8 +4,11 @@
         <div class="row justify-content-center align-self-center">
             <div class="col-md-6 intro-info order-md-first order-last">
                 <h2>Website đấu giá<br>trực tuyến <span>Chilin!</span></h2>
-                <div>
-                    <a href="#services" class="btn-get-started scrollto">Bắt đầu</a>
+                <div class="form-search">
+                    <input type="text" placeholder="Nhập tên sản phẩm để tìm kiếm...">
+                    <button class="btn-search">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </div>
             </div>
 

@@ -99,13 +99,13 @@
 					<div class="panel-body">
 						<div><label class="mv-120">Họ và tên:</label>&emsp;{$user.sTennguoidung}</div>
 						<div><label class="mv-120">Tên đăng nhập:</label>&emsp;{$user.sTendangnhap}</div>
-						{if $user.iPhanloai == 1}
+						{if $user.iMaquyen == 1}
 						<div><label class="mv-120">Trạng thái:</label>&emsp;{$tttk[$nguoiBan.iTrangthai]}</div>
 						{/if}
 					</div>
 				</div>	
 			</div>
-			{if $user.iPhanloai == 2}
+			{if $user.iMaquyen == 2}
 			<div class="col">
 				<div class="panel">
 					<div class="panel-heading">
@@ -132,7 +132,7 @@
 			{/if}
 		</div>
 	</div>
-	{if $user.iPhanloai == 2}
+	{if $user.iMaquyen == 2}
 	<div id="change-profile" role="tabpanel" aria-labelledby="change-profile-tab">
 		<div class="panel">
 			<div class="panel-heading">

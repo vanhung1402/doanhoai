@@ -24,7 +24,7 @@ $(document).ready(function() {
 			},
 		})
 		.done(function(res) {
-			console.log("Success: ", res);
+			window.location.href = `${url}don-mua`;
 		})
 		.fail(function(err) {
 			console.log("Error: ", err);
@@ -42,7 +42,7 @@ $(document).ready(function() {
 		});
 
 		const donHang = {
-			dThoigianlap: new Date().getTime(),
+			dThoigianlap: new Date(),
 			sDiachi: $('#address').val().trim(),
 			sSodienthoai: $('#phone').val().trim(),
 			sGhichu: $('#note').val().trim(),

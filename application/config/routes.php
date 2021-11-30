@@ -18,6 +18,7 @@ $route['chu-hang/san-pham'] 			= 'public/Cthemsanpham';
 $route['dau-gia-san-pham'] 				= 'public/Cdaugiasanpham';
 $route['gio-hang'] 						= 'public/Cgiohang';
 $route['don-mua'] 						= 'public/Cdonmua';
+$route['don-hang'] 						= 'public/Cdonhang';
 
 // Admin
 $route['admin/login'] 					= 'admin/Clogin';

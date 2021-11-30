@@ -1,9 +1,9 @@
-<link href="{$url}dist/custom/public/css/donmua.css" rel="stylesheet">
+<link href="{$url}dist/custom/public/css/donhang.css" rel="stylesheet">
 
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item active"><a href="{$url}">Home</a></li>
-		<li class="breadcrumb-item" aria-current="page">Đơn mua</li>
+		<li class="breadcrumb-item" aria-current="page">Đơn hàng</li>
 	</ol>
 </nav>
 
@@ -11,7 +11,7 @@
 	<ul class="nav nav-tabs" id="don-hang-tabs-header" role="tablist">
 		{foreach $trangThaiDonHang as $k => $tt}
 		<li class="nav-item">
-			<a class="nav-link {if $k == 0}active{/if}" id="tab-{$k}" data-toggle="tab" data-tab="tab-{$k}-content" href="{$url}don-mua#tab-{$k}-content" role="tab" aria-controls="tab-{$k}" aria-selected="false">{$tt}</a>
+			<a class="nav-link {if $k == 0}active{/if}" id="tab-{$k}" data-toggle="tab" data-tab="tab-{$k}-content" href="{$url}don-hang#tab-{$k}-content" role="tab" aria-controls="tab-{$k}" aria-selected="false">{$tt}</a>
 		</li>
 		{/foreach}
 	</ul>
@@ -22,7 +22,7 @@
 		{if $k==0 || $k == $dh.0.iTrangthai}
 			<div class="don-hang mb-4 mt-4">
 				<div class="don-hang-header">
-					<span>Ngày đặt: {$dh.0.tThoigianlap}</span>
+					<span>Đặt ngày: {$dh.0.tThoigianlap} bởi <span class="text-main font-weight-bold">{$dh.0.nguoiMua}</span></span>
 					<span class="text-main">{$trangThaiDonHang[$dh.0.iTrangthai]}</span>
 				</div>
 				<div class="don-hang-body">
@@ -43,7 +43,6 @@
 		 						<div class="item-detail">
 		 							<h5>{$don.sTensanpham}</h5>
 		 							<p><b>Màu: </b>{$don.sTenmausac} - <b>Size: </b>{$don.sTensize}</p>
-		 							<p><b>Shop: </b>{$don.sTenshop}</p>
 		 							<p class="price text-right pr-2 font-weight-bold">1 <i class="fa fa-times"></i> <span class="format-number">{$don.iMucgiadau}</span> VNĐ</p>
 		 						</div>
 		 					</div>
@@ -53,13 +52,24 @@
 				</div>
 				<div class="don-hang-footer">
 					{if $dh.0.iTrangthai < 4}
-					<button class="huy-don-hang btn btn-md btn-secondary" value="{$don.iMadonmua}">
-						<i class="fa fa-times"></i> Hủy đơn hàng
-					</button>
-					{else if $dh.0.iTrangthai == 4}
-					<button class="chuyen-trang-thai btn btn-md btn-success" data-trang-thai="6" value="{$don.iMadonmua}">
-						<i class="fa fa-check-circle-o"></i> Xác nhận đã nhận hàng
-					</button>
+					<div>
+						<button class="huy-don-hang btn btn-md btn-secondary" value="{$don.iMadonmua}">
+							<i class="fa fa-times"></i> Hủy đơn hàng
+						</button>
+						{if $dh.0.iTrangthai == 1}
+						<button class="chuyen-trang-thai btn btn-md btn-warning" data-trang-thai="2" value="{$don.iMadonmua}">
+							<i class="fa fa-check"></i> Xác nhận đơn hàng
+						</button>
+						{else if $dh.0.iTrangthai == 2}
+						<button class="chuyen-trang-thai btn btn-md btn-info" data-trang-thai="3" value="{$don.iMadonmua}">
+							<i class="fa fa-check"></i> Xác nhận lấy hàng xong
+						</button>
+						{else if $dh.0.iTrangthai == 3}
+						<button class="chuyen-trang-thai btn btn-md btn-success" data-trang-thai="4" value="{$don.iMadonmua}">
+							<i class="fa fa-check"></i> Xác nhận đã giao hàng
+						</button>
+						{/if}
+					</div>
 					{else if $dh.0.sNguoimuahuy || $dh.0.sNguoibanhuy}
 					<div>
 						{if $dh.0.sNguoimuahuy}
@@ -83,4 +93,4 @@
 	</div>
 </div>
 
-<script src="{$url}dist/custom/public/js/donmua.js"></script>
+<script src="{$url}dist/custom/public/js/donhang.js"></script>

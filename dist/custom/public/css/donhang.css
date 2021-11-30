@@ -41,6 +41,11 @@
 	align-items: center;
 }
 
+.don-hang-footer-extend {
+	border-top: 1px solid #CCC;
+	padding: 20px 10px 5px;
+}
+
 .item-container {
 	border-radius: 3px;
 	padding: 10px 0;
