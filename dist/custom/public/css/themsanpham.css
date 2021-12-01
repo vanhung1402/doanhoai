@@ -120,3 +120,7 @@ table.table tr th, table.table tr td {
   object-fit: cover;
   object-position: center;
 }
+.action-wrapper {
+    display: flex;
+    justify-content: space-between;
+}

@@ -113,8 +113,14 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<th colspan="4" class="text-right">
-											<button id="them-chi-tiet" type="button" class="btn btn-sm btn-info"><i class="fa fa-plus"></i>&emsp;Thêm chi tiết mới</button>
+										<th colspan="4">
+											<div class="action-wrapper">
+												<div class="add">
+													<button id="them-mau-sac" type="button" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i>&emsp;Thêm màu sắc mới</button>
+													<button id="them-kich-thuoc" type="button" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>&emsp;Thêm kích thước mới</button>		
+												</div>
+												<button id="them-chi-tiet" type="button" class="btn btn-sm btn-info"><i class="fa fa-plus"></i>&emsp;Thêm chi tiết mới</button>
+											</div>
 										</th>
 									</tr>
 								</tfoot>
@@ -131,6 +137,7 @@
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript" src="{$url}dist/custom/public/js/themsanpham.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {

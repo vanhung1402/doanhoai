@@ -44,6 +44,14 @@
 	    		case 'xoa-san-pham':
 	    			$this->xoaSanPham();
 	    			break;
+
+	    		case 'them-mau':
+	    			$this->themMauSac();
+	    			break;
+	    		
+	    		case 'them-size':
+	    			$this->themKichThuoc();
+	    			break;
 	    		
 	    		default:
 	    			// code...
@@ -67,6 +75,20 @@
 			$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vthemsanpham';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
+	    }
+
+	    private function themMauSac()
+	    {
+	    	$mau = $this->input->post('mau');
+	    	$result = $this->Mhethong->themMauSac($mau);
+	    	die(json_encode($result));
+	    }
+
+	    private function themKichThuoc()
+	    {
+	    	$size = $this->input->post('size');
+	    	$result = $this->Mhethong->themKichThuoc($size);
+	    	die(json_encode($result));
 	    }
 
 	    private function xoaSanPham()

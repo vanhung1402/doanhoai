@@ -64,7 +64,7 @@
                     </li>
                     {else}
                     <li>
-                        <a href="{$url}dang-dau-gia"><i class="fa fa-gavel"></i>&nbsp; Đang đấu giá (<span id="total-uncheck">0</span>)</a>
+                        <a href="{$url}dang-dau-gia"><i class="fa fa-gavel"></i>&nbsp; Đang đấu giá (<span id="total-current">0</span>)</a>
                     </li>
                     <li>
                         <a href="{$url}gio-hang"><i class="fa fa-shopping-cart"></i>&nbsp; Giỏ hàng (<span id="total-uncheck">0</span>)</a>

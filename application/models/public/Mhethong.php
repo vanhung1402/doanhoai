@@ -242,6 +242,20 @@
 	    	$this->db->insert_batch('tbl_hinhanh_sanpham', $hinhAnh);
 	    	return $this->db->affected_rows();
 	    }
+
+	    public function themMauSac($mau)
+	    {
+	    	$session = $this->session->userdata('user');
+	    	$this->db->insert('tbl_mausac', ['sTenmausac' => $mau, 'iNguoithem' => $session['iMataikhoan']]);
+	    	return $this->db->insert_id();
+	    }
+
+	    public function themKichThuoc($size)
+	    {
+	    	$session = $this->session->userdata('user');
+	    	$this->db->insert('tbl_kichthuoc', ['sTensize' => $size, 'iNguoithem' => $session['iMataikhoan']]);
+	    	return $this->db->insert_id();
+	    }
 	}
 
 ?>

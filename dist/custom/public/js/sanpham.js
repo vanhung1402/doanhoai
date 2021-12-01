@@ -73,6 +73,9 @@ $(document).ready(function() {
     }
 
     const getKetQua = (phien) => {
+        const thoiGianKetThuc = new Date(phien.dThoigianketthuc).getTime();
+        const timestamps = new Date().getTime();
+        if (timestamps < thoiGianKetThuc) return '';
         return phien.iMadonmua ? '<span class="badge badge-success">Thành công</span>' : '<span class="badge badge-warning">Không thành công<span>';
     }
 

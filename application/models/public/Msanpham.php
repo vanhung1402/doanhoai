@@ -42,7 +42,7 @@
 
 	    public function getDanhSachDauGiaSanPham($iMasanpham)
 	    {	
-	    	$this->db->select('*, DATE_FORMAT(dThoigianbatdau, "%H:%i %d/%m/%Y") as batDau, DATE_FORMAT(dThoigianketthuc, "%H:%i %d/%m/%Y") as ketThuc, iMadonmua');
+	    	$this->db->select('*, DATE_FORMAT(dThoigianbatdau, "%H:%i %d/%m/%Y") as batDau, DATE_FORMAT(dThoigianketthuc, "%H:%i %d/%m/%Y") as ketThuc, iMadonmua, iKetqua, DATE_FORMAT(dThoigianketthuc, "%Y/%m/%d %H:%i:%s") as end');
 	    	$this->db->from('tbl_ct_sanpham ctsp');
 	    	$this->db->join('tbl_phiendaugia pdg', 'ctsp.iMactsanpham = pdg.iMactsanpham', 'inner');
 	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
@@ -51,7 +51,39 @@
 	    	$this->db->group_by('pdg.iMaphiendaugia');
 	    	$this->db->order_by('ctp.iMadonmua', 'desc');
 	    	$this->db->where('ctsp.iMasanpham', $iMasanpham);
-	    	return $this->db->get()->result_array();	
+	    	$result = $this->db->get()->result_array();
+	    	$current = date('Y/m/d H:i:s');
+	    	foreach ($result as $value) {
+	    		if ($value['end'] < $current) {
+	    			$this->setDauGiaResult($value);
+	    		}
+	    	}
+	    	return $result;
+	    }
+
+	    public function setDauGiaResult($dg) {
+	    	$this->db->where([
+	    		'pdg.iMaphiendaugia' => $dg['iMaphiendaugia'],
+	    		'iKetqua' => 1,
+	    	]);
+	    	$this->db->from('tbl_phiendaugia pdg');
+	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
+	    	$this->db->order_by('ctp.iMadonmua', 'desc');
+	    	$has = $this->db->get()->row_array();
+
+	    	if ($has) {
+	    		$this->db->where([
+		    		'iMaphiendaugia' => $dg['iMaphiendaugia']
+		    	]);
+	    		if ($has['iMadonmua']) {
+	    			$this->db->update('tbl_phiendaugia', ['iKetqua' => 2]);
+
+	    			$this->db->where('iMactsanpham', $dg['iMactsanpham']);
+	    			$this->db->update('tbl_ct_sanpham', ['iSoluong' => ($dg['iSoluong'] - 1)]);
+	    		} else {
+	    			$this->db->update('tbl_phiendaugia', ['iKetqua' => 3]);
+	    		};
+	    	}
 	    }
 
 	    public function getHinhAnhSanPham($iMasanpham) {

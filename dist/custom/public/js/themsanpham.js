@@ -1,4 +1,4 @@
-const chiTiet = document.getElementById('chi-tiet-root').outerHTML.replace('id="chi-tiet-root"', '');
+let chiTiet = document.getElementById('chi-tiet-root').outerHTML.replace('id="chi-tiet-root"', '');
 $(document).ready(function() {
 	let chiTietBiXoa = [];
 	let anhBiXoa = [];
@@ -257,4 +257,104 @@ $(document).ready(function() {
 			$('#input-anh-danger').removeClass('hidden');
 		}
 	});
+
+	$('#them-mau-sac').click(async () => {
+		const { value: mau } = await Swal.fire({
+		  title: 'Thêm màu sắc mới',
+		  input: 'text',
+		  inputLabel: 'Tên màu',
+		  inputPlaceholder: 'Tên màu...',
+		  confirmButtonText: 'Lưu',
+		})
+
+		if (mau && mau.trim()) {
+			themMau(mau.trim());
+		}
+	})
+
+	$('#them-kich-thuoc').click(async () => {
+		const { value: size } = await Swal.fire({
+		  title: 'Thêm kích thước mới',
+		  input: 'text',
+		  inputLabel: 'Kích thước',
+		  inputPlaceholder: 'Tên kích thước...',
+		  confirmButtonText: 'Lưu',
+		})
+
+		if (size && size.trim()) {
+			themSize(size.trim());
+		}
+	})
+
+	const themMau = (mau) => {
+		$.ajax({
+			url: window.location.href,
+			type: 'POST',
+			dataType: 'JSON',
+			data: {
+				action: 'them-mau',
+				mau,
+			},
+		})
+		.done(function(res) {
+			console.log(res);
+			if (res) {
+				const newMau = {
+					iMamausac: res,
+					sTenmausac: mau
+				};
+				renderMau(newMau);
+			}
+		})
+		.fail(function(err) {
+			console.log("Error: ", err);
+		});
+	}
+
+	const themSize = (size) => {
+		$.ajax({
+			url: window.location.href,
+			type: 'POST',
+			dataType: 'JSON',
+			data: {
+				action: 'them-size',
+				size,
+			},
+		})
+		.done(function(res) {
+			console.log(res);
+			if (res) {
+				const newSize = {
+					iMasize: res,
+					sTensize: size
+				};
+				renderSize(newSize);
+			}
+		})
+		.fail(function(err) {
+			console.log("Error: ", err);
+		});
+	}
+
+	const renderMau = (mau) => {
+		const html = `<option value="${mau.iMamausac}">${mau.sTenmausac}</option>`;
+		let newChiTiet = $(chiTiet);
+		chiTiet = newChiTiet;
+		newChiTiet.find('.mau-sac').append($(html));
+		$.each($(document).find('.mau-sac'), function(index, val) {
+			const htmlThis = $(this).html() + html;
+			$(this).html(htmlThis);
+		});
+	}
+
+	const renderSize = (size) => {
+		const html = `<option value="${size.iMasize}">${size.sTensize}</option>`;
+		let newChiTiet = $(chiTiet);
+		newChiTiet.find('.kich-thuoc').append($(html));
+		chiTiet = newChiTiet;
+		$.each($(document).find('.kich-thuoc'), function(index, val) {
+			const htmlThis = $(this).html() + html;
+			$(this).html(htmlThis);
+		});
+	}
 });

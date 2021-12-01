@@ -81,15 +81,15 @@
 	 			<h3 class="text-center font-weight-bold">GIAO HÀNG</h3>
 	 			<div class="form-group">
 	 				<label for="fullname">Người nhận <span class="text-danger">*</span></label>
-	 				<input type="text" name="fullname" id="fullname" class="form-control" placeholder="Họ tên người nhận...">
+	 				<input type="text" name="fullname" id="fullname" class="form-control" value="{$user.sTennguoidung}" placeholder="Họ tên người nhận...">
 	 			</div>
 	 			<div class="form-group">
 	 				<label for="phone">Điện thoại <span class="text-danger">*</span></label>
-	 				<input type="text" name="phone" id="phone" class="form-control" placeholder="Điện thoại người nhận...">
+	 				<input type="text" name="phone" id="phone" class="form-control" value="{$user.sSodienthoai}" placeholder="Điện thoại người nhận...">
 	 			</div>
 	 			<div class="form-group">
 	 				<label for="address">Địa chỉ <span class="text-danger">*</span></label>
-	 				<textarea name="address" id="address" cols="30" rows="4" class="form-control" placeholder="Số nhà, đường, phố..."></textarea>
+	 				<textarea name="address" id="address" cols="30" rows="4" class="form-control" placeholder="Số nhà, đường, phố...">{$user.sDiachi}</textarea>
 	 			</div>
 	 			<div class="form-group">
 	 				<label for="note">Ghi chú</label>
