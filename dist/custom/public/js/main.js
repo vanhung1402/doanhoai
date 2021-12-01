@@ -67,4 +67,32 @@ $(document).ready(function() {
 
     $('#current_url').val(encodeURI(window.location.href));
     $('#logout').attr('href', `${url}logout?back=${window.location.href}`);
+
+    const getCurrentBid = () => {
+        $.ajax({
+            url,
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                action: 'get-current-bid'
+            },
+        })
+        .done(function(res) {
+            if (res) {
+                $('#total-current').text(res.tongPhien);                
+            }
+        })
+        .fail(function(err) {
+            console.log(err);
+        });
+        
+    }
+
+    var functionLop = () => {
+        getCurrentBid();
+    }
+
+    getCurrentBid();
+
+    setInterval(functionLop, 3000);
 });

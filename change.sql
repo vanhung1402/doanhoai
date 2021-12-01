@@ -6,3 +6,7 @@ ALTER TABLE `tbl_donmuahang` ADD `sDiachi` TEXT NOT NULL AFTER `dThoigianlap`, A
 ALTER TABLE `tbl_donmuahang` CHANGE `bTrangthai` `iTrangthai` TINYINT NOT NULL; 
 
 ALTER TABLE `tbl_donmuahang` ADD `sNguoimuahuy` TEXT NULL AFTER `iTrangthai`, ADD `sNguoibanhuy` TEXT NULL AFTER `sNguoimuahuy`; 
+
+
+### 01.12.2021
+ALTER TABLE `tbl_taikhoan` ADD `iNguoithem` INT NULL AFTER `iTrangthai`; 

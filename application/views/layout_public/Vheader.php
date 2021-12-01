@@ -76,6 +76,7 @@
                             <li><a href="{$url}chu-hang/san-pham">Thêm sản phẩm</a></li>
                             <li><a href="{$url}chu-hang/danh-sach-san-pham">Danh sách sản phẩm</a></li>
                             <li><a href="{$url}don-hang">Đơn hàng</a></li>
+                            <li><a href="{$url}chu-hang/phien-dau-gia">Phiên đấu giá</a></li>
                             {/if}
                             <li><a href="{$url}don-mua">Đơn mua</a></li>
                             <li><a href="{$url}doi-mat-khau">Đổi mật khẩu</a></li>

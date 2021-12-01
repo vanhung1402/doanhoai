@@ -96,7 +96,10 @@ $(document).ready(function() {
         const btnEdit = editAvailable ? `<button type="button" class="btn btn-xs btn-info edit-phien" value="${phien.iMaphiendaugia}">
           <i class="fa fa-edit"></i>
         </button>` : ``;
-        return `${btnEdit}`;
+        const btnView = `<a type="button" class="btn btn-xs btn-primary" href="${url}dau-gia-san-pham?phien=${phien.iMaphiendaugia}">
+          <i class="fa fa-eye"></i>
+        </a>`;
+        return `${btnEdit}${btnView}`;
     }
     const getDauGiaInput = () => {
         let check = true;

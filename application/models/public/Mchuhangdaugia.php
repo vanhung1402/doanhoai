@@ -1,6 +1,6 @@
 <?php
 
-	class Mdaugia extends CI_Model
+	class Mchuhangdaugia extends CI_Model
 	{
 	    /**
 	     * summary
@@ -10,7 +10,52 @@
 	        parent::__construct();
 	    }
 
+	    public function sapDienRa()
+	    {
+	    	$session = $this->session->userdata('user');
+	    	$this->db->select('pdg.iMaphiendaugia, sp.iMasanpham, sTensanpham, sTenmausac, sTensize, dThoigianbatdau, DATE_FORMAT(dThoigianbatdau, "%H:%i %d/%m/%Y") as tThoigian, iGiakhoidiem');
+	    	$this->db->from('tbl_phiendaugia pdg');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
+	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
+	    	$this->db->where('dThoigianbatdau > NOW()');
+	    	$this->db->where('sp.iNguoithem', $session['iManguoidung']);
+	    	$this->db->order_by('dThoigianketthuc');
+	    	$this->db->group_by('pdg.iMaphiendaugia');
+	    	$phien = $this->db->get()->result_array();
+	    	$arrayMaSanPham = array_column($phien, 'iMasanpham');
+
+	    	return [
+	    		'listPhien' => $phien,
+	    		'hinhAnh' 	=> $this->getHinhAnhSanPham($arrayMaSanPham),
+	    	];
+	    }
+
+	    public function daDienRa()
+	    {
+	    	$session = $this->session->userdata('user');
+	    	$this->db->select('pdg.iMaphiendaugia, sp.iMasanpham, sTensanpham, sTenmausac, sTensize, dThoigianbatdau, DATE_FORMAT(dThoigianketthuc, "%H:%i %d/%m/%Y") as tThoigian, iGiakhoidiem');
+	    	$this->db->from('tbl_phiendaugia pdg');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
+	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
+	    	$this->db->where('dThoigianketthuc < NOW()');
+	    	$this->db->where('sp.iNguoithem', $session['iManguoidung']);
+	    	$this->db->order_by('dThoigianketthuc');
+	    	$this->db->group_by('pdg.iMaphiendaugia');
+	    	$phien = $this->db->get()->result_array();
+	    	$arrayMaSanPham = array_column($phien, 'iMasanpham');
+
+	    	return [
+	    		'listPhien' => $phien,
+	    		'hinhAnh' 	=> $this->getHinhAnhSanPham($arrayMaSanPham),
+	    	];
+	    }
+
 	    public function getAuctua($start, $end, $limit) {
+	    	$session = $this->session->userdata('user');
 	    	$this->db->limit($limit);
 	    	$this->db->select('pdg.iMaphiendaugia, sp.iMasanpham, sTensanpham, sTenmausac, sTensize, dThoigianketthuc, iGiakhoidiem, max(iMucgiadau) as giaHientai');
 	    	$this->db->from('tbl_phiendaugia pdg');
@@ -21,6 +66,7 @@
 	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
 	    	$this->db->where('dThoigianbatdau <=', $start);
 	    	$this->db->where('dThoigianketthuc >=', $end);
+	    	$this->db->where('sp.iNguoithem', $session['iManguoidung']);
 	    	$this->db->order_by('dThoigianketthuc');
 	    	$this->db->group_by('pdg.iMaphiendaugia');
 	    	$phien = $this->db->get()->result_array();
@@ -60,10 +106,14 @@
 	    }
 
 	    public function getSoPhien($start, $end) {
-			$this->db->select('count(iMaphiendaugia) as tongPhien');
+	    	$session = $this->session->userdata('user');
+			$this->db->select('count(DISTINCT iMaphiendaugia) as tongPhien');
 	    	$this->db->from('tbl_phiendaugia pdg');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
 	    	$this->db->where('dThoigianbatdau <=', $start);
 	    	$this->db->where('dThoigianketthuc >=', $end);
+	    	$this->db->where('sp.iNguoithem', $session['iManguoidung']);
 	    	return $this->db->get()->row_array();
 	    }
 
@@ -331,18 +381,6 @@
 	    	$this->db->where('iMactsanpham', $iMactsanpham);
 	    	$this->db->update('tbl_ct_sanpham', ['iSoluong' => ($ct['iSoluong'] + 1)]);
 	    	return $this->db->affected_rows();
-	    }
-
-	    public function getCurrentBidNumber()
-	    {
-	    	$session = $this->session->userdata('user');
-	    	$this->db->select('count(DISTINCT pdg.iMaphiendaugia) as tongPhien');
-	    	$this->db->from('tbl_ct_phiendaugia ctp');
-	    	$this->db->join('tbl_phiendaugia pdg', 'ctp.iMaphiendaugia = pdg.iMaphiendaugia', 'inner');
-	    	$this->db->where('dThoigianbatdau <= NOW()');
-	    	$this->db->where('dThoigianketthuc >= NOW()');
-	    	$this->db->where('ctp.iMataikhoan', $session['iMataikhoan']);
-	    	return $this->db->get()->row_array();
 	    }
 	}
 

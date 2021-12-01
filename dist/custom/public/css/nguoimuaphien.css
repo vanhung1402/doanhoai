@@ -1,0 +1,187 @@
+#don-mua {
+	background-color: transparent;
+}
+#don-mua .nav.nav-tabs {
+	background-color: #FFF;
+}
+#don-mua .nav-link {
+	color: #111;
+	font-weight: 700;
+	padding: 1rem 1.5rem;
+	border-bottom: 3px solid transparent;
+}
+#don-mua .nav-item, #don-mua .nav-item:focus {
+	border: none !important;
+}
+#don-mua .nav-link {
+	border: none;
+}
+#don-mua .nav-link:hover {
+	border: none;
+}
+#don-mua .nav-link.active {
+	border: none;
+	color: #1ab7ea;
+	border-bottom: 3px solid #1ab7ea;
+}
+
+.don-hang {
+	background-color: #fff;
+}
+.don-hang-header {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #ccc;
+	padding: 20px;
+}
+.don-hang-footer {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	align-items: center;
+}
+
+.don-hang-footer-extend {
+	border-top: 1px solid #CCC;
+	padding: 20px 10px 5px;
+}
+
+.item-container {
+	border-radius: 3px;
+	padding: 10px 0;
+	position: relative;
+	border-bottom: 1px solid #ccc;
+}
+.item-container .item-detail {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.item-container .price {
+	position: absolute;
+	right: 10px;
+	top: calc(50% - 12px);
+}
+.item-container .col-md-3 {
+	border-right: 1px solid #ccc;
+	padding-right:  0px;
+}
+.item-thumb {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	height: 100%;
+}
+.item-thumb img {
+	height: 125px;
+	object-fit: fill;
+}
+.item-detail {
+	padding: 10px 0;
+	height: 100%;
+}
+.item-detail h5 {
+	font-weight: bold;
+}
+.item-detail p {
+	margin-bottom: 5px;
+}
+
+.empty-don-mua {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: calc(100vh - 500px);
+	flex-direction: column;
+	font-weight: 800;
+	font-size: 2rem;
+}
+.auction-box {
+	height: 450px;
+	position: relative;
+	padding: 10px !important;
+}
+.image-thumbnail {
+	height: 250px;
+	text-align: center;
+}
+.image-thumbnail img {
+	height: 100%;
+	object-fit: cover;
+}
+.auction-info {
+	position: absolute;
+	bottom: 0;
+	width: calc(100% - 20px);
+	padding: 10px;
+}
+.auction-info .title {
+	min-height: 64px;
+  	text-overflow: ellipsis;
+  	overflow: hidden;
+  	text-align: left;
+}
+.trang-thai {
+	padding: 10px 0;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+}
+.trang-thai span:first-child {
+	color: #e8434a;
+}
+.trang-thai span:last-child {
+	text-align: right;
+}
+.trang-thai span:last-child i {
+	background-color: #1ab7ea;
+	border-radius: 50%;
+	color: #FFF;
+	padding: 4px;
+}
+
+.view-more {
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+	transition: all ease .5s;
+	padding-bottom: 10px;
+}
+.view-more:hover {
+	color: #1ab7ea;
+}
+
+.form-search {
+	display: flex;
+}
+.form-search input {
+	width: 100%;
+	border-color: #1ab7ea;
+	border-style: solid;
+	padding: 5px 10px;
+}
+.form-search input:focus {
+	outline: none;
+}
+.form-search button {
+	background-color: #1ab7ea;
+	padding: 5px 30px;
+	border: 2px solid #1ab7ea;
+	color: #FFF;
+	transition: all ease .5s;
+	border-left: none;
+}
+.form-search button:hover, .form-search button:focus {
+	background-color: #FFF;
+	color: #1ab7ea;
+	outline: none;
+}
+.current {
+	background-color: #FFF;
+}
+.services {
+	padding: 40px 15px;
+}

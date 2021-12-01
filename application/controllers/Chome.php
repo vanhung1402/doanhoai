@@ -24,12 +24,21 @@
 	    		case 'get-cart':
 	    			$this->getCart();
 	    			break;
+	    		case 'get-current-bid':
+	    			$this->getCurrentBid();
+	    			break;
 	    		default:
 	    			break;
 	    	}
 	    	$this->checkDonHang();
 			$temp['template'] 		= 'public/Vhome';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
+	    }
+
+	    private function getCurrentBid()
+	    {
+	    	$res = $this->Mdaugia->getCurrentBidNumber();
+	    	die(json_encode($res));
 	    }
 
 	    private function checkDonHang() 

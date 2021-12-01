@@ -73,6 +73,9 @@
 					Bạn không thể tham gia phiên đấu giá của chính bạn
 				</div>
 				{/if}
+				<div id="waiting" class="hidden alert alert-warning text-center">
+					Phiên đấu giá đã chưa bắt đầu!
+				</div>
 				<div id="finished" class="hidden alert alert-warning text-center">
 					Phiên đấu giá đã kết thúc!
 				</div>
@@ -119,5 +122,11 @@
 <script src="{$url}dist/custom/public/js/daugia.js"></script>
 <script type="text/javascript">
 	let timer = new Date('{$phien.dThoigianketthuc}').getTime();
+	let timeStart = new Date('{$phien.dThoigianbatdau}').getTime();
 	let current  = new Date().getTime();
+	let tt = 1;
+	if (current < timeStart) {
+		timer = timeStart;
+		tt = 2;
+	}
 </script>

@@ -108,6 +108,11 @@ $(document).ready(function() {
 		$('#bid-action').remove();
 	}
 
+	const waitingBid = () => {
+		$('#waiting').removeClass('hidden');
+		$('#bid-action').remove();	
+	}
+
 	const setTimer = () => {
 		let seconds = Math.floor((timer / 1000) - (current / 1000));
 		let days = seconds > 86400 ? Math.floor(seconds / 86400) : 0;
@@ -129,19 +134,26 @@ $(document).ready(function() {
 
 	const startCount = () => {
 		if (current >= timer) {
+			if (tt == 2) window.location.reload(); 
 			clearTimeout(timeout);
 			finishBid();
 			return false;
 		}
 
-		getCurrentBidResult();
-		setTimer();
+		if (tt == 2) {
+			waitingBid();
+			setTimer();
+		} else {
+			getCurrentBidResult();
+			setTimer();
+		}
 
 		timeout = setTimeout(function(){
 			current += 1000;
 	        startCount();
 	    }, 1000);
 	}
+
 
 	if (current >= timer) {
 		getCurrentBidResult();
