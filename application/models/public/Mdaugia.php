@@ -75,7 +75,7 @@
 	    	$this->db->join('tbl_danhmucloaihang dmlh', 'sp.iMadanhmuclh = dmlh.iMadanhmuclh', 'inner');
 	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
-	    	$this->db->join('tbl_nguoidung nd', 'sp.iManguoidung = nd.iManguoidung', 'inner');
+	    	$this->db->join('tbl_nguoidung nd', 'sp.iNguoithem = nd.iManguoidung', 'inner');
 	    	$this->db->where('iMactsanpham', $ctsp);
 	    	$sanpham = $this->db->get()->row_array();
 	    	if (!$sanpham) return null;
