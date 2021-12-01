@@ -69,7 +69,7 @@
 
 	    public function getChiTietSanPham($ctsp)
 	    {
-	    	$this->db->select('sp.iMasanpham, sTenmausac, sTensize, sTensanpham, sMota, sChatlieu, sTinhtrang, sVideo, sTendanhmuclh, sp.iNguoithem, sTenshop, sTenthuonghieu');
+	    	$this->db->select('sp.iMasanpham, sTenmausac, sTensize, sTensanpham, sMota, sChatlieu, sTinhtrang, sVideo, sTendanhmuclh, sp.iNguoithem, sTenshop, sThuonghieu');
 	    	$this->db->from('tbl_ct_sanpham ctsp');
 	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
 	    	$this->db->join('tbl_danhmucloaihang dmlh', 'sp.iMadanhmuclh = dmlh.iMadanhmuclh', 'inner');
