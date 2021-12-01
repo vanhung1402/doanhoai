@@ -44,7 +44,7 @@ $(document).ready(function() {
 		const listDauGia = await getAuction(start, start, limit);
 
 			console.log(listDauGia);
-		if (!listDauGia.tongPhien) {
+		if (!listDauGia.tongPhien.tongPhien || listDauGia.tongPhien.tongPhien < 1) {
 			$('#view-more-current').addClass('hidden');
 			$('#current-auction').html(emptyTrangThaiDon);
 		}

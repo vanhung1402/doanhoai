@@ -3,7 +3,7 @@
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item active"><a href="{$url}">Home</a></li>
-		<li class="breadcrumb-item" aria-current="page">Danh sách phiên đấu giá</li>
+		<li class="breadcrumb-item" aria-current="page">Danh sách phiên đấu giá của bạn</li>
 	</ol>
 </nav>
 

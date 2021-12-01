@@ -42,7 +42,6 @@ $(document).ready(function() {
 		let start = moment(current).format('YYYY-MM-DD HH:mm:ss');
 
 		const listDauGia = await getAuction(start, start, limit);
-
 		if (!listDauGia.tongPhien.tongPhien || listDauGia.tongPhien.tongPhien < 1) {
 			$('#view-more-current').addClass('hidden');
 			$('#current-auction').html(emptyTrangThaiDon);

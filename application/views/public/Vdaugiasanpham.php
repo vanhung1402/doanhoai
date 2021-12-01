@@ -85,7 +85,7 @@
 	<br><br>
 	<div class="product-detail">
 		<div class="row">
-			<div class="col-sm-3"><b>Cửa hàng: </b>{$sanpham.sTenshop}</div>
+			<div class="col-sm-3"><b>Cửa hàng: </b><a href="{$url}shop/dau-gia?id={$sanpham.iNguoithem}">{$sanpham.sTenshop}</a></div>
 			<div class="col-sm-3"><b>Thương hiệu: </b>{$sanpham.sThuonghieu}</div>
 			<div class="col-sm-3"><b>Chất liệu: </b>{$sanpham.sChatlieu}</div>
 			<div class="col-sm-3"><b>Tình trạng: </b>{$sanpham.sTinhtrang}</div>

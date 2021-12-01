@@ -1,17 +1,39 @@
-<link href="{$url}dist/custom/public/css/chuhangphien.css" rel="stylesheet">
+<link href="{$url}dist/custom/public/css/shopphien.css" rel="stylesheet">
 
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item active"><a href="{$url}">Home</a></li>
-		<li class="breadcrumb-item" aria-current="page">Quản lý phiên đấu giá</li>
+		<li class="breadcrumb-item" aria-current="page">Danh sách phiên đấu giá của {$shop.sTenshop}</li>
 	</ol>
 </nav>
+
+<div id="shop" class="container pt-3 pb-3">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="thumb">
+				{if ($shop.sMotahinhanh)}
+				<img src="{$url}files/shop/logo/{$shop.sMotahinhanh}" alt="Logo {$shop.sTenshop}">
+				{else}
+				<img src="{$url}dist/templates/public/img/no-image.png" alt="No image">
+				{/if}
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div id="info">
+				<h2>{$shop.sTenshop}</h2>
+				<div class="info">
+					<p>{$shop.sTenshop}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div id="don-mua" class="container pt-3 pb-3">
 	<ul class="nav nav-tabs" id="don-hang-tabs-header" role="tablist">
 		{foreach $trangThai as $k => $tt}
 		<li class="nav-item">
-			<a class="nav-link {if $k == 0}active{/if}" id="tab-{$k}" data-toggle="tab" data-tab="tab-{$k}-content" href="{$url}chu-hang/phien-dau-gia#tab-{$k}-content" role="tab" aria-controls="tab-{$k}" aria-selected="false">{$tt}</a>
+			<a class="nav-link {if $k == 0}active{/if}" id="tab-{$k}" data-toggle="tab" data-tab="tab-{$k}-content" href="{$url}shop/dau-gia?id={$id}#tab-{$k}-content" role="tab" aria-controls="tab-{$k}" aria-selected="false">{$tt}</a>
 		</li>
 		{/foreach}
 	</ul>
@@ -91,4 +113,4 @@
 </div>
 
 <script src="dist/custom/public/libs/moment.js/moment.min.js"></script>
-<script src="{$url}dist/custom/public/js/chuhangphien.js"></script>
+<script src="{$url}dist/custom/public/js/shopphien.js"></script>
