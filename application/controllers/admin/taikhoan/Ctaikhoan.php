@@ -77,6 +77,7 @@
 	    		'sTendangnhap' => $this->input->post('username'),
 	    		'sMatkhau' => sha1($this->input->post('password')),
 	    		'iTrangthai' => 1,
+	    		'iNguoithem' => $this->__session['iMataikhoan'],
 	    	];
 
 	    	$resultCreate = $this->Mtaikhoan->taoTaiKhoan($taiKhoan);

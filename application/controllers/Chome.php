@@ -27,8 +27,14 @@
 	    		default:
 	    			break;
 	    	}
+	    	$this->checkDonHang();
 			$temp['template'] 		= 'public/Vhome';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
+	    }
+
+	    private function checkDonHang() 
+	    {
+	    	$res = $this->Mdaugia->getCurrentErr();
 	    }
 
 	    private function getCart()

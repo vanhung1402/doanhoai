@@ -291,6 +291,47 @@
 	    	]);
 	    	return $this->db->affected_rows();
 	    }
+
+	    public function getCurrentErr()
+	    {
+	    	$this->db->select('pdg.iMaphiendaugia, iMactsanpham');
+	    	$this->db->from('tbl_phiendaugia pdg');
+	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
+	    	$this->db->where('dThoigianketthuc < SUBDATE(CURDATE(), INTERVAL 3 DAY)');
+	    	$this->db->where('iMadonmua IS NULL');
+	    	$this->db->where('iKetqua !=', 0);
+	    	$this->db->order_by('iMadonmua', 'desc');
+	    	$this->db->group_by('pdg.iMaphiendaugia');
+	    	$result = $this->db->get()->result_array();
+	    	$count = 0;
+	    	foreach ($result as $value) {
+	    		$count += $this->setTrangThaiDauGia($value['iMaphiendaugia']);
+	    		$count += $this->updateSoLuong($value['iMactsanpham']);
+	    	}
+	    	return $count;
+
+	    }
+
+	    public function setTrangThaiDauGia($iMaphien)
+	    {
+	    	$this->db->where('iMaphiendaugia', $iMaphien);
+	    	$this->db->update('tbl_phiendaugia', ['iKetqua' => 0]);
+
+	    	$this->db->where('iMaphiendaugia', $iMaphien);
+	    	$this->db->where('iMadonmua IS NOT NULL');
+	    	$this->db->update('tbl_ct_phiendaugia', ['iMadonmua' => null]);
+	    	return $this->db->affected_rows();
+	    }
+
+	    public function updateSoLuong($iMactsanpham)
+	    {
+	    	$this->db->where('iMactsanpham', $iMactsanpham);
+	    	$ct = $this->db->get('tbl_ct_sanpham')->row_array();
+	    	if (!$ct) return 0;
+	    	$this->db->where('iMactsanpham', $iMactsanpham);
+	    	$this->db->update('tbl_ct_sanpham', ['iSoluong' => ($ct['iSoluong'] + 1)]);
+	    	return $this->db->affected_rows();
+	    }
 	}
 
 ?>
