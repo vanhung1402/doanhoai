@@ -109,6 +109,15 @@
 	    	$this->db->update('tbl_binhluan', ['iTrangthai' => $trangThai]);
 	    	return $this->db->last_query();
 	    }
+	    
+	    public function checkTrungGio($start, $end, $chiTiet)
+	    {
+	    	$this->db->from('tbl_phiendaugia');
+	    	$this->db->where('iMactsanpham', $chiTiet);
+	    	$this->db->where('dThoigianbatdau', $start);
+	    	$this->db->where('dThoigianketthuc', $end);
+	    	return $this->db->get()->row_array();
+	    }
 	}
 
 ?>

@@ -26,8 +26,8 @@ $(document).ready(function() {
         timeEndValue = e.date.format(e.date._f);
         $('#time-start').data("DateTimePicker").maxDate(e.date);
     });
-    $('#luu-dau-gia').click(function(event) {
-        const dauGia = getDauGiaInput();
+    $('#luu-dau-gia').click(async (event) => {
+        const dauGia = await getDauGiaInput();
         if (dauGia) setDauGia(dauGia);
     });
     const setDauGia = (dauGia) => {
@@ -101,7 +101,7 @@ $(document).ready(function() {
         </a>`;
         return `${btnEdit}${btnView}`;
     }
-    const getDauGiaInput = () => {
+    const getDauGiaInput = async () => {
         let check = true;
         const dauGia = {
             dThoigianbatdau: timeStartValue,
@@ -130,9 +130,33 @@ $(document).ready(function() {
             return;
         }
 
+        const checkGio = await checkGioDauGia(dauGia.dThoigianbatdau, dauGia.dThoigianketthuc, chiTietDauGia);
+        if (checkGio) {
+            showMessage('warning', 'Đã có phiên đấu giá trong khung giờ này, vui lòng chọn khung giờ khác!');
+            return;
+        }
+
         if (trangThai === 2) dauGia.iMaphiendaugia = maPhienEdit;
         return check ? dauGia : false;
     }
+
+    const checkGioDauGia = async (start, end, chiTiet) => {
+        return await $.ajax({
+            url: window.location.href,
+            type: 'POST',
+            dataType: 'JSON',
+            data: {
+                action: 'check-trung-thoi-gian',
+                start,
+                end,
+                chiTiet
+            },
+        })
+        .fail(function(err) {
+            console.log("Error: ", err);
+        });
+    }
+
     const getDanhSachDauGia = () => {
         $.ajax({
             url: window.location.href,

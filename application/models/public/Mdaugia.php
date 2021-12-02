@@ -87,6 +87,15 @@
 		    return $anhSanPham;
 	    }
 
+	    public function checkTrungGio($start, $end, $chiTiet)
+	    {
+	    	$this->db->from('tbl_phiendaugia');
+	    	$this->db->where('iMactsanpham', $chiTiet);
+	    	$this->db->where('dThoigianbatdau', $start);
+	    	$this->db->where('dThoigianketthuc', $end);
+	    	return $this->db->get()->row_array();
+	    }
+
 	    public function getSoPhien($start, $end, $search) {
 			$this->db->select('count(DISTINCT pdg.iMaphiendaugia) as tongPhien');
 	    	$this->db->from('tbl_phiendaugia pdg');

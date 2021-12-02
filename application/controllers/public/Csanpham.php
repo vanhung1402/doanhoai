@@ -30,6 +30,9 @@
 	    			$this->danhSachDauGia();
 	    			break;
 	    		}
+	    		case 'check-trung-thoi-gian':
+	    			$this->checkTrungGio();
+	    			break;
 	    		default:
 	    			// code...
 	    			break;
@@ -53,6 +56,14 @@
 			$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vsanpham';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
+	    }
+	    private function checkTrungGio()
+	    {
+	    	$start = $this->input->post('start');
+	    	$end = $this->input->post('end');
+	    	$chiTiet = $this->input->post('chiTiet');
+	    	$result = $this->Msanpham->checkTrungGio($start, $end, $chiTiet);
+	    	die(json_encode($result));
 	    }
 	    public function setDauGia() {
 	    	$dauGia = $this->input->post('dauGia');
