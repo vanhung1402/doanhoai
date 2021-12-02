@@ -177,11 +177,6 @@
                                         <input type="password" name="signup_password" id="signup_password" class="form-control" required>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 flex align-middle justify-content-between border-top pt-3 mb-2 form-phanloai">
-                                    <label for="nguoiban">Đăng ký với tư cách:&emsp;</label>
-                                    <div><input type="radio" name="phanloai" id="nguoimua" value="1" required checked>&emsp;<label for="nguoimua">Người mua</label></div>
-                                    <div><input type="radio" name="phanloai" id="nguoiban" value="2" required>&emsp;<label for="nguoiban">Người bán</label></div>
-                                </div>
                                 <div class="col-sm-12">
                                     <p class="fieldset">
                                         <input name="btn-signup" class="full-width" type="submit" value="ĐĂNG KÝ">

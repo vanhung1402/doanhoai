@@ -80,7 +80,7 @@
 	    	$taiKhoan = [
 	    		'sTendangnhap' => $this->input->post('signup_email'),
 	    		'sMatkhau' => sha1($this->input->post('signup_password')),
-	    		'iTrangthai' => ($this->input->post('phanloai') == 2) ? 3 : 1,
+	    		'iTrangthai' => 3,
 	    	];
 	    	$resultTaiKhoan = $this->Mhethong->taoTaiKhoan($taiKhoan);
 	    	if (!$resultTaiKhoan) {
@@ -89,7 +89,7 @@
 	    	}
 
 	    	$quyenTaiKhoan = [
-	    		'iMaquyen' => $this->input->post('phanloai'),
+	    		'iMaquyen' => 2,
 	    		'iMataikhoan' => $resultTaiKhoan,
 	    	];
 	    	$resultQuyenTaiKhoan = $this->Mhethong->phanQuyenTaiKhoan($quyenTaiKhoan);
@@ -106,7 +106,7 @@
 	    		'sDiachi' => $this->input->post('diachi'),
 	    		'sEmail' => $this->input->post('signup_email'),
 	    		'iSoCCCD' => $this->input->post('cmnd'),
-	    		'iPhanloai' => $this->input->post('phanloai'),
+	    		'iPhanloai' => 2,
 	    	];
 
 	    	$resultNguoiDung = $this->Mhethong->taoNguoiDung($nguoiDung);
