@@ -1,3 +1,6 @@
+#main {
+  background-color: #F5F8FD;
+}
 #san-pham {
   display: flex;
   overflow: visible;
@@ -290,4 +293,48 @@ table.table thead tr th, table.table tbody tr td {
     height: 275px;
     width: 100%;
   }
+}
+
+#dau-gia>div{
+  width: 100% !important;
+  display: block;
+}
+#dau-gia>div table {
+  width: 100% !important;
+} 
+#dau-gia>div>div:first-child {
+  display: none;
+}
+#binh-luan .title {
+  border-bottom: 2px solid #1ab7ea;
+}
+#binh-luan h3{
+  padding-bottom: 2px;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 25px;
+}
+.empty-comment {
+  font-size: 2rem;
+}
+
+.binh-luan-container {
+  padding: 15px 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-left-width: 5px;
+  position: relative;
+}
+.binh-luan-container:nth-child(odd) {
+  border-right-width: 5px;
+  border-left-width: 1px;
+  padding-left: 14px; 
+}
+.btn-an {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.binh-luan-container:nth-child(even) .btn-an {
+  right: 9px;
 }

@@ -1,10 +1,13 @@
 <link href="{$url}dist/custom/public/css/sanpham.css" rel="stylesheet">
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="dist/custom/public/libs/moment.js/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script> 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.11.3/datatables.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 
@@ -97,7 +100,6 @@
         <th>Màu sắc</th>
         <th>Kích thước</th>
         <th>Số lượng tồn</th>
-        <th>Tác vụ</th>
       </tr>
     </thead>
     <tbody>
@@ -107,75 +109,10 @@
         <td>{$ct.sTenmausac}</td>
         <td>{$ct.sTensize}</td>
         <td class="text-right format-number">{$ct.iSoluong}</td>
-        <td class="text-right">
-          {if $ct.iSoluong}
-          <button value="{$ct.iMactsanpham}" type="button" class="btn btn-sm btn-primary btn-dau-gia" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-gavel"></i> &nbsp; Mở phiên đấu giá</button>
-          {/if}
-        </td>
       </tr>
       {/foreach}
     </tbody>
   </table>
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="dau-gia-modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="dau-gia-modal">Thiết lập thông tin đấu giá</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="time-start">Thời gian bắt đầu</label>
-                <div class="form-group">
-                    <div class="input-group date" id="time-start">
-                      <input type="text" class="form-control" />
-                      <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="time-end">Thời gian kết thúc</label>
-                <div class="form-group">
-                    <div class="input-group date" id="time-end">
-                      <input type="text" class="form-control" />
-                      <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="gia-khoi-diem">Giá khởi điểm (VNĐ)</label>
-                <input type="text" min="1" id="gia-khoi-diem" class="form-control input-format-number">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="buoc-gia">Bước giá (VNĐ)</label>
-                <input type="text" min="1" id="buoc-gia" class="form-control input-format-number">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-          <button type="button" id="luu-dau-gia" class="btn btn-primary">Lưu</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 <section id="dau-gia" class="container">
   <table class="table table-bordered">
@@ -211,17 +148,35 @@
       <div class="binh-luan-container">
         <p><b>{$bl.sTennguoidung}</b> <small><i>{$bl.thoiGian}</i></small></p>
         <p><i>{$bl.sNoidungbinhluan}</i></p>
+        {if $user.iManguoidung == $sanPham.iNguoithem}
         {if $bl.iTrangthai == 1}
         <button class="btn btn-xs btn-warning btn-an" value="{$bl.iMabinhluan}" name="an-binh-luan"><i class="fa fa-eye-slash"></i> Ẩn bình luận</button>
         {else}
         <button class="btn btn-xs btn-info btn-an" value="{$bl.iMabinhluan}" name="hien-binh-luan"><i class="fa fa-eye"></i> Hiện bình luận</button>
+        {/if}
         {/if}
       </div>
       {/foreach}
       {/if}
     </div>
   </form>
+  <br>
+  {if $user}
+  <div class="form-binh-luạn">
+    <form method="post">
+      <div class="form-group">
+        <textarea name="binh-luan" required id="binh-luan" cols="30" rows="3" class="form-control"></textarea>
+      </div>
+      <div class="form-group text-right">
+        <button name="action" value="gui-binh-luan" type="submit" class="btn btn-info">Gửi bình luận</button>
+      </div>
+    </form>
+  </div>
+  {else}
+  <div class="alert alert-info">
+    Đăng nhập để bình luận
+  </div>
+  {/if}
 </section>
 
-
-<script type="text/javascript" src="{$url}dist/custom/public/js/sanpham.js"></script>
+<script type="text/javascript" src="{$url}dist/custom/public/js/xemsanpham.js"></script>

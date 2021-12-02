@@ -22,6 +22,7 @@ $route['don-mua'] 						= 'public/Cdonmua';
 $route['don-hang'] 						= 'public/Cdonhang';
 $route['dang-dau-gia'] 					= 'public/Cnguoimuaphien';
 $route['shop/dau-gia'] 					= 'public/Cshopdaugia';
+$route['san-pham'] 						= 'public/Cxemsanpham';
 
 // Admin
 $route['admin/login'] 					= 'admin/Clogin';

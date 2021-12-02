@@ -35,7 +35,7 @@
 		</div>
 		<div class="col-sm-8">
 			<div class="san-pham-info">
-				<h1 class="ten-san-pham">{$sanpham.sTensanpham}</h1>
+				<a href="{$url}san-pham?sp={$sanpham.iMasanpham}"><h1 class="ten-san-pham">{$sanpham.sTensanpham}</h1></a>
 				<p><b>Kích thước:</b> {$sanpham.sTensize}<b> &emsp; Màu sắc:</b> {$sanpham.sTenmausac}</p>
 
 				<div class="times">

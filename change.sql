@@ -10,3 +10,6 @@ ALTER TABLE `tbl_donmuahang` ADD `sNguoimuahuy` TEXT NULL AFTER `iTrangthai`, AD
 
 ### 01.12.2021
 ALTER TABLE `tbl_taikhoan` ADD `iNguoithem` INT NULL AFTER `iTrangthai`; 
+
+### 02.12.2021
+ALTER TABLE `tbl_binhluan` CHANGE `bTrangthai` `iTrangthai` TINYINT(3) NULL; 

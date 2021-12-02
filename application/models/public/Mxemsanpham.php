@@ -1,6 +1,6 @@
 <?php
 
-	class Msanpham extends CI_Model
+	class Mxemsanpham extends CI_Model
 	{
 	    public function __construct()
 	    {
@@ -9,13 +9,30 @@
 
 	    public function getSanPham($sp)
 	    {
-	    	$session = $this->session->userdata('user');
 	    	$this->db->select('*, sp.iNguoithem as iNguoithem');
 	    	$this->db->from('tbl_sanpham sp');
 	    	$this->db->join('tbl_danhmucloaihang dmlh', 'sp.iMadanhmuclh = dmlh.iMadanhmuclh', 'inner');
 	    	$this->db->where('iMasanpham', $sp);
-	    	$this->db->where('sp.iNguoithem', $session['iManguoidung']);
 	    	return $this->db->get()->row_array();
+	    }
+
+	    public function guiBinhLuan($binhLuan)
+	    {
+	    	$this->db->insert('tbl_binhluan', $binhLuan);
+	    	return $this->db->affected_rows();
+	    }
+
+	    public function getBinhLuan($sp, $iNguoithem)
+	    {
+	    	$session = $this->session->userdata('user');
+	    	$this->db->select('bl.*, nd.sTennguoidung, DATE_FORMAT(sNoidungbinhluan, "%H:%i:%s %d/%m/%Y") as thoiGian');
+	    	$this->db->from('tbl_binhluan bl');
+	    	$this->db->join('tbl_nguoidung nd', 'bl.iMataikhoan = nd.iMataikhoan', 'inner');
+	    	$this->db->where('iMasanpham', $sp);
+	    	if ($session['iManguoidung'] != $iNguoithem) {
+	    		$this->db->where('iTrangthai', 1);
+	    	}
+	    	return $this->db->get()->result_array();
 	    }
 
 	    public function getChiTietSanPham($sp)
@@ -32,15 +49,6 @@
 	    {
 	    	$this->db->insert('tbl_phiendaugia', $dauGia);
 	    	return $this->db->affected_rows();
-	    }
-
-	    public function getBinhLuan($sp)
-	    {
-	    	$this->db->select('bl.*, nd.sTennguoidung, DATE_FORMAT(sNoidungbinhluan, "%H:%i:%s %d/%m/%Y") as thoiGian');
-	    	$this->db->from('tbl_binhluan bl');
-	    	$this->db->join('tbl_nguoidung nd', 'bl.iMataikhoan = nd.iMataikhoan', 'inner');
-	    	$this->db->where('iMasanpham', $sp);
-	    	return $this->db->get()->result_array();
 	    }
 
 	    public function updateDauGia($dauGia, $maPhien)
