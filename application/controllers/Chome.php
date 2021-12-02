@@ -11,6 +11,8 @@
 	    public function index()
 	    {
 	    	$action = $this->input->post('action');
+	    	$search = $this->input->get('keyword');
+
 	    	switch ($action) {
 	    		case 'get-auctua':
 	    			$start = $this->input->post('start');
@@ -19,7 +21,11 @@
 	    			// $end = date($end);
 	    			// die(json_encode($start));
 	    			$limit = $this->input->post('limit');
-	    			$result = $this->Mdaugia->getAuctua($start, $end, $limit);
+	    			$result = $this->Mdaugia->getAuctua($start, $end, $limit, $search);
+	    			die(json_encode($result));
+	    		case 'get-waiting-auctua':
+	    			$limit = $this->input->post('limit');
+	    			$result = $this->Mdaugia->getWaitingAuctua($limit, $search);
 	    			die(json_encode($result));
 	    		case 'get-cart':
 	    			$this->getCart();
@@ -31,6 +37,9 @@
 	    			break;
 	    	}
 	    	$this->checkDonHang();
+	    	$data['keyword'] 		= $search;
+	    	$data['trangThai'] 		= ['Đang diễn ra', 'Sắp diễn ra'];
+	    	$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vhome';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
 	    }

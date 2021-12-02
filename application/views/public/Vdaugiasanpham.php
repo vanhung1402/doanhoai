@@ -39,6 +39,8 @@
 				<p><b>Kích thước:</b> {$sanpham.sTensize}<b> &emsp; Màu sắc:</b> {$sanpham.sTenmausac}</p>
 
 				<div class="times">
+					<span class="waiting">Chờ</span>
+					<span class="waiting">-</span>
 					<span id="hours">00</span>
 					<span>:</span>
 					<span id="minutes">00</span>

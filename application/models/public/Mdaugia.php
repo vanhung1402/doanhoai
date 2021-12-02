@@ -10,7 +10,7 @@
 	        parent::__construct();
 	    }
 
-	    public function getAuctua($start, $end, $limit) {
+	    public function getAuctua($start, $end, $limit, $search = null) {
 	    	$this->db->limit($limit);
 	    	$this->db->select('pdg.iMaphiendaugia, sp.iMasanpham, sTensanpham, sTenmausac, sTensize, dThoigianketthuc, iGiakhoidiem, max(iMucgiadau) as giaHientai');
 	    	$this->db->from('tbl_phiendaugia pdg');
@@ -19,6 +19,9 @@
 	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
 	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
+	    	if ($search) {
+	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    	}
 	    	$this->db->where('dThoigianbatdau <=', $start);
 	    	$this->db->where('dThoigianketthuc >=', $end);
 	    	$this->db->order_by('dThoigianketthuc');
@@ -28,7 +31,32 @@
 
 	    	return [
 	    		'listPhien' => $phien,
-	    		'tongPhien' => $this->getSoPhien($start, $end),
+	    		'tongPhien' => $this->getSoPhien($start, $end, $search),
+	    		'hinhAnh' 	=> $this->getHinhAnhSanPham($arrayMaSanPham),
+	    	];
+	    }
+
+	    public function getWaitingAuctua($limit, $search = null) {
+	    	$this->db->limit($limit);
+	    	$this->db->select('pdg.iMaphiendaugia, sp.iMasanpham, sTensanpham, sTenmausac, sTensize, dThoigianbatdau, dThoigianketthuc, iGiakhoidiem, max(iMucgiadau) as giaHientai');
+	    	$this->db->from('tbl_phiendaugia pdg');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    	$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
+	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
+	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
+	    	if ($search) {
+	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    	}
+	    	$this->db->where('dThoigianbatdau > NOW()');
+	    	$this->db->order_by('dThoigianbatdau');
+	    	$this->db->group_by('pdg.iMaphiendaugia');
+	    	$phien = $this->db->get()->result_array();
+	    	$arrayMaSanPham = array_column($phien, 'iMasanpham');
+
+	    	return [
+	    		'listPhien' => $phien,
+	    		'tongPhien' => $this->getSoPhienWaiting($search),
 	    		'hinhAnh' 	=> $this->getHinhAnhSanPham($arrayMaSanPham),
 	    	];
 	    }
@@ -59,11 +87,28 @@
 		    return $anhSanPham;
 	    }
 
-	    public function getSoPhien($start, $end) {
-			$this->db->select('count(iMaphiendaugia) as tongPhien');
+	    public function getSoPhien($start, $end, $search) {
+			$this->db->select('count(DISTINCT pdg.iMaphiendaugia) as tongPhien');
 	    	$this->db->from('tbl_phiendaugia pdg');
+	    	if ($search) {
+	    		$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    		$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    	}
 	    	$this->db->where('dThoigianbatdau <=', $start);
 	    	$this->db->where('dThoigianketthuc >=', $end);
+	    	return $this->db->get()->row_array();
+	    }
+
+	    public function getSoPhienWaiting($search) {
+			$this->db->select('count(DISTINCT pdg.iMaphiendaugia) as tongPhien');
+	    	$this->db->from('tbl_phiendaugia pdg');
+	    	if ($search) {
+	    		$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
+	    		$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
+	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    	}
+	    	$this->db->where('dThoigianbatdau > NOW()');
 	    	return $this->db->get()->row_array();
 	    }
 
@@ -156,9 +201,9 @@
 	    	$this->db->join('tbl_mausac ms', 'ctsp.iMamausac = ms.iMamausac', 'inner');
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
 	    	$this->db->where('iMadonmua', NULL);
+	    	$this->db->where('dThoigianketthuc < NOW()');
 	    	$this->db->where('ctp.iMataikhoan', $taiKhoan);
 	    	$this->db->where('pdg.iKetqua', 1);
-	    	$this->db->where('dThoigianketthuc < NOW()');
 	    	$this->db->order_by('iMucgiadau', 'desc');
 	    	$this->db->group_by('ctp.iMaphiendaugia');
 	    	return $this->db->get()->result_array();

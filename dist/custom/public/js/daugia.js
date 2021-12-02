@@ -2,6 +2,8 @@ $(document).ready(function() {
 	let activeIndex = 0;
 	let maxIndex = $('.carousel-item').length - 1;
 
+	if (tt == 1) $('.waiting').remove();
+
 	const setActiveItem = (index) => {
 		$('.carousel-indicators li').removeClass('active');
 		$(`.carousel-indicators li:eq(${index})`).addClass('active');
