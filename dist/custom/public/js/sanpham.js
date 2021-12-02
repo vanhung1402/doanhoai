@@ -125,6 +125,9 @@ $(document).ready(function() {
         if (end.getTime() <= start.getTime()) {
             showMessage('warning', 'Thời gian kết thúc đấu giá không được trước thời gian bắt đầu!');
             return;
+        } else if (86400000 < end.getTime() - start.getTime()) {
+            showMessage('warning', 'Thời gian kết thúc đấu giá không được quá 1 ngày thời gian bắt đầu!');
+            return;
         }
 
         if (trangThai === 2) dauGia.iMaphiendaugia = maPhienEdit;
@@ -139,7 +142,6 @@ $(document).ready(function() {
                 action: 'danh-sach-dau-gia',
             },
         }).done(function(res) {
-            console.table(res)
             renderDauGia(res);
         }).fail(function(err) {
             console.log("Error: ", err);
@@ -172,7 +174,6 @@ $(document).ready(function() {
 
 
         const urlImage = $(this).find('img').first().attr('src');
-        console.log(urlImage)
         $('#img-thumbnail img').attr('src', urlImage);
     });
 

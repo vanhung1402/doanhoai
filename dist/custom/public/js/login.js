@@ -109,7 +109,6 @@ jQuery(document).ready(function ($) {
         ngaySinh = `${ngaySinh.getFullYear()}-${ngaySinh.getMonth() + 1}-${ngaySinh.getDate()}`;
         let todayDate = new Date();
         todayDate = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
-        console.log(ngaySinh, todayDate);
 
         if (!$('#ngaysinh').val() || ngaySinh > todayDate) {
             showMessage('warning', 'Ngày sinh không hợp lệ!');

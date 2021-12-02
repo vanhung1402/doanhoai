@@ -297,7 +297,6 @@ $(document).ready(function() {
 			},
 		})
 		.done(function(res) {
-			console.log(res);
 			if (res) {
 				const newMau = {
 					iMamausac: res,

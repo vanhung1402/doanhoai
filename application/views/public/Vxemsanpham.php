@@ -114,29 +114,6 @@
     </tbody>
   </table>
 </section>
-<section id="dau-gia" class="container">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th colspan="8">Danh sách phiên đấu giá</th>
-      </tr>
-      <tr>
-        <th>#</th>
-        <th>Chi tiết sản phẩm</th>
-        <th>Thời gian</th>
-        <th>Giá khởi điểm</th>
-        <th>Bước giá</th>
-        <th>Trạng thái</th>
-        <th>Kết quả</th>
-        <th>Tác vụ</th>
-      </tr>
-    </thead>
-    <tbody id="list-dau-gia">
-      
-    </tbody>
-  </table>
-</section>
-<br>
 <section class="container pb-5" id="binh-luan">
   <h3><span class="title">Người dùng bình luận</span></h3>
   <form method="post">

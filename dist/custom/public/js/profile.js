@@ -102,7 +102,6 @@ $(document).ready(function() {
 			},
 		})
 		.done(function(res) {
-			console.log(res);
 			if (res) {
 				window.location.reload();
 			}
@@ -150,7 +149,6 @@ $(document).ready(function() {
 			},
 		})
 		.done(function(res) {
-			console.log(res);
 			if (res) {
 				window.location.reload();
 			}
