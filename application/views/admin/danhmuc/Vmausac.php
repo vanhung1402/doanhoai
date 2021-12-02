@@ -56,10 +56,12 @@
                                         <a class="btn btn-outline-primary btn-sm btn-xs" href="{$url}admin/mau-sac?id={$mauSac.iMamausac}" title="Sửa màu sắc">
                                             <i data-feather="edit"></i>
                                         </a>
+                                        {if !$mauSac.iMactsanpham}
                                         <input class="hidden" type="text" name="action" value="xoa-mau-sac">
                                         <button class="btn btn-outline-danger btn-sm btn-xs" name="id-xoa" value="{$mauSac.iMamausac}" onclick="return confirm('Xác nhận thực hiện thao tác')" title="Xóa màu sắc">
                                             <i data-feather="trash"></i>
                                         </button>
+                                        {/if}
                                     </form>
                                 </td>
                                 {/if}

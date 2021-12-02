@@ -56,10 +56,12 @@
                                         <a class="btn btn-outline-primary btn-sm btn-xs" href="{$url}admin/kich-thuoc?id={$kichThuoc.iMasize}" title="Sửa kích thước">
                                             <i data-feather="edit"></i>
                                         </a>
+                                        {if !$kichThuoc.iMactsanpham}
                                         <input class="hidden" type="text" name="action" value="xoa-kich-thuoc">
                                         <button class="btn btn-outline-danger btn-sm btn-xs" name="id-xoa" value="{$kichThuoc.iMasize}" onclick="return confirm('Xác nhận thực hiện thao tác')" title="Xóa kích thước">
                                             <i data-feather="trash"></i>
                                         </button>
+                                        {/if}
                                     </form>
                                 </td>
                                 {/if}

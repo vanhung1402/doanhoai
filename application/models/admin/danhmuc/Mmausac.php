@@ -39,6 +39,10 @@
 
 	    public function danhSachMauSac()
 	    {
+	    	$this->db->select('ms.*, iMactsanpham');
+	    	$this->db->from('tbl_mausac ms');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'ms.iMamausac = ctsp.iMamausac', 'left');
+	    	$this->db->group_by('ms.iMamausac');
 	    	return $this->db->get('tbl_mausac')->result_array();
 	    }
 

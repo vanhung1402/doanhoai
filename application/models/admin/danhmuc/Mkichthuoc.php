@@ -38,6 +38,10 @@
 
 	    public function danhSachKichThuoc()
 	    {
+	    	$this->db->select('kt.*, iMactsanpham');
+	    	$this->db->from('tbl_kichthuoc kt');
+	    	$this->db->join('tbl_ct_sanpham ctsp', 'kt.iMasize = ctsp.iMasize', 'left');
+	    	$this->db->group_by('kt.iMasize');
 	    	return $this->db->get('tbl_kichthuoc')->result_array();
 	    }
 
