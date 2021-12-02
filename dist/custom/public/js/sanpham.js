@@ -111,6 +111,7 @@ $(document).ready(function() {
             iMactsanpham: chiTietDauGia,
             iKetqua: 1,
         };
+
         for (const [key, value] of Object.entries(dauGia)) {
             if (!value) {
                 showMessage('error', `Vui lòng không bỏ trống dữ liệu ${key}`);
@@ -118,6 +119,14 @@ $(document).ready(function() {
                 return;
             }
         }
+
+        const start = new Date(dauGia.dThoigianbatdau);
+        const end = new Date(dauGia.dThoigianketthuc);
+        if (end.getTime() <= start.getTime()) {
+            showMessage('warning', 'Thời gian kết thúc đấu giá không được trước thời gian bắt đầu!');
+            return;
+        }
+
         if (trangThai === 2) dauGia.iMaphiendaugia = maPhienEdit;
         return check ? dauGia : false;
     }
@@ -147,8 +156,8 @@ $(document).ready(function() {
         $('#exampleModal').modal();
         $('#buoc-gia').val(numeral(phien.iBuocgia).format('0,0'));
         $('#gia-khoi-diem').val(numeral(phien.iGiakhoidiem).format('0,0'));
-        $('#time-start').data("DateTimePicker").date(new Date(phien.dThoigianbatdau));
-        $('#time-end').data("DateTimePicker").date(new Date(phien.dThoigianketthuc));
+        $('#time-start').data("DateTimePicker").date(start);
+        $('#time-end').data("DateTimePicker").date(end);
     });
 
     $('.img-thumb').click(function (e) {
