@@ -342,7 +342,9 @@ $(document).ready(function() {
 		newChiTiet.find('.mau-sac').append($(html));
 		$.each($(document).find('.mau-sac'), function(index, val) {
 			const htmlThis = $(this).html() + html;
+			let value = $(this).val();
 			$(this).html(htmlThis);
+			$(this).val(value);
 		});
 	}
 
@@ -353,7 +355,9 @@ $(document).ready(function() {
 		chiTiet = newChiTiet;
 		$.each($(document).find('.kich-thuoc'), function(index, val) {
 			const htmlThis = $(this).html() + html;
+			let value = $(this).val();
 			$(this).html(htmlThis);
+			$(this).val(value);
 		});
 	}
 });
