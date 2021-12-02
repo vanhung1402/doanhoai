@@ -157,6 +157,7 @@
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
 	    	$this->db->where('iMadonmua', NULL);
 	    	$this->db->where('ctp.iMataikhoan', $taiKhoan);
+	    	$this->db->where('pdg.iKetqua', 1);
 	    	$this->db->where('dThoigianketthuc < NOW()');
 	    	$this->db->order_by('iMucgiadau', 'desc');
 	    	$this->db->group_by('ctp.iMaphiendaugia');
