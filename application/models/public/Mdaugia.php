@@ -20,7 +20,7 @@
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
 	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
 	    	if ($search) {
-	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    		$this->db->like('sp.sTensanpham', "$search");
 	    	}
 	    	$this->db->where('dThoigianbatdau <=', $start);
 	    	$this->db->where('dThoigianketthuc >=', $end);
@@ -46,7 +46,7 @@
 	    	$this->db->join('tbl_kichthuoc kt', 'ctsp.iMasize = kt.iMasize', 'inner');
 	    	$this->db->join('tbl_ct_phiendaugia ctp', 'pdg.iMaphiendaugia = ctp.iMaphiendaugia', 'left');
 	    	if ($search) {
-	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    		$this->db->like('sp.sTensanpham', "$search");
 	    	}
 	    	$this->db->where('dThoigianbatdau > NOW()');
 	    	$this->db->order_by('dThoigianbatdau');
@@ -93,7 +93,7 @@
 	    	if ($search) {
 	    		$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
 	    		$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
-	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    		$this->db->like('sp.sTensanpham', "$search");
 	    	}
 	    	$this->db->where('dThoigianbatdau <=', $start);
 	    	$this->db->where('dThoigianketthuc >=', $end);
@@ -106,7 +106,7 @@
 	    	if ($search) {
 	    		$this->db->join('tbl_ct_sanpham ctsp', 'pdg.iMactsanpham = ctsp.iMactsanpham', 'inner');
 	    		$this->db->join('tbl_sanpham sp', 'ctsp.iMasanpham = sp.iMasanpham', 'inner');
-	    		$this->db->like('LOWER(sp.sTensanpham)', strtolower("$search"));
+	    		$this->db->like('sp.sTensanpham', "$search");
 	    	}
 	    	$this->db->where('dThoigianbatdau > NOW()');
 	    	return $this->db->get()->row_array();
