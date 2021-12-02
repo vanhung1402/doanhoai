@@ -18,7 +18,7 @@
         <div class="active" id="sidebar">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
-                    <img alt="" src="{$url}dist/templates/admin/assets/images/logo.svg" srcset="">
+                    <img alt="" src="{$url}files/logo.jpg" srcset="">
                     </img>
                 </div>
                 <div class="sidebar-menu">
@@ -54,7 +54,7 @@
                                 <span>Quản lý sản phẩm</span>
                             </a>
                             <ul class="submenu ">
-                                <li><a href="admin/loai-hang">tbl_loaihang</a></li>
+                                <li><a href="admin/loai-hang">Loại hàng</a></li>
                                 <li><a href="admin/danh-muc-loai-hang">Danh mục loại hàng</a></li>
                                 <li><a href="admin/mau-sac">Danh mục màu sắc</a></li>
                                 <li><a href="admin/kich-thuoc">Danh mục kích thước</a></li>
