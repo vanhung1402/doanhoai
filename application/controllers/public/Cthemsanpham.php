@@ -53,6 +53,14 @@
 	    			$this->themKichThuoc();
 	    			break;
 	    		
+	    		case 'check-mau':
+	    			$this->checkMauSac();
+	    			break;
+	    		
+	    		case 'check-size':
+	    			$this->checkKichThuoc();
+	    			break;
+	    		
 	    		default:
 	    			// code...
 	    			break;
@@ -75,6 +83,20 @@
 			$temp['data'] 			= $data;
 			$temp['template'] 		= 'public/Vthemsanpham';
 	    	$this->load->view('layout_public/Vcontent', $temp);	
+	    }
+
+	    private function checkMauSac()
+	    {
+	    	$mau = $this->input->post('mau');
+	    	$result = $this->Mhethong->checkMau($mau);
+	    	die(json_encode($mau));
+	    }
+
+	    private function checkKichThuoc()
+	    {
+	    	$size = $this->input->post('size');
+	    	$result = $this->Mhethong->checkKichThuoc($size);
+	    	die(json_encode($result));
 	    }
 
 	    private function themMauSac()

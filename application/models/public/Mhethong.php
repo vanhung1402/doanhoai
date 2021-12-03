@@ -19,6 +19,18 @@
 	    	return $this->db->insert_id();	
 	    }
 
+	    public function checkMau($mau)
+	    {
+	    	$this->db->where('sTenmausac', $mau);
+	    	return $this->db->get('tbl_mausac')->row_array();
+	    }
+
+	    public function checkKichThuoc($size)
+	    {
+	    	$this->db->where('sTensize', $size);
+	    	return $this->db->get('tbl_kichthuoc')->row_array();
+	    }
+
 	    public function phanQuyenTaiKhoan($quyenTaiKhoan)
 	    {
 	    	$this->db->insert('tbl_quyen_taikhoan', $quyenTaiKhoan);

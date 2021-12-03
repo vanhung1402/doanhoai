@@ -284,9 +284,27 @@ $(document).ready(function() {
 		if (size && size.trim()) {
 			themSize(size.trim());
 		}
-	})
+	});
 
-	const themMau = (mau) => {
+	const themMau = async (mau) => {
+		const checkMau = await $.ajax({
+			url: window.location.href,
+			type: 'POST',
+			dataType: 'JSON',
+			data: {
+				action: 'check-mau',
+				mau
+			},
+		})
+		.fail(function(err) {
+			console.log("Error: ", err);
+		});
+		
+		if (checkMau) {
+			showMessage('warning', `Đã tồn tại màu ${mau}`);
+			return;
+		}
+
 		$.ajax({
 			url: window.location.href,
 			type: 'POST',
@@ -310,7 +328,24 @@ $(document).ready(function() {
 		});
 	}
 
-	const themSize = (size) => {
+	const themSize = async (size) => {
+		const checkSize = await $.ajax({
+			url: window.location.href,
+			type: 'POST',
+			dataType: 'JSON',
+			data: {
+				action: 'check-size',
+				size
+			},
+		})
+		.fail(function(err) {
+			console.log("Error: ", err);
+		});
+		if (checkSize) {
+			showMessage('warning', `Đã tồn tại size ${size}`);
+			return;
+		}
+
 		$.ajax({
 			url: window.location.href,
 			type: 'POST',
@@ -359,6 +394,5 @@ $(document).ready(function() {
 			$(this).html(htmlThis);
 			$(this).val(value);
 		});
-		
 	}
 });
